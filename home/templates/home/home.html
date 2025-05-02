@@ -1,6 +1,16 @@
 {% extends "base.html"%}
 {% load static %}
 
-{%block content%}
-<h1 class="text-success">Does it work?</h1>
+{% block meta_description %}
+    Discover handcrafted bouquets and artisan coffee delivered with heart.
 {% endblock%}
+
+{% block content %}
+<section class="hero-section">
+    <div class="container">
+        <h1 id="hero-title">Bloom & Brew</h1>
+        <p class="lead">Artisan coffee. Handcrafted bouquets.</p>
+        <a href="#" class="btn btn-lg mt-3">Shop now</a>
+    </div>
+</section>
+{% endblock %}
