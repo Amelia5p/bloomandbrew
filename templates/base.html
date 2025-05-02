@@ -1,11 +1,16 @@
 {% load static %} 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% block meta %}
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{% block meta_description %}{% endblock %}">
-    <title>{% block title %}Bloom and Brew{% endblock %}</title>
+    {% endblock %}
+
+    <title> Bloom and Brew </title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="">
@@ -30,10 +35,12 @@
     <!-- Font Awesome -->
     <script src="https://kit.fontawesome.com/5f90db2858.js" crossorigin="anonymous"></script>
 </head>
+
+
 <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container">
-            <a class="navbar-brand" href="/" aria-label="Bloom and Brew homepage">Bloom and Brew</a>
+            <a class="navbar-brand" href="/" aria-label="Bloom and Brew homepage"><img src="" alt="Bloom and Brew logo"></a>
 
             <!-- Toggler Button -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
