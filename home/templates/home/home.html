@@ -2,15 +2,68 @@
 {% load static %}
 
 {% block meta_description %}
-    Discover handcrafted bouquets and artisan coffee delivered with heart.
+    Discover handcrafted bouquets and artisan coffee delivered with care.
 {% endblock%}
 
 {% block content %}
-<section class="hero-section">
+<!-- Hero Section -->
+<section class="hero d-flex align-items-center">
     <div class="container">
-        <h1 id="hero-title">Bloom & Brew</h1>
-        <p class="lead">Artisan coffee. Handcrafted bouquets.</p>
-        <a href="#" class="btn btn-lg mt-3">Shop now</a>
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <h1 class="display-4">Welcome to Bloom and Brew</h1>
+          <p class="lead">Fresh bouquets & artisan coffee delivered with care.</p>
+          <a href="#" class="btn btn-primary btn-lg">Shop Now</a>
+        </div>
+        <div class="col-md-6">
+          <img src="{% static 'images/hero?.jpg' %}" alt="Hero" class="hero-img">
+        </div>
+      </div>
     </div>
-</section>
+  </section>
+
+<!-- Bundle of the Week -->
+<section class="bundle-offer text-center bg-light">
+    <div class="container py-5">
+      <h2 class="section-title">OFFER: Bundle of the Week</h2>
+      <p class="mb-4">Get our most loved bouquet + a bag of premium roast at 20% off!</p>
+      <img src="{% static 'images/bundle.jpg' %}" class="img-fluid rounded" alt="Bundle Offer">
+    </div>
+  </section>
+  
+  <!-- Special Offers -->
+  <section class="special-offers py-5">
+    <div class="container">
+      <h2 class="section-title text-center mb-5">Special Offers</h2>
+      <div class="row g-4">
+        <div class="col-md-4">
+          <div class="special-offer-card">
+            <h5>Spring Bloom Set</h5>
+            <p>€25 — Limited Time</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="special-offer-card">
+            <h5>Morning Roast Pack</h5>
+            <p>€18 — Save 15%</p>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="special-offer-card">
+            <h5>Flower & Bean Duo</h5>
+            <p>€30 — Customer Favourite</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container text-center">
+      <h2>Ready to make someone’s day?</h2>
+      <p class="mb-4">Choose from our curated bundles.</p>
+      <a href="#" class="btn btn-light btn-lg">Start Shopping</a>
+    </div>
+  </section>
 {% endblock %}

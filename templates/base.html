@@ -57,20 +57,26 @@
                             Shop
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="shopDropdown">
-                            <li><a class="dropdown-item" href="#">Shop Coffee</a></li>
-                            <li><a class="dropdown-item" href="#">Shop Bouquets</a></li>
+                            <li><a class="dropdown-item" href="#">Shop Brews</a></li>
+                            <li><a class="dropdown-item" href="#">Shop Blooms</a></li>
                             <li><a class="dropdown-item" href="#">Shop Bundles</a></li>
+                            <li><a class="dropdown-item" href="#">Shop All</a></li>
+
                         </ul>
                     </li>
+                        <li>
+                            <a class="nav-link" href="#">About Us</a>
+                        </li> 
 
                     {% if user.is_authenticated %}
                         <li class="nav-item">
                             <a class="nav-link" href="#">My Account</a>
                         </li>
                         <li class="nav-item">
-                            <form action="#" method="post" class="d-inline">
+                            <form action="{% url 'logout' %}" method="post" class="d-inline m-0 p-0">
                                 {% csrf_token %}
-                                <button type="submit" class="nav-link btn btn-link p-0 logout-button">Logout</button>
+                                <button type="submit" class="btn btn-link nav-link logout-button">Logout</button>
+
                             </form>
                         </li>
                     {% else %}
