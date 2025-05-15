@@ -117,6 +117,31 @@ footer .icon:hover {
     font-family: 'Poppins', sans-serif;
 }
 
+
+/* All Products */
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  color: #A68A6D;
+}
+
+.card-body .btn {
+  background-color: #C8D5B9;
+  color: #000;
+}
+
+.card-body .btn:hover {
+  background-color: #EECFD1;
+  color: #000;
+}
+
+
+
+
+
+
+
+
 /* Responsive */
 @media (max-width: 767px) {
     .hero-section {
