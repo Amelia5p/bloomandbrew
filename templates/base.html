@@ -87,6 +87,17 @@
                             <a class="nav-link" href="#">Sign Up</a>
                         </li>
                     {% endif %}
+                    <a class="nav-link" href="#">
+                        🛒 Cart
+                        <span class="ms-3">
+                          {% if grand_total %}
+                            ${{ grand_total|floatformat:2 }}
+                          {% else %}
+                            €0.00
+                          {% endif %}
+                        </span>
+                      </a>
+                      
                 </ul>
             </div>
         </div>
