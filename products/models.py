@@ -15,6 +15,7 @@ Includes category, pricing (with optional discount), image, stock, and auto-gene
     ]
 
     name = models.CharField(max_length=100)
+    sku = models.CharField(max_length=20, unique=True)
     description = models.TextField()
     category = models.CharField(max_length=10, choices=CATEGORY_CHOICES)
     price = models.DecimalField(max_digits=6, decimal_places=2)
