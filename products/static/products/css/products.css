@@ -1,0 +1,23 @@
+/* All Products */
+.card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.25rem;
+    color: #A68A6D;
+  }
+  
+  .card-body .btn {
+    background-color: #C8D5B9;
+    color: #000;
+  }
+  
+  .card-body .btn:hover {
+    background-color: #EECFD1;
+    color: #000;
+  }
+
+  .product-image {
+    width: 100%;
+    height: 300px;            
+    object-fit: contain;
+    border-radius: 6px;
+}

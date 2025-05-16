@@ -57,42 +57,6 @@ h1, h2, h3, h4, h5, h6 {
     color: #000;
 }
 
-/* Homepage */
-.hero {
-    min-height: 80vh;
-    background: linear-gradient(to right, #ffffff 50%, rgba(255,255,255,0) 100%);
-  }
-  
-  .hero-img {
-    width: 100%;
-    object-fit: cover;
-    mix-blend-mode: multiply;
-  }
-  
-  .section-title {
-    font-size: 2rem;
-    font-weight: bold;
-  }
-  
-  .special-offer-card {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 1rem;
-    text-align: center;
-    background-color: #f8f9fa;
-  }
-  
-  .cta-section {
-    background-color: #06231D;
-    color: white;
-    padding: 3rem 1rem;
-  }
-  
-  .cta-section .btn {
-    border: 2px solid white;
-    color: white;
-  }
-  
 
 /* Footer */
 footer {
@@ -116,30 +80,6 @@ footer .icon:hover {
 .alert {
     font-family: 'Poppins', sans-serif;
 }
-
-
-/* All Products */
-.card-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.25rem;
-  color: #A68A6D;
-}
-
-.card-body .btn {
-  background-color: #C8D5B9;
-  color: #000;
-}
-
-.card-body .btn:hover {
-  background-color: #EECFD1;
-  color: #000;
-}
-
-
-
-
-
-
 
 
 /* Responsive */

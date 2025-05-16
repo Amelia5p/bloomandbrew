@@ -1,6 +1,10 @@
 {% extends "base.html"%}
 {% load static %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'home/home.css' %}">
+{% endblock %}
+
 {% block meta_description %}
     Discover handcrafted bouquets and artisan coffee delivered with care.
 {% endblock%}
