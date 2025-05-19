@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'products/css/products.css' %}">
+{% endblock %}
+
+{% block body_class %}blooms-page{% endblock %}
+
+{% block title %}Shop Blooms{% endblock title %}
+
+{% block content %}
+<section class="py-5">
+  <div class="container">
+    <h2 class="section-title blooms-section-title text-center mb-4">Blooms Collection</h2>
+    <p class="text-center">Explore our handcrafted bouquet range.</p>
+
+    <div class="row g-4">
+      {% for product in products %}
+        <div class="col-md-4">
+          <div class="card h-100 border-0 shadow-sm">
+            <a href="{% url 'product_detail' product.slug %}">
+              <img src="{{ product.image.url }}" class="card-img-top img-fluid product-image" alt="{{ product.name }}">
+            </a>
+            <div class="card-body text-center">
+              <h5 class="card-title">{{ product.name }}</h5>
+              <p class="card-text">€{{ product.price }}</p>
+              <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary mt-2">View Product</a>
+            </div>
+          </div>
+        </div>
+      {% empty %}
+        <div class="col-12 text-center">
+          <p>No brews available at the moment.</p>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

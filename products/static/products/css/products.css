@@ -31,3 +31,31 @@
   padding: 10px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
+
+body.brews-page {
+  background-color: #5C3A2E;
+}
+
+.card {
+  background-color: #FFFDF9;
+  border: none;
+}
+
+.brews-page .section-title {
+  color: #F6F1EB;
+}
+
+.brews-page .btn-primary {
+  background-color: #EECFD1;
+  color: #000;
+  border: none;
+}
+
+.brews-page .card-title
+{
+  color:#000
+}
+
+body.blooms-page {
+  background-color: #FDF6C3;
+}

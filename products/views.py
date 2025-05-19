@@ -41,3 +41,13 @@ def product_detail(request, slug):
     """Display detailed view of a single product."""
     product = get_object_or_404(Product, slug=slug)
     return render(request, 'products/product_detail.html', {'product': product})
+
+def shop_brews(request):
+    """ Brews-only product page """
+    products = Product.objects.filter(category='coffee')
+    return render(request, 'products/shop_brews.html', {'products': products})
+
+def shop_blooms(request):
+    """ Blooms-only product page """
+    products = Product.objects.filter(category='bouquet')
+    return render(request, 'products/shop_blooms.html', {'products': products})
