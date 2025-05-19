@@ -21,3 +21,13 @@
     object-fit: contain;
     border-radius: 6px;
 }
+
+  .product-detail-image {
+  max-height: 500px;
+  object-fit: contain;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
