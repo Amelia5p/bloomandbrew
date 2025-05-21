@@ -112,6 +112,24 @@ footer .icon:hover {
     display: flex;
 }
 
+
+.cart-count-badge {
+    position: absolute;
+    top: -6px;
+    right: -10px;
+    background-color: #8CC63F;  /* Bloom and Brew green */
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 999px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    line-height: 1;
+    z-index: 10;
+}
+
+
+
 /* Responsive Design */
 
  /* Media Queries 767px */

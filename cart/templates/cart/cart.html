@@ -26,7 +26,7 @@
               <th scope="col">Price</th>
               <th scope="col">Qty</th>
               <th scope="col">Total</th>
-              <th scope="col">Remove</th>
+              <th scope="col">Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -37,7 +37,14 @@
                   <small class="text-muted">{{ item.product.category }}</small>
                 </td>
                 <td>€{{ item.price|floatformat:2 }}</td>
-                <td>{{ item.quantity }}</td>
+                <td>
+                  <form action="{% url 'add_to_cart' item.product.id %}" method="post" class="d-flex align-items-center">
+                    {% csrf_token %}
+                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control form-control-sm me-2" style="width: 70px;">
+                    <input type="hidden" name="override_quantity" value="true">
+                    <button type="submit" class="btn btn-sm btn-outline-primary">Update</button>
+                  </form>
+                </td>
                 <td>€{{ item.total_price|floatformat:2 }}</td>
                 <td>
                   <form action="{% url 'remove_from_cart' item.product.id %}" method="post">
@@ -53,7 +60,7 @@
 
       <div class="text-end mt-4">
         <h4>Total: €{{ cart.get_total_price|floatformat:2 }}</h4>
-        <a href="#" class="btn btn-primary mt-3">Proceed to Checkout</a>
+        <a href="{% url 'checkout' %}" class="btn btn-success mt-3">Proceed to Checkout</a>
       </div>
     {% endif %}
   </div>

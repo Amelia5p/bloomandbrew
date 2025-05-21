@@ -80,14 +80,16 @@
                         <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
                     {% endif %}
     
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'view_cart' %}">
-                            <i class="fas fa-shopping-bag"></i>
+                    <li class="nav-item position-relative">
+                        <a href="{% url 'view_cart' %}" class="nav-link d-flex align-items-center position-relative">
+                            <i class="fas fa-bag-shopping fa-lg text-dark cart-icon"></i>
                             {% if cart_item_count %}
-                                <span class="badge bg-danger rounded-pill ms-1">{{ cart_item_count }}</span>
+                                <span class="cart-count-badge">{{ cart_item_count }}</span>
                             {% endif %}
                         </a>
                     </li>
+                    
+                    
                     <li class="nav-item position-relative">
                         <button class="btn btn-outline-light" id="search-toggle" type="button" aria-label="Open search">
                           <i class="fas fa-search"></i>
