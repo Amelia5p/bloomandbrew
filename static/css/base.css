@@ -1,8 +1,4 @@
-.logo-img {
-    height: 100px;
-    width: 150px;
-}
-
+/* General */
 body {
     font-family: 'Poppins', sans-serif;
     font-size: 1rem;
@@ -18,7 +14,24 @@ h1, h2, h3, h4, h5, h6 {
     color: #A68A6D;
 }
 
-/* Navbar */
+/* Nav bar */
+.logo-img {
+    height: 60px;
+    width: auto;
+    image-rendering: auto;
+  }
+  
+
+.navbar .badge {
+    font-size: 0.75rem;
+    padding: 0.35em 0.5em;
+}
+
+#search-toggle {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+}
+
 .navbar {
     background-color: #EECFD1;
 }
@@ -99,8 +112,9 @@ footer .icon:hover {
     display: flex;
 }
 
+/* Responsive Design */
 
-/* Responsive */
+ /* Media Queries 767px */
 @media (max-width: 767px) {
     .hero-section {
         background: url("/static/images/travel-hero-img600.jpg") no-repeat center center/cover;
@@ -120,19 +134,38 @@ footer .icon:hover {
       height: 250px;
       object-fit: cover;
     }
-  }
+
+    .navbar-nav {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .navbar-nav .nav-item {
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .navbar .dropdown-menu {
+        text-align: center;
+    }
+}
   
+  /* Media Queries 576px */
   @media (max-width: 576px) {
-    .navbar .nav-link {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .navbar-nav {
+        flex-direction: column;
+        text-align: center;
     }
-  
-    .navbar .nav-link span {
-      margin-left: 0.5rem;
+
+    .navbar-nav .nav-item {
+        width: 100%;
+        margin-bottom: 0.5rem;
     }
-    
+
+    .navbar .dropdown-menu {
+        text-align: center;
+    }
+
     .cta-section {
           padding: 2rem 1rem;
     }

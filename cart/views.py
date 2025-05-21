@@ -10,8 +10,9 @@ def add_to_cart(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     quantity = int(request.POST.get('quantity', 1))
-    cart.add(product=product, quantity=quantity)
-    messages.success(request, f'Added {quantity} × "{product.name}" to your cart.')
+    override = request.POST.get('override_quantity') == 'true'
+    cart.add(product=product, quantity=quantity, override_quantity=override)
+    messages.success(request, f'{"Updated" if override else "Added"} {quantity} × "{product.name}" to your cart.')
     return redirect('view_cart')
 
 
@@ -28,3 +29,11 @@ def view_cart(request):
     """Display the full cart contents."""
     cart = Cart(request)
     return render(request, 'cart/cart.html', {'cart': cart})
+
+
+def checkout(request):
+    cart = Cart(request)
+    if len(cart) == 0:
+        messages.warning(request, "Your cart is empty.")
+        return redirect('view_cart')
+    return render(request, 'cart/checkout.html', {'cart': cart})

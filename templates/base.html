@@ -40,62 +40,73 @@
 </head>
 
 <body class="{% block body_class %}{% endblock %}">
-<nav class="navbar navbar-expand-lg">
-    <div class="container">
-        <a class="navbar-brand" href="/" aria-label="Bloom and Brew homepage">
-            <img class="logo-img" src="{% static 'images/b.png' %}" alt="Bloom and Brew logo">
-        </a>
-
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav ms-auto align-items-center gap-4">
-                <li class="nav-item dropdown">
-                    <a class="nav-link" href="#" id="shopDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Shop
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="shopDropdown">
-                        <li><a class="dropdown-item" href="{% url 'shop_brews' %}">Shop Brews</a></li>
-                        <li><a class="dropdown-item" href="{% url 'shop_blooms' %}">Shop Blooms</a></li>
-                        <li><a class="dropdown-item" href="#">Shop Bundles</a></li>
-                        <li><a class="dropdown-item" href="{% url 'product_list' %}">Shop All</a></li>
-                    </ul>
-                </li>
-                <li class="nav-item"><a class="nav-link" href="#">About</a></li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'view_cart' %}">
-                        <i class="fas fa-shopping-bag"></i>
-                        {% if cart_item_count %}
-                        <span class="badge bg-danger rounded-pill ms-1">{{ cart_item_count }}</span>
-                        {% endif %}
-                    </a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link" href="#" id="search-toggle">
-                        <i class="fas fa-search"></i>
-                    </a>
-                </li>
-
-                {% if user.is_authenticated %}
-                    <li class="nav-item"><a class="nav-link" href="#">My Account</a></li>
-                    <li class="nav-item">
-                        <form action="{% url 'logout' %}" method="post" class="d-inline m-0 p-0">
-                            {% csrf_token %}
-                            <button type="submit" class="btn btn-link nav-link logout-button">Logout</button>
-                        </form>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="/" aria-label="Bloom and Brew homepage">
+                <img class="logo-img" src="{% static 'images/logo.png' %}" alt="Bloom and Brew logo">
+            </a>
+    
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav" aria-controls="navbarNav"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+    
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto align-items-center gap-4">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link" href="#" id="shopDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Shop <i class="fas fa-caret-down ms-1"></i>
+                        </a>                        
+                        <ul class="dropdown-menu" aria-labelledby="shopDropdown">
+                            <li><a class="dropdown-item" href="{% url 'shop_brews' %}">Shop Brews</a></li>
+                            <li><a class="dropdown-item" href="{% url 'shop_blooms' %}">Shop Blooms</a></li>
+                            <li><a class="dropdown-item" href="#">Shop Bundles</a></li>
+                            <li><a class="dropdown-item" href="{% url 'product_list' %}">Shop All</a></li>
+                        </ul>
                     </li>
-                {% else %}
-                    <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
-                {% endif %}
-            </ul>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'about' %}">About</a></li>
+    
+                    {% if user.is_authenticated %}
+                        <li class="nav-item"><a class="nav-link" href="#">My Account</a></li>
+                        <li class="nav-item">
+                            <form action="{% url 'logout' %}" method="post" class="d-inline m-0 p-0">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-link nav-link logout-button">Logout</button>
+                            </form>
+                        </li>
+                    {% else %}
+                        <li class="nav-item"><a class="nav-link" href="#">Login</a></li>
+                        <li class="nav-item"><a class="nav-link" href="#">Sign Up</a></li>
+                    {% endif %}
+    
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'view_cart' %}">
+                            <i class="fas fa-shopping-bag"></i>
+                            {% if cart_item_count %}
+                                <span class="badge bg-danger rounded-pill ms-1">{{ cart_item_count }}</span>
+                            {% endif %}
+                        </a>
+                    </li>
+                    <li class="nav-item position-relative">
+                        <button class="btn btn-outline-light" id="search-toggle" type="button" aria-label="Open search">
+                          <i class="fas fa-search"></i>
+                        </button>
+                      
+                        <form method="GET" action="{% url 'product_list' %}" class="search-form position-absolute" id="search-form">
+                          <input class="form-control" type="search" placeholder="Search products..." name="q" aria-label="Search">
+                        </form>
+                      </li>
+                      
+                      
+                      
+                    </li>
+                    
+                </ul>
+            </div>
         </div>
-    </div>
-</nav>
+    </nav>
+    
 
 {% if messages %}
 <div class="container mt-3">
