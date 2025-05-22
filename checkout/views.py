@@ -3,9 +3,7 @@ from django.contrib import messages
 from .models import Order, OrderItem
 from .forms import OrderForm
 from cart.cart import Cart
-from products.models import Product
-
-
+from django.conf import settings
 
 
 def checkout(request):
@@ -45,6 +43,8 @@ def checkout(request):
     return render(request, 'checkout/checkout.html', {
         'form': form,
         'cart': cart,
+        'STRIPE_PUBLISHABLE_KEY': settings.STRIPE_PUBLISHABLE_KEY
+        
     })
 
 
