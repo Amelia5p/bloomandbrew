@@ -44,11 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
+    'profiles.apps.ProfilesConfig',
     'allauth.socialaccount',
     'django_countries',
     'home',
     'products',
-    'profiles',
     'cart',
     'checkout',
 ]
