@@ -1,131 +1,305 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# BloomandBrew
 
-Welcome USER_NAME,
+Bloom and Brew is
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. It's perfectly ok to use this template as the basis for your project submissions.
+The live link can be found here - [BloomandBrew]()
 
-You can safely delete this README.md file or change it for your own project. Please do read it at least once, though! It contains some important information about Gitpod and the extensions we use. Some of this information has been updated since the video content was created. The last update to this file was: **June 18, 2024**
+![Am I Responsive]()
 
-## Gitpod Reminders
+## Table of Contents
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
 
-`python3 -m http.server`
 
-A blue button should appear to click: _Make Public_,
 
-Another blue button should appear to click: _Open Browser_.
 
-To run a backend Python file, type `python3 app.py` if your Python file is named `app.py`, of course.
 
-A blue button should appear to click: _Make Public_,
+## Epics and User Stories
 
-Another blue button should appear to click: _Open Browser_.
 
-By Default, Gitpod gives you superuser security privileges. Therefore, you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the lessons.
 
-To log into the Heroku toolbelt CLI:
+## Design
 
-1. Log in to your Heroku account and go to *Account Settings* in the menu under your avatar.
-2. Scroll down to the *API Key* and click *Reveal*
-3. Copy the key
-4. In Gitpod, from the terminal, run `heroku_config`
-5. Paste in your API key when asked
+#### Colour Scheme
 
-You can now use the `heroku` CLI program - try running `heroku apps` to confirm it works. This API key is unique and private to you, so do not share it. If you accidentally make it public, you can create a new one with _Regenerate API Key_.
+This particular colour scheme was chosen as 
+![Colour Palette]()
 
-### Connecting your Mongo database
+#### Imagery
 
-- **Connect to Mongo CLI on a IDE**
-- navigate to your MongoDB Clusters Sandbox
-- click **"Connect"** button
-- select **"Connect with the MongoDB shell"**
-- select **"I have the mongo shell installed"**
-- choose **mongosh (2.0 or later)** for : **"Select your mongo shell version"**
-- choose option: **"Run your connection string in your command line"**
-- in the terminal, paste the copied code `mongo "mongodb+srv://<CLUSTER-NAME>.mongodb.net/<DBname>" --apiVersion 1 --username <USERNAME>`
-  - replace all `<angle-bracket>` keys with your own data
-- enter password _(will not echo **\*\*\*\*** on screen)_
 
-------
 
-## Release History
+#### Fonts
 
-We continually tweak and adjust this template to help give you the best experience. Here is the version history:
+I chose  and  as my fonts. 
 
-**June 18, 2024,** Add Mongo back into template
+![]()
 
-**June 14, 2024,** Temporarily remove Mongo until the key issue is resolved
+![]()
 
-**May 28 2024:** Fix Mongo and Links installs
+#### Wireframes
 
-**April 26 2024:** Update node version to 16
+<details>
 
-**September 20 2023:** Update Python version to 3.9.17.
+ <summary>Homepage</summary>
 
-**September 1 2021:** Remove `PGHOSTADDR` environment variable.
+![Homepage]()
+</details>
 
-**July 19 2021:** Remove `font_fix` script now that the terminal font issue is fixed.
+## Features
 
-**July 2 2021:** Remove extensions that are not available in Open VSX.
+### Navigation Bar
 
-**June 30 2021:** Combined the P4 and P5 templates into one file, added the uptime script. See the FAQ at the end of this file.
+- The navigation at the top of each page provides easy access to all main sections of the website.
 
-**June 10 2021:** Added: `font_fix` script and alias to fix the Terminal font issue
 
-**May 10 2021:** Added `heroku_config` script to allow Heroku API key to be stored as an environment variable.
 
-**April 7 2021:** Upgraded the template for VS Code instead of Theia.
+### Footer
 
-**October 21 2020:** Versions of the HTMLHint, Prettier, Bootstrap4 CDN and Auto Close extensions updated. The Python extension needs to stay the same version for now.
+- The footer is at the bottom of each page and contains social links. I made sure these links opened in another tab to prevent users from being driven away from the site.
 
-**October 08 2020:** Additional large Gitpod files (`core.mongo*` and `core.python*`) are now hidden in the Explorer, and have been added to the `.gitignore` by default.
+![Footer](docs/readme-images/footer.png)
 
-**September 22 2020:** Gitpod occasionally creates large `core.Microsoft` files. These are now hidden in the Explorer. A `.gitignore` file has been created to make sure these files will not be committed, along with other common files.
+### Home Page
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+### Profile
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+- The profile page has user's
 
-------
+![Profile]()
 
-## FAQ about the uptime script
+### Sign Up
 
-**Why have you added this script?**
+- When a user signs up, a profile is automatically created for them.
 
-It will help us to calculate how many running workspaces there are at any one time, which greatly helps us with cost and capacity planning. It will help us decide on the future direction of our cloud-based IDE strategy.
+![Sign Up]()
 
-**How will this affect me?**
+### Log In
 
-For everyday usage of Gitpod, it doesn’t have any effect at all. The script only captures the following data:
 
-- An ID that is randomly generated each time the workspace is started.
-- The current date and time
-- The workspace status of “started” or “running”, which is sent every 5 minutes.
 
-It is not possible for us or anyone else to trace the random ID back to an individual, and no personal data is being captured. It will not slow down the workspace or affect your work.
+![Log In]()
 
-**So….?**
+### Error pages
+- I created my own error pages and these have navigation buttons.
 
-We want to tell you this so that we are being completely transparent about the data we collect and what we do with it.
+![Log In]()
 
-**Can I opt out?**
+### Success Messages
+- Success messages inform the user if they have made any changes to their 
+![Success]()
 
-Yes, you can. Since no personally identifiable information is being captured, we'd appreciate it if you let the script run; however if you are unhappy with the idea, simply run the following commands from the terminal window after creating the workspace, and this will remove the uptime script:
+## Future Features
 
-```
-pkill uptime.sh
-rm .vscode/uptime.sh
-```
+In the future I would like to add the following features to further improve the site:
 
-**Anything more?**
+## CRUD Functionality
 
-Yes! We'd strongly encourage you to look at the source code of the `uptime.sh` file so that you know what it's doing. As future software developers, it will be great practice to see how these shell scripts work.
+- User's can Create, Read, Update and Delete both their . 
 
----
+## Agile Methodology
 
-Happy coding!
+Github projects was used to manage the development process using an agile approach. Please see link to my project board:
+
+[Project Board]()
+
+## Data Model
+
+This is the data model I designed. It has the Django built-in user model that handles authentication and basic user information. 
+
+![Database Schema]()
+
+## Testing
+
+### HTML
+
+HTML was passed through the W3C validator with no errors.
+
+| Page                   | Result     |
+|------------------------|------------|
+| base.html              | No errors  |
+| home.html              | No errors  |
+| all.trips.html         | No errors  |
+| create_trip.html       | No errors  |
+| delete_trip.html       | No errors  |
+| edit_trip.html         | No errors  |
+| my_trips.html          | No errors  |
+| suggest_activity.html  | No errors  |
+| trip_details.html      | No errors  |
+| profile.html           | No errors  |
+| delete_profile.html    | No errors  |
+| edit_profile.html      | No errors  |
+| login.html             | No errors  |
+| signup.html            | No errors  |
+| 403.html               | No errors  |
+| 404.html               | No errors  |
+| 500.html               | No errors  |
+
+
+### CSS
+
+CSS was passed through W3C validator with no errors.
+
+### JavaScript
+
+JavaScript was passed through JShint with no errors.
+
+### Python
+
+Python code was passed through the PEP8 CI linter with no errors.
+
+## General Testing
+
+
+| Test             | Action                                                                 | Success Criteria                                                 |
+| --------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------- |
+| **Homepage loads**  | Navigate to website URL                                            | Page loads with no errors                     |
+| **Links**          | Click on each navigation link, CTAs, buttons, logo, and footer links  | Correct page loads or correct action performed, new tab opens if applicable |
+| **Form validation** | Enter data into each input field, ensuring only valid data is accepted  | Form does not submit until correct data is entered, and an error message is shown |
+| **Responsiveness**  | Resize viewport window from 320px upwards using Chrome DevTools. Test various devices  | Page layout remains intact and adapts correctly to different screen sizes |
+
+### Lighthouse
+
+Lighthouse validation was run on all pages (both mobile and desktop).  Here are the scores: 
+
+| Page           | Performance  | Accessibility | Best Practices  | SEO |
+|----------------|:------------:|:-------------:|:---------------:|:---:|
+|                |              |               |                 |     |
+| Home           |          97  |           98  |             100 | 100 |
+| My Trips       |          98  |           98  |             100 | 100 |
+| Trip Details   |          99  |           98  |             100 | 100 |
+| Delete trip*   |          99  |           98  |             100 | 100 |
+| Create trip*   |          99  |           98  |             100 | 100 |
+|SuggestActivity |          100 |           100 |             100 | 100 |
+| Delete Trip    |          100 |           100 |             100 | 90  |
+| Edit Trip      |          90  |           100 |             100 | 100 |
+|All Trips(admin)|          89  |           98  |             100 | 90  |
+| Profile        |          98  |           98  |             100 | 100 |
+| Login          |          99  |           99  |             100 | 100 |
+| Signup         |          100 |           99  |             100 | 100 |
+| Edit Profile   |          98  |           100 |             100 | 100 |
+| Delete Profile |          98  |           100 |             100 | 91  |
+
+## Browser Testing
+The Website was tested on Google Chrome, Firefox, Safari browsers with no issues.
+
+## Security Features
+
+### User Authentication
+Authorisation is required to reach certain pages such as . Requesting these pages while unauthorised will redirect users to the Login page.
+
+### Form Validation
+Incorrect or in certain cases empty data in forms is not accepted and the user is made aware.
+
+### Database Security
+The database url and secret key are stored in the .env file to prevent unwanted connections.
+
+Cross-Site Request Forgery (CSRF) tokens were used on all forms throughout this site.
+
+
+## Deployment - Heroku
+
+To deploy this page to Heroku from its GitHub repository, the following steps were taken:
+
+1. Login to the Heroku dashboard and create a new app.
+2. Connect your GitHub repository to your Heroku app.
+3. Set environment variables in the Config Vars section of the Settings tab.
+4. In the Deploy tab, enable automatic deploys from your GitHub repository.
+5. Click the "Deploy Branch" button to deploy the app.
+6. Once the app has been deployed, click the "Open App" button to view the app.
+
+-  Under 'Config Vars' the following variables to be set:
+
+    - `DATABASE_URL` - the URL for your Postgres database.
+    - `NAME` - the name of your database.
+    - `USER` - the username for your database.
+    - `PASSWORD` - the password for your database.
+    - `HOST` - the host for your database.
+    - `PORT` - the port for your database.
+    - Django settings:
+    - `SECRET_KEY` - the secret key for your Django project. (kept in .env file)
+    - `DEBUG` - set to `True` for development, `False` for production.
+
+## Cloning Repository
+
+### <ins> Step 1: </ins>
+
+From the <a href="https://github.com/Amelia5p/travel-planner" target="_blank">GitHub repository</a> click on the 'code' button.
+
+### <ins> Step 2:</ins>
+
+Click 'local' on the top of the drop down menu and copy the URL.
+
+### <ins>Step 3: </ins>
+
+Open Git Bash on windows and change the working directory to the location where you want the cloned directory.
+
+### <ins>Step 4: </ins>
+
+Type 'Git clone' followed by a space and paste the URL previously copied, hit enter.
+
+### <ins> Result: </ins> 
+
+You now have a local copy of the Github repository.
+
+## Forking Repository
+
+### <ins>Step 1:</ins>
+
+From the <a href="https://github.com/Amelia5p/travel-planner" target="_blank">GitHub repository</a> click on the 'fork' button in the top right corner of the page. 
+
+### <ins>Step 2:</ins> 
+
+Choose to copy only the main branch or all branches to the new fork.
+
+### <ins>Step 3: </ins>
+
+Click Create a Fork.
+
+### <ins>Result:</ins>
+
+There is now a forked copy on GitHub.
+
+
+## Languages
+
+- Python
+- HTML
+- CSS
+- Javascript
+
+### Programs used
+- [Django](https://www.djangoproject.com/): main python framework used in the development of this project.
+- [Heroku](https://dashboard.heroku.com/login) - used as the cloud based platform to deploy the site on.
+- [Balsamiq](https://balsamiq.com/) - used to generate Wireframe images.
+- [Chrome Dev Tools](https://developer.chrome.com/docs/devtools/) - used for overall development and testing.
+- [Font Awesome](https://fontawesome.com/) - used for icons.
+- [GitHub](https://github.com/) - used for agile tool.
+- [Google Fonts](https://fonts.google.com/) - used to import fonts.
+- [W3C](https://www.w3.org/) - used for HTML & CSS Validation.
+- [PEP8 CI Linter](https://pep8ci.herokuapp.com/) - used to validate all the Python code.
+- [Jshint](https://jshint.com/) - used to validate javascript.
+- [Favicon](https://favicon.io/) - used to create the favicon.
+- [Mermaid](https://mermaid.live/) - used to create the database schema design
+- [Bootstrap 5](https://getbootstrap.com/docs/5.0/):Framework for developing responsiveness and styling
+- [Am I responsive](https://ui.dev/amiresponsive) used for responsive picture
+- [Coolors](https://coolors.co/) used for creating colour palette
+
+## Bugs
+
+- Some users do not have a Profile associated with them- fixed by using django signals to auto make profile when sign up.
+
+
+
+
+
+
+## Credits
+- [Code Institute - Walkthrough Project](https://github.com/Code-Institute-Solutions/boutique_ado_v1_sourcecode)
+
+
+
+
+## Acknowledgements 
+This is the fifth and final project, created for the Code Institutes Full Stack Web Developer (eCommerce) course. I would like to thank my cohort facilitator and the Code Institute team for their support.

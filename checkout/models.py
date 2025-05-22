@@ -2,6 +2,7 @@ import uuid
 from django.db import models
 from django_countries.fields import CountryField
 from products.models import Product
+from profiles.models import UserProfile
 
 
 class Order(models.Model):
