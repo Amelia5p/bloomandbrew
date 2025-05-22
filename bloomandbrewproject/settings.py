@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'profiles.apps.ProfilesConfig',
     'allauth.socialaccount',
     'django_countries',
+    'crispy_forms',
+    'crispy_bootstrap5',
     'home',
     'products',
     'cart',
@@ -84,6 +86,9 @@ TEMPLATES = [
         },
     },
 ]
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
 
 AUTHENTICATION_BACKENDS = [
     
