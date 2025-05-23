@@ -5,6 +5,7 @@ from django.contrib import messages
 from .models import Order, OrderItem
 from .forms import OrderForm
 from cart.cart import Cart
+from django.contrib.auth.decorators import login_required
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -57,8 +58,16 @@ def checkout(request):
 
 
 
-        
-
 def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
     return render(request, 'checkout/checkout_success.html', {'order': order})
+
+
+@login_required
+def order_history(request):
+    user_profile = request.user.userprofile
+    orders = Order.objects.filter(user=user_profile).order_by('-created_on')
+
+    return render(request, 'checkout/order_history.html', {
+        'orders': orders
+    })
