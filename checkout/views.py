@@ -2,15 +2,18 @@ import stripe
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+
 from .models import Order, OrderItem
 from .forms import OrderForm
 from cart.cart import Cart
-from django.contrib.auth.decorators import login_required
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+
 def checkout(request):
     cart = Cart(request)
+
     if len(cart) == 0:
         messages.warning(request, "Your cart is empty.")
         return redirect('view_cart')
@@ -38,24 +41,40 @@ def checkout(request):
         else:
             messages.error(request, "There was an error with your form.")
     else:
-        form = OrderForm()
-        total = int(cart.get_total_price() * 100)
+        
+        if request.user.is_authenticated:
+            profile = request.user.userprofile
+            initial_data = {
+                'full_name': request.user.get_full_name(),
+                'email_address': request.user.email,
+                'contact_number': profile.phone,
+                'address_line_1': profile.address_1,
+                'address_line_2': profile.address_2,
+                'town': profile.city,
+                'county': profile.county,
+                'postal_code': profile.postcode,
+                'country': profile.country,
+            }
+            form = OrderForm(initial=initial_data)
+        else:
+            form = OrderForm()
 
+        total = int(cart.get_total_price() * 100)
         intent = stripe.PaymentIntent.create(
             amount=total,
             currency='eur',
         )
-    total_eur = cart.get_total_price() 
+
+    total_eur = cart.get_total_price()
     context = {
         'form': form,
         'cart': cart,
-        'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
+        'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY,
         'client_secret': intent.client_secret,
         'stripe_pid': intent.id,
         'total_due': total_eur,
     }
     return render(request, 'checkout/checkout.html', context)
-
 
 
 def checkout_success(request, order_number):
