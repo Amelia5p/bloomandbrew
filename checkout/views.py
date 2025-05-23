@@ -69,7 +69,7 @@ def checkout(request):
     context = {
         'form': form,
         'cart': cart,
-        'stripe_public_key': settings.STRIPE_PUBLISHABLE_KEY,
+        'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
         'client_secret': intent.client_secret,
         'stripe_pid': intent.id,
         'total_due': total_eur,
