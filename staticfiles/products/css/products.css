@@ -1,23 +1,61 @@
 /* All Products */
 .card-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.25rem;
-    color: #A68A6D;
-  }
-  
-  .card-body .btn {
-    background-color: #C8D5B9;
-    color: #000;
-  }
-  
-  .card-body .btn:hover {
-    background-color: #EECFD1;
-    color: #000;
-  }
+  font-family: 'Playfair Display', serif;
+  font-size: 1.25rem;
+  color: #A68A6D;
+}
 
-  .product-image {
-    width: 100%;
-    height: 300px;            
-    object-fit: contain;
-    border-radius: 6px;
+.card-body .btn {
+  background-color: #C8D5B9;
+  color: #000;
+}
+
+.card-body .btn:hover {
+  background-color: #EECFD1;
+  color: #000;
+}
+
+.product-image {
+  width: 100%;
+  height: 300px;            
+  object-fit: contain;
+  border-radius: 6px;
+}
+
+.product-detail-image {
+max-height: 500px;
+object-fit: contain;
+width: 100%;
+background: #fff;
+border: 1px solid #eee;
+padding: 10px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+body.brews-page {
+background-color: #5C3A2E;
+}
+
+.card {
+background-color: #FFFDF9;
+border: none;
+}
+
+.brews-page .section-title {
+color: #F6F1EB;
+}
+
+.brews-page .btn-primary {
+background-color: #EECFD1;
+color: #000;
+border: none;
+}
+
+.brews-page .card-title
+{
+color:#000
+}
+
+body.blooms-page {
+background-color: #FDF6C3;
 }

@@ -1,0 +1,66 @@
+/* --- Checkout Page Layout --- */
+
+#payment-form {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#payment-form label {
+    font-weight: 600;
+    margin-bottom: 4px;
+    display: inline-block;
+}
+
+/* --- Stripe Card Element Styles --- */
+
+#card-element {
+    background-color: #fff;
+    padding: 12px 14px;
+    border: 1px solid #000;
+    border-radius: 6px;
+    height: auto;
+    min-height: 44px;
+    transition: border-color 0.2s ease-in-out;
+    font-size: 16px;
+    font-family: inherit;
+}
+
+/* Stripe injects the iframe into this class */
+.StripeElement {
+    background-color: transparent;
+    height: 100%;
+    width: 100%;
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* Focus State */
+.StripeElement--focus {
+    outline: none;
+    border-color: #76a935;
+    box-shadow: 0 0 0 2px rgba(118, 169, 53, 0.2);
+}
+
+/* Error State */
+.StripeElement--invalid {
+    border-color: #dc3545;
+    color: #dc3545;
+}
+
+#card-errors {
+    color: #dc3545;
+    font-size: 0.9rem;
+    margin-top: 6px;
+}
+
+/* --- Button Styling (match yours if custom) --- */
+
+button[type="submit"] {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: bold;
+}

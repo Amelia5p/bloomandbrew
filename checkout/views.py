@@ -1,14 +1,15 @@
+import stripe
 from django.shortcuts import render, redirect, get_object_or_404
+from django.conf import settings
 from django.contrib import messages
 from .models import Order, OrderItem
 from .forms import OrderForm
 from cart.cart import Cart
-from django.conf import settings
 
+stripe.api_key = settings.STRIPE_SECRET_KEY
 
 def checkout(request):
     cart = Cart(request)
-
     if len(cart) == 0:
         messages.warning(request, "Your cart is empty.")
         return redirect('view_cart')
@@ -19,34 +20,44 @@ def checkout(request):
             order = form.save(commit=False)
             order.user = request.user.userprofile if request.user.is_authenticated else None
             order.cart_snapshot = str(cart)
-            order.stripe_pid = 'TEMP-PLACEHOLDER'
+            order.stripe_pid = request.POST.get('stripe_pid')
             order.save()
 
             for item in cart:
-                product = item['product']
                 OrderItem.objects.create(
                     order=order,
-                    product=product,
+                    product=item['product'],
                     quantity=item['quantity'],
                 )
 
             order.update_totals()
             cart.clear()
-
             messages.success(request, f"Order {order.order_number} placed successfully!")
             return redirect('checkout_success', order_number=order.order_number)
         else:
-            messages.error(request, "There was an error with your form. Please review and try again.")
+            messages.error(request, "There was an error with your form.")
     else:
         form = OrderForm()
+        total = int(cart.get_total_price() * 100)
 
-    return render(request, 'checkout/checkout.html', {
+        intent = stripe.PaymentIntent.create(
+            amount=total,
+            currency='eur',
+        )
+    total_eur = cart.get_total_price() 
+    context = {
         'form': form,
         'cart': cart,
-        'STRIPE_PUBLISHABLE_KEY': settings.STRIPE_PUBLISHABLE_KEY
-        
-    })
+        'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
+        'client_secret': intent.client_secret,
+        'stripe_pid': intent.id,
+        'total_due': total_eur,
+    }
+    return render(request, 'checkout/checkout.html', context)
 
+
+
+        
 
 def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
