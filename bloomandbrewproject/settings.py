@@ -17,6 +17,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 if os.path.exists(os.path.join(BASE_DIR, 'env.py')):
     import env
 
+if os.path.exists('env.py'):
+    import env
+
+
+
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -31,8 +36,7 @@ SECRET_KEY = 'django-insecure-!5u^*goorb&xz!ophk%9d595l77$amr9_ydb1i$ks#=&c8z6a4
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = ['localhost','127.0.0.1' ]
+ALLOWED_HOSTS = ['localhost','127.0.0.1', ]
 
 
 # Application definition
@@ -52,10 +56,13 @@ INSTALLED_APPS = [
     'django_countries',
     'crispy_forms',
     'crispy_bootstrap5',
+    'cloudinary',
+    'cloudinary_storage',
     'home',
     'products',
     'cart',
     'checkout',
+
 ]
 
 MIDDLEWARE = [
@@ -172,6 +179,17 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Cloudinary Storage
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': os.environ.get('CLOUDINARY_CLOUD_NAME'),
+    'API_KEY': os.environ.get('CLOUDINARY_API_KEY'),
+    'API_SECRET': os.environ.get('CLOUDINARY_API_SECRET'),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
 
 
 

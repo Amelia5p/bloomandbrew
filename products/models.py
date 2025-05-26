@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils.text import slugify
+from cloudinary.models import CloudinaryField
 
 class Product(models.Model):
     """
@@ -20,7 +21,7 @@ Includes category, pricing (with optional discount), image, stock, and auto-gene
     category = models.CharField(max_length=10, choices=CATEGORY_CHOICES)
     price = models.DecimalField(max_digits=6, decimal_places=2)
     special_offer_price = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
-    image = models.ImageField(upload_to='product_images/')
+    image = CloudinaryField('image')
     stock = models.PositiveIntegerField(default=0)
     slug = models.SlugField(unique=True, blank=True)
 
