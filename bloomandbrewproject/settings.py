@@ -38,7 +38,7 @@ SECRET_KEY = 'django-insecure-!5u^*goorb&xz!ophk%9d595l77$amr9_ydb1i$ks#=&c8z6a4
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-ALLOWED_HOSTS = ['localhost','127.0.0.1', ]
+ALLOWED_HOSTS = ['localhost','127.0.0.1', 'bloom-and-brew-2265123bf17d.herokuapp.com', ]
 
 
 # Application definition
@@ -69,6 +69,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -189,6 +191,8 @@ CLOUDINARY_STORAGE = {
 }
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 
 
