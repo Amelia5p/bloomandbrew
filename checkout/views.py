@@ -3,19 +3,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-
-from .models import Order, OrderItem
-from .forms import OrderForm
-from cart.cart import Cart
-
-stripe.api_key = settings.STRIPE_SECRET_KEY
-
-
-import stripe
-from django.shortcuts import render, redirect, get_object_or_404
-from django.conf import settings
-from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from .models import Order, OrderItem
 from .forms import OrderForm
 from cart.cart import Cart
