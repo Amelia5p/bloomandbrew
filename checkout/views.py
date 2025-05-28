@@ -41,7 +41,6 @@ def checkout(request):
         else:
             messages.error(request, "There was an error with your form.")
     else:
-        
         if request.user.is_authenticated:
             profile = request.user.userprofile
             initial_data = {
@@ -59,20 +58,24 @@ def checkout(request):
         else:
             form = OrderForm()
 
-        total = int(cart.get_total_price() * 100)
+        total = cart.get_total_price()
+        if total == 0:
+            messages.error(request, "Your cart total is €0. Please add items before checking out.")
+            return redirect('view_cart')
+
+        total_cents = int(total * 100)
         intent = stripe.PaymentIntent.create(
-            amount=total,
+            amount=total_cents,
             currency='eur',
         )
 
-    total_eur = cart.get_total_price()
     context = {
         'form': form,
         'cart': cart,
         'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
         'client_secret': intent.client_secret,
         'stripe_pid': intent.id,
-        'total_due': total_eur,
+        'total_due': total,
     }
     return render(request, 'checkout/checkout.html', context)
 
