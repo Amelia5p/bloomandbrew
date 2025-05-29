@@ -128,6 +128,45 @@ footer .icon:hover {
     z-index: 10;
 }
 
+/* Error Pages */
+.error-page {
+    min-height: 100vh;
+    background-color: #F9F4F1;
+    color: #06231D;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+}
+
+.error-code {
+    font-size: 6rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.error-message {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.error-button {
+    display: inline-block;
+    background-color: #8CC63F;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 1.5rem;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+.error-button:hover {
+    background-color: #76a935;
+}
+
 
 
 /* Responsive Design */

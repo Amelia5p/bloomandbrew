@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Server Error{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/base.css' %}">
+{% endblock %}
+
+{% block content %}
+<section class="error-page">
+  <h1 class="error-code">500</h1>
+  <p class="error-message">Yikes! Something went wrong on our end.</p>
+  <a href="{% url 'home' %}" class="error-button">Try Again Later</a>
+</section>
+{% endblock %}
