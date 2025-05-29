@@ -1,6 +1,10 @@
 from django.db import models
 from django.utils.text import slugify
 from cloudinary.models import CloudinaryField
+from django.contrib.auth.models import User
+
+
+
 
 class Product(models.Model):
     """
@@ -41,11 +45,20 @@ Includes category, pricing (with optional discount), image, stock, and auto-gene
 
 
 class Review(models.Model):
+    """
+    Stores a user review for a product, including star rating and optional comment.
+    """
+
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    rating = models.PositiveIntegerField()
-    comment = models.TextField()
+    rating = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)])
+    comment = models.TextField(blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
 
+    class Meta:
+        ordering = ['-created_on']
+        unique_together = ('product', 'user')
+
     def __str__(self):
-        return f"Review by {self.user} on {self.product}"
+        return f"{self.product.name} - {self.user.username} ({self.rating}★)"
+
