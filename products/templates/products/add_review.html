@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Add Review | Bloom and Brew{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'products/css/products.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h2 class="mb-4">Review: {{ product.name }}</h2>
+  <form method="post" novalidate>
+    {% csrf_token %}
+
+    <!-- Star Rating -->
+    <div class="form-group mb-3">
+      <label class="form-label">Your Rating:</label>
+      <div class="star-rating">
+        {% for i in "54321" %}
+          <i class="fa-regular fa-star" data-value="{{ i }}"></i>
+        {% endfor %}
+        {{ form.rating }}
+      </div>
+    </div>
+
+    <!-- Comment -->
+    <div class="form-group mb-3">
+      {{ form.comment.label_tag }}
+      {{ form.comment }}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Submit Review</button>
+  </form>
+</div>
+{% endblock %}
+
+{% block postloadjs %}
+<script src="{% static 'products/js/products.js' %}"></script>
+{% endblock %}
