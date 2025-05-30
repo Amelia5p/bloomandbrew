@@ -69,7 +69,7 @@ def shop_blooms(request):
 
 def shop_bundles(request):
     """ Bundles-only product page """
-    products = Product.objects.filter(category='bundles')
+    products = Product.objects.filter(category='bundle')
     return render(request, 'products/shop_bundles.html', {'products': products})
 
 

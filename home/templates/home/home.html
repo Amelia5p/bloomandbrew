@@ -27,13 +27,33 @@ Discover handcrafted bouquets and artisan coffee delivered with care.
 </section>
 
 <!-- Bundle of the Week -->
-<section class="bundle-offer-section text-center">
-  <div class="container py-5">
-    <h2 class="section-title">OFFER: Bundle of the Week</h2>
-    <p class="bundle-subtext">Get our most loved bouquet + a bag of premium roast at 20% off!</p>
-    <img src="{% static 'images/bundle.jpg' %}" class="bundle-img img-fluid rounded" alt="Bundle Offer">
+<section class="bundle-offer-section text-center py-5 bg-light">
+  <div class="container">
+    <h2 class="section-title mb-3">Bundle of the Week</h2>
+
+    {% if bundle_of_the_week %}
+      <div class="card mx-auto shadow-sm p-3" style="max-width: 300px;">
+        <img src="{{ bundle_of_the_week.image.url }}" class="card-img-top rounded" alt="{{ bundle_of_the_week.name }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ bundle_of_the_week.name }}</h5>
+          <p class="card-text">
+            {% if bundle_of_the_week.special_offer_price %}
+              <strong>€{{ bundle_of_the_week.special_offer_price }}</strong>
+              <span class="text-muted text-decoration-line-through ms-2">€{{ bundle_of_the_week.price }}</span>
+            {% else %}
+              €{{ bundle_of_the_week.price }}
+            {% endif %}
+          </p>
+          <a href="{% url 'product_detail' bundle_of_the_week.slug %}" class="btn btn-success btn-sm">View Bundle</a>
+        </div>
+      </div>
+    {% else %}
+      <p class="text-muted">No bundle is currently featured.</p>
+    {% endif %}
   </div>
 </section>
+
+
 
 <!-- Featured Picks -->
 <section class="featured-products py-5">

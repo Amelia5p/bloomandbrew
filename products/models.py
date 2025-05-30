@@ -29,6 +29,7 @@ Includes category, pricing (with optional discount), image, stock, and auto-gene
     stock = models.PositiveIntegerField(default=0)
     slug = models.SlugField(unique=True, blank=True)
     is_featured = models.BooleanField(default=False)
+    bundle_of_the_week = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if not self.slug:
