@@ -26,36 +26,60 @@ Discover handcrafted bouquets and artisan coffee delivered with care.
   </div>
 </section>
 
-<!-- Bundle of the Week -->
-<section class="bundle-offer-section text-center py-5 bg-light">
+<!-- Bundle of the Week + Newsletter Section -->
+<section class="bundle-offer-section py-5">
   <div class="container">
-    <h2 class="section-title mb-3">Bundle of the Week</h2>
+    <h2 class="section-title text-center mb-4"> <span class="brand-accent">Bundle of the Week</span></h2>
+    <p class="text-center text-muted mb-5">This week's favourite pick, paired with something special just for you.</p>
 
-    {% if bundle_of_the_week %}
-      <div class="card mx-auto shadow-sm p-3" style="max-width: 300px;">
-        <img src="{{ bundle_of_the_week.image.url }}" class="card-img-top rounded" alt="{{ bundle_of_the_week.name }}">
-        <div class="card-body">
-          <h5 class="card-title">{{ bundle_of_the_week.name }}</h5>
-          <p class="card-text">
-            {% if bundle_of_the_week.special_offer_price %}
-              <strong>€{{ bundle_of_the_week.special_offer_price }}</strong>
-              <span class="text-muted text-decoration-line-through ms-2">€{{ bundle_of_the_week.price }}</span>
-            {% else %}
-              €{{ bundle_of_the_week.price }}
-            {% endif %}
-          </p>
-          <a href="{% url 'product_detail' bundle_of_the_week.slug %}" class="btn btn-success btn-sm">View Bundle</a>
-        </div>
+    <div class="row justify-content-center align-items-stretch gx-4 gy-4">
+      <!-- Bundle -->
+      <div class="col-md-5">
+        {% if bundle_of_the_week %}
+          <div class="card unified-card text-center p-3 h-100">
+            <img src="{{ bundle_of_the_week.image.url }}" class="card-img-top rounded mb-3" alt="{{ bundle_of_the_week.name }}">
+            <div class="card-body">
+              <h5 class="card-title fw-bold">{{ bundle_of_the_week.name }}</h5>
+              <p class="card-text mb-3">
+                {% if bundle_of_the_week.special_offer_price %}
+                  <strong>€{{ bundle_of_the_week.special_offer_price }}</strong>
+                  <span class="text-muted text-decoration-line-through ms-2">€{{ bundle_of_the_week.price }}</span>
+                {% else %}
+                  €{{ bundle_of_the_week.price }}
+                {% endif %}
+              </p>
+              <a href="{% url 'product_detail' bundle_of_the_week.slug %}" class="btn btn-outline-success">View Bundle</a>
+            </div>
+          </div>
+        {% else %}
+          <p class="text-muted text-center">No bundle is currently featured.</p>
+        {% endif %}
       </div>
-    {% else %}
-      <p class="text-muted">No bundle is currently featured.</p>
+
+      <!-- Newsletter -->
+<div class="col-md-5">
+  <div class="card unified-card p-4 h-100 text-center d-flex flex-column justify-content-center">
+    <img src="{% static 'images/pinkletter.png' %}" alt="Newsletter Graphic" class="newsletter-img mb-3">
+    <h5 class="fw-bold mb-2 brand-accent">Stay in the Loop</h5>
+    <p class="small text-muted mb-3">Get exclusive offers, artisan coffee tips, and bouquet drops in your inbox.</p>
+    <form method="post" action="{% url 'newsletter_signup' %}">
+      {% csrf_token %}
+      <input type="email" name="email" class="form-control mb-2" placeholder="Your email address" required>
+      <button type="submit" class="btn btn-newsletter w-100">Subscribe</button>
+    </form>
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert alert-{{ message.tags }} mt-3">{{ message }}</div>
+      {% endfor %}
     {% endif %}
+  </div>
+</div>
+
+    </div>
   </div>
 </section>
 
-
-
-<!-- Featured Picks -->
+<!-- Featured Section -->
 <section class="featured-products py-5">
   <div class="container">
     <h2 class="text-center mb-4">Featured Picks</h2>
@@ -73,8 +97,6 @@ Discover handcrafted bouquets and artisan coffee delivered with care.
     </div>
   </div>
 </section>
-
-
 
 <!-- CTA -->
 <section class="cta-section">

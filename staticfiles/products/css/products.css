@@ -1,4 +1,4 @@
-/* All Products */
+/* Product cards */
 .card-title {
   font-family: 'Playfair Display', serif;
   font-size: 1.25rem;
@@ -22,49 +22,104 @@
   border-radius: 6px;
 }
 
-.product-detail-image {
-max-height: 500px;
-object-fit: contain;
-width: 100%;
-background: #fff;
-border: 1px solid #eee;
-padding: 10px;
-box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+/* Product Detail Page */
+.product-detail {
+  background-color: #fdfaf6;
 }
 
-/* Shop Brews and Blooms Pages */
+.product-detail-image {
+  max-height: 500px;
+  object-fit: contain;
+  width: 100%;
+  background: #fff;
+  border: 1px solid #eee;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
 
+.product-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #2f2f2f;
+}
+
+.product-price {
+  color: #333;
+}
+
+.product-category {
+  font-size: 0.9rem;
+}
+
+.product-description {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.add-to-cart-form {
+  padding: 1rem 0;
+}
+
+.add-to-cart-form .btn {
+  min-width: 130px;
+}
+
+.customer-reviews {
+  border-top: 1px solid #ddd;
+  padding-top: 2rem;
+}
+
+.customer-reviews h5 {
+  font-size: 1.25rem;
+  color: #444;
+}
+
+.review {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1rem;
+}
+
+.review-stars i {
+  font-size: 1rem;
+}
+
+.review-comment {
+  font-size: 0.95rem;
+}
+
+.review-actions .btn {
+  margin-top: 0.5rem;
+}
+
+/*  Shop Pages Backgrounds */
 body.brews-page {
-background-color: #5C3A2E;
+  background-color: #5C3A2E;
 }
 
 .card {
-background-color: #FFFDF9;
-border: none;
+  background-color: #FFFDF9;
+  border: none;
 }
 
 .brews-page .section-title {
-color: #F6F1EB;
+  color: #F6F1EB;
 }
 
 .brews-page .btn-primary {
-background-color: #EECFD1;
-color: #000;
-border: none;
+  background-color: #EECFD1;
+  color: #000;
+  border: none;
 }
 
-.brews-page .card-title
-{
-color:#000
+.brews-page .card-title {
+  color: #000;
 }
-
 
 body.blooms-page {
-background-color: #FDF6C3;
+  background-color: #FDF6C3;
 }
 
 /* Reviews */
-
 .star-rating {
   display: inline-flex;
   flex-direction: row-reverse;
@@ -86,4 +141,19 @@ background-color: #FDF6C3;
 textarea {
   width: 100%;
   min-height: 100px;
+}
+
+/*Responsive*/
+@media (max-width: 768px) {
+  .product-detail-image {
+    max-height: 300px;
+  }
+
+  .product-title {
+    font-size: 1.5rem;
+  }
+
+  .product-price {
+    font-size: 1.25rem;
+  }
 }
