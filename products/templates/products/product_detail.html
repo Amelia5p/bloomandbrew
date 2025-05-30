@@ -55,7 +55,15 @@
         {% endfor %}
       </div>
       <p class="mb-1">{{ review.comment }}</p>
-      <small class="text-muted">By {{ review.user.username }} on {{ review.created_on|date:"M d, Y" }}</small>
+      <small class="text-muted d-block mb-1">By {{ review.user.username }} on {{ review.created_on|date:"M d, Y" }}</small>
+      
+      {% if user == review.user %}
+        <div>
+          <a href="{% url 'edit_review' product.slug review.id %}" class="btn btn-sm btn-outline-primary me-2">Edit</a>
+          <a href="{% url 'delete_review' product.slug review.id %}" class="btn btn-sm btn-outline-danger">Delete</a>
+        </div>
+      {% endif %}
+      
     </div>
   {% endfor %}
 
