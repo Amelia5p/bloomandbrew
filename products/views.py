@@ -117,4 +117,14 @@ def edit_review(request, product_slug, review_id):
 
 @login_required
 def delete_review(request, product_slug, review_id):
-    """"""
+    """ Delete review"""
+    product = get_object_or_404(Product, slug=product_slug)
+    review = get_object_or_404(Review, id=review_id, user=request.user)
+
+    if request.method == 'POST':
+        review.delete()
+        messages.success(request, "Your review has been deleted.")
+        return redirect('product_detail', slug=product.slug)
+
+    return render(request, 'products/delete_review.html', {'review': review, 'product': product})
+

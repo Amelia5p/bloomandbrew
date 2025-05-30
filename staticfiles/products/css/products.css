@@ -58,6 +58,7 @@ border: none;
 color:#000
 }
 
+
 body.blooms-page {
 background-color: #FDF6C3;
 }
@@ -69,6 +70,7 @@ background-color: #FDF6C3;
   flex-direction: row-reverse;
   gap: 0.4rem;
   cursor: pointer;
+  vertical-align: middle;
 }
 
 .star-rating i {
@@ -79,4 +81,9 @@ background-color: #FDF6C3;
 .star-rating i.selected,
 .star-rating i.hovered {
   color: gold;
+}
+
+textarea {
+  width: 100%;
+  min-height: 100px;
 }

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Delete Review | Bloom and Brew{% endblock %}
+
+{% block content %}
+<div class="container my-5 text-center">
+  <h2 class="mb-4">Delete Review</h2>
+  <p>Are you sure you want to delete your review for <strong>{{ product.name }}</strong>?</p>
+
+  <div class="mt-4">
+    <form method="post" class="d-inline-block">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Yes, Delete</button>
+    </form>
+    <a href="{% url 'product_detail' product.slug %}" class="btn btn-secondary ms-2">No, Go Back</a>
+  </div>
+</div>
+{% endblock %}
