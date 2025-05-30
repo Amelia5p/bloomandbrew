@@ -4,7 +4,7 @@ from .models import Product, Review
 from django.db.models import Q
 from django.contrib import messages
 from .forms import ReviewForm
-
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -40,7 +40,9 @@ def product_list(request):
         'search_query': query,
     })
 
+
 def product_detail(request, slug):
+    """ Displays a single product's details """
     product = get_object_or_404(Product, slug=slug)
     all_reviews = product.reviews.all()
     show_all = request.GET.get('all') == '1'
@@ -59,14 +61,15 @@ def shop_brews(request):
     products = Product.objects.filter(category='coffee')
     return render(request, 'products/shop_brews.html', {'products': products})
 
+
 def shop_blooms(request):
     """ Blooms-only product page """
     products = Product.objects.filter(category='bouquet')
     return render(request, 'products/shop_blooms.html', {'products': products})
 
 
-
 def add_review(request, product_slug):
+    """ Add review page """
     product = get_object_or_404(Product, slug=product_slug)
 
     if not request.user.is_authenticated:
@@ -91,3 +94,27 @@ def add_review(request, product_slug):
         form = ReviewForm()
 
     return render(request, 'products/add_review.html', {'form': form, 'product': product})
+
+
+
+@login_required
+def edit_review(request, product_slug, review_id):
+    """ Edit review page """
+    product = get_object_or_404(Product, slug=product_slug)
+    review = get_object_or_404(Review, id=review_id, user=request.user)
+
+    if request.method == 'POST':
+        form = ReviewForm(request.POST, instance=review)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Review updated.")
+            return redirect('product_detail', slug=product.slug)
+    else:
+        form = ReviewForm(instance=review)
+
+    return render(request, 'products/edit_review.html', {'form': form, 'product': product})
+
+
+@login_required
+def delete_review(request, product_slug, review_id):
+    """"""
