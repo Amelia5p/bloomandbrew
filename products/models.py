@@ -28,6 +28,7 @@ Includes category, pricing (with optional discount), image, stock, and auto-gene
     image = CloudinaryField('image')
     stock = models.PositiveIntegerField(default=0)
     slug = models.SlugField(unique=True, blank=True)
+    is_featured = models.BooleanField(default=False)
 
     def save(self, *args, **kwargs):
         if not self.slug:
@@ -54,6 +55,7 @@ class Review(models.Model):
     rating = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)])
     comment = models.TextField(blank=True, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
+
 
     class Meta:
         ordering = ['-created_on']

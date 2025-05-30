@@ -67,6 +67,11 @@ def shop_blooms(request):
     products = Product.objects.filter(category='bouquet')
     return render(request, 'products/shop_blooms.html', {'products': products})
 
+def shop_bundles(request):
+    """ Bundles-only product page """
+    products = Product.objects.filter(category='bundles')
+    return render(request, 'products/shop_bundles.html', {'products': products})
+
 
 def add_review(request, product_slug):
     """ Add review page """
