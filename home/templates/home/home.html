@@ -12,7 +12,7 @@
 <!-- Hero Section -->
 <section class="hero-section">
   <div class="container hero-content">
-    <div class="row align-items-center flex-column-reverse flex-md-row">
+    <div class="row align-items-center flex-column-reverse flex-md-row gy-4">
       <div class="col-md-6 text-block text-center text-md-start">
         <h1 class="display-4">Welcome to Bloom and Brew</h1>
         <p class="lead">Fresh bouquets & artisan coffee delivered with care.</p>
@@ -25,40 +25,47 @@
   </div>
 </section>
 
-<!-- Bundle of the Week + Newsletter Section -->
+
+<!--Bundle and Newletter Section -->
 <section class="bundle-offer-section py-5">
   <div class="container">
     <h2 class="section-title text-center mb-4"><span class="brand-accent">Bundle of the Week</span></h2>
-    <p class="text-center text-muted mb-5">This week's favourite pick, paired with something special just for you.</p>
+    <p class="text-center text-muted mb-5">Our weekly pick + something special for you.</p>
 
-    <div class="row justify-content-center align-items-stretch gx-4 gy-4">
-      <!-- Bundle -->
-      <div class="col-md-5">
-        {% if bundle_of_the_week %}
-          <div class="card unified-card text-center p-3 h-100">
-            <img src="{{ bundle_of_the_week.image.url }}" class="card-img-top rounded mb-3" alt="{{ bundle_of_the_week.name }}">
-            <div class="card-body">
-              <h5 class="card-title fw-bold">{{ bundle_of_the_week.name }}</h5>
-              <p class="card-text mb-3">
-                {% if bundle_of_the_week.special_offer_price %}
-                  <strong>€{{ bundle_of_the_week.special_offer_price }}</strong>
-                  <span class="text-muted text-decoration-line-through ms-2">€{{ bundle_of_the_week.price }}</span>
-                {% else %}
-                  €{{ bundle_of_the_week.price }}
-                {% endif %}
-              </p>
-              <a href="{% url 'product_detail' bundle_of_the_week.slug %}" class="btn btn-outline-success">View Bundle</a>
-            </div>
+    <div class="row gx-4 gy-4 justify-content-center">
+      <div class="col-md-6">
+        <div class="card unified-card compact-card text-center p-3 h-100">
+          <img src="{{ bundle_of_the_week.image.url }}" class="card-img-top rounded mb-3" alt="{{ bundle_of_the_week.name }}">
+          <div class="card-body">
+            <h5 class="card-title fw-bold">{{ bundle_of_the_week.name }}</h5>
+            <p class="card-text mb-3">
+              {% if bundle_of_the_week.special_offer_price %}
+                <strong>€{{ bundle_of_the_week.special_offer_price }}</strong>
+                <span class="text-muted text-decoration-line-through ms-2">€{{ bundle_of_the_week.price }}</span>
+              {% else %}
+                €{{ bundle_of_the_week.price }}
+              {% endif %}
+            </p>
+            <a href="{% url 'product_detail' bundle_of_the_week.slug %}" class="btn btn-outline-success">View Bundle</a>
           </div>
-        {% else %}
-          <p class="text-muted text-center">No bundle is currently featured.</p>
-        {% endif %}
+        </div>
       </div>
 
-      <!-- Newsletter -->
-      <div class="col-md-5">
-        <div class="card unified-card p-4 h-100 text-center d-flex flex-column justify-content-center">
-          <img src="{% static 'images/pinkletter.png' %}" alt="Newsletter Graphic" class="newsletter-img mb-3">
+      
+      <div class="col-md-6 extra-card">
+        <div class="card unified-card extra-card compact-card text-center p-3 h-100 d-flex align-items-center justify-content-center" style="min-height: 100%;">
+          <p class="text-muted">Something special coming soon...</p>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="card unified-card compact-card extra-card p-3 h-100">
+          <img src="{% static 'images/dont-miss.png' %}" class="img-fluid rounded" alt="Don't Miss Out">
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="card unified-card compact-card p-4 text-center d-flex flex-column justify-content-center h-100">
+          <img src="{% static 'images/pinkletter.png' %}" alt="Newsletter" class="newsletter-img mb-3">
           <h5 class="fw-bold mb-2 brand-accent">Stay in the Loop</h5>
           <p class="small text-muted mb-3">Get exclusive offers, artisan coffee tips, and bouquet drops in your inbox.</p>
           <form method="post" action="{% url 'newsletter_signup' %}">
@@ -78,6 +85,7 @@
     </div>
   </div>
 </section>
+
 
 <!-- Featured Section -->
 <section class="featured-products py-5">
