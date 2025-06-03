@@ -12,13 +12,13 @@
 <!-- Hero Section -->
 <section class="hero-section">
   <div class="container hero-content">
-    <div class="row align-items-center">
-      <div class="col-md-6 text-block">
+    <div class="row align-items-center flex-column-reverse flex-md-row">
+      <div class="col-md-6 text-block text-center text-md-start">
         <h1 class="display-4">Welcome to Bloom and Brew</h1>
         <p class="lead">Fresh bouquets & artisan coffee delivered with care.</p>
         <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg">Shop Now</a>
       </div>
-      <div class="col-md-6 image-block">
+      <div class="col-md-6 image-block text-center">
         <img src="{% static 'images/hero.jpg' %}" alt="Hero" class="hero-img img-fluid rounded shadow-sm">
       </div>
     </div>
@@ -28,7 +28,7 @@
 <!-- Bundle of the Week + Newsletter Section -->
 <section class="bundle-offer-section py-5">
   <div class="container">
-    <h2 class="section-title text-center mb-4"> <span class="brand-accent">Bundle of the Week</span></h2>
+    <h2 class="section-title text-center mb-4"><span class="brand-accent">Bundle of the Week</span></h2>
     <p class="text-center text-muted mb-5">This week's favourite pick, paired with something special just for you.</p>
 
     <div class="row justify-content-center align-items-stretch gx-4 gy-4">
@@ -56,27 +56,25 @@
       </div>
 
       <!-- Newsletter -->
-<div class="col-md-5">
-  <div class="card unified-card p-4 h-100 text-center d-flex flex-column justify-content-center">
-    <img src="{% static 'images/pinkletter.png' %}" alt="Newsletter Graphic" class="newsletter-img mb-3">
-    <h5 class="fw-bold mb-2 brand-accent">Stay in the Loop</h5>
-    <p class="small text-muted mb-3">Get exclusive offers, artisan coffee tips, and bouquet drops in your inbox.</p>
-    <form method="post" action="{% url 'newsletter_signup' %}">
-      {% csrf_token %}
-      <input type="email" name="email" class="form-control mb-2" placeholder="Your email address" required>
-      <button type="submit" class="btn btn-newsletter w-100">Subscribe</button>
-    </form>
-    {% if messages %}
-    {% for message in messages %}
-      {% if message.tags != 'success' %}
-        <div class="alert alert-{{ message.tags }} mt-3">{{ message }}</div>
-      {% endif %}
-    {% endfor %}
-  {% endif %}
-  
-  </div>
-</div>
-
+      <div class="col-md-5">
+        <div class="card unified-card p-4 h-100 text-center d-flex flex-column justify-content-center">
+          <img src="{% static 'images/pinkletter.png' %}" alt="Newsletter Graphic" class="newsletter-img mb-3">
+          <h5 class="fw-bold mb-2 brand-accent">Stay in the Loop</h5>
+          <p class="small text-muted mb-3">Get exclusive offers, artisan coffee tips, and bouquet drops in your inbox.</p>
+          <form method="post" action="{% url 'newsletter_signup' %}">
+            {% csrf_token %}
+            <input type="email" name="email" class="form-control mb-2" placeholder="Your email address" required>
+            <button type="submit" class="btn btn-newsletter w-100">Subscribe</button>
+          </form>
+          {% if messages %}
+            {% for message in messages %}
+              {% if message.tags != 'success' %}
+                <div class="alert alert-{{ message.tags }} mt-3">{{ message }}</div>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+        </div>
+      </div>
     </div>
   </div>
 </section>

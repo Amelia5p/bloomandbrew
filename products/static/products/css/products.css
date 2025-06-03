@@ -133,13 +133,13 @@ textarea {
 
 
 /* Brews Page */
-body.brews-page {
-  background-color: #5C3A2E;
-  color: #FFF;
+
+.brews-page .section-title{
+  color:#5C3A2E;
 }
 
-.brews-page .section-title {
-  color: #F6F1EB;
+.brews-page .explore-brews {
+  color:#5C3A2E;
 }
 
 .brews-page .card-title {
@@ -167,10 +167,6 @@ body.brews-page {
 .brews-page .card-body .btn:hover {
   background-color: #6f4631;
   color: #fff;
-}
-
-.brews-page .card-body{
-  background-color: beige;
 }
 
 /* Blooms Page */

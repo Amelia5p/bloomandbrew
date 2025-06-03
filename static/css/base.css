@@ -46,6 +46,7 @@ h1, h2, h3, h4, h5, h6 {
 .navbar .dropdown-item:hover {
     background-color: #C8D5B9;
     color: #000;
+    border-radius: 10px;
 }
 
 .navbar .dropdown-menu {

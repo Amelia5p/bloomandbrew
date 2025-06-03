@@ -1,0 +1,12 @@
+/* Button */
+.continue-shopping {
+    background-color: #eecfd1; 
+    color: #06231D;
+    border: none;
+  }
+  
+  .continue-shopping:hover {
+    background-color: #cde0d0; 
+    color: #06231D;
+  }
+  

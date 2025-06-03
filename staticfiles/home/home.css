@@ -1,7 +1,7 @@
-/* === Hero Section === */
+/* Hero Section */
 .hero-section {
-  background-color: #fffaf5;
   padding: 4rem 0;
+  
 }
 
 .hero-content .text-block {
@@ -24,10 +24,11 @@
   max-width: 100%;
 }
 
-/* === Bundle + Newsletter Section === */
+/* Bundle + Newsletter Section */
 .bundle-offer-section {
   background-color: #fefaf6;
   padding: 4rem 0;
+  border-radius: 15px;
 }
 
 .section-title {
@@ -72,7 +73,7 @@
   background-color: #c9dabf;
 }
 
-/* === Featured Products === */
+/* Featured Products Section */
 .featured-products {
   background-color: #fffdf9;
 }
@@ -107,7 +108,7 @@
 }
 
 
-/* === CTA Section === */
+/* CTA Section */
 .cta-section {
   background-color: #06231D;
   color: #fff;
@@ -130,27 +131,119 @@
   border: none;
 }
 
-/* === Responsive Fixes === */
+
+  /* About page */
+
+  .about-section {
+    background-color: #F6F1EB;
+    color: #333;
+  }
+  
+  .about-section h1 {
+    font-family: 'Playfair Display', serif;
+    color: #A68A6D;
+  }
+  
+  .about-section p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+  
+  .about-img {
+    max-width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+
+  .contact-section {
+    background-color: #fefefe;
+  }
+  
+  .contact-section h2 {
+    font-family: 'Playfair Display', serif;
+    color: #A68A6D;
+  }
+  
+  .contact-section .card {
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    background-color: #fff;
+  }
+  
+  .contact-section i {
+    color: #A68A6D;
+  }
+
+
+/*  Responsive  */
+
 @media (max-width: 768px) {
-  .hero-content {
-    flex-direction: column;
-    text-align: center;
-  }
-
+  /* Hero Section Adjustments */
   .hero-content .text-block {
-    padding: 0;
+    text-align: center;
+    padding-right: 0;
+    margin-bottom: 2rem;
   }
 
-  .card-img-top {
-    max-height: 220px;
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content .lead {
+    font-size: 1rem;
+  }
+
+  .hero-img {
+    max-width: 100%;
+    margin: 0 auto;
+  }
+
+  /* Bundle and Newsletter Cards */
+  .bundle-offer-section .card.unified-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .newsletter-img {
+    max-width: 120px;
+    height: auto;
+    margin: 0 auto 1rem auto;
+  }
+
+  .btn-newsletter {
+    font-size: 0.95rem;
+  }
+
+  .bundle-offer-section h2.section-title {
+    font-size: 1.5rem;
+  }
+
+  .bundle-offer-section p {
+    font-size: 0.95rem;
+  }
+
+  /* Featured Product Cards */
+  .featured-products h2 {
+    font-size: 1.6rem;
   }
 
   .product-card img {
     height: auto;
+    max-width: 100%;
   }
 
-  .bundle-offer-section .row {
-    flex-direction: column;
-    gap: 2rem;
+  /* CTA Section */
+  .cta-section h2 {
+    font-size: 1.75rem;
+  }
+
+  .cta-section .cta-subtext {
+    font-size: 1rem;
+  }
+
+  .cta-section .btn {
+    font-size: 1rem;
+    padding: 0.75rem 1.25rem;
   }
 }
