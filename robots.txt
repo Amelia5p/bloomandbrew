@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /accounts/
+Disallow: /cart/
+Sitemap: bloom-and-brew-2265123bf17d.herokuapp.com/sitemap.xml
