@@ -194,6 +194,43 @@
   color: #A68A6D;
 }
 
+
+.bundle-offer-section .text-card {
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: center;
+}
+
+.bundle-offer-section .text-card img {
+  max-height: 140px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.bundle-offer-section .text-card h5 {
+  font-size: 1.5em;
+  margin-bottom: 1rem;
+}
+
+.bundle-offer-section .text-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-width: 450px;
+  margin-bottom: 0.75rem;
+  text-align: left;
+}
+
+.flower-beans-text-small{
+  text-align: left;
+  font-weight: bold;
+  padding-left: 2rem;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .hero-content {
