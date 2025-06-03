@@ -63,6 +63,7 @@
 
       <div class="text-end mt-4">
         <h4>Total: €{{ cart.get_total_price|floatformat:2 }}</h4>
+        <a href="{% url 'product_list' %}" class="btn continue-shopping mt-3">Continue Shopping</a>
         <a href="{% url 'checkout' %}" class="btn btn-success mt-3">Proceed to Checkout</a>
       </div>
     {% endif %}

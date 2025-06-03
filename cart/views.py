@@ -13,7 +13,7 @@ def add_to_cart(request, product_id):
     override = request.POST.get('override_quantity') == 'true'
     cart.add(product=product, quantity=quantity, override_quantity=override)
     messages.success(request, f'{"Updated" if override else "Added"} {quantity} × "{product.name}" to your cart.')
-    return redirect('product_list')
+    return redirect('view_cart')
 
 
 def remove_from_cart(request, product_id):
