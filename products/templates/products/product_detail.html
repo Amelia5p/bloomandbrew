@@ -6,7 +6,11 @@
 <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
 {% endblock %}
 
-{% block title %}{{ product.name }}{% endblock %}
+{% block title %}{{ product.name }} | Bloom and Brew{% endblock %}
+{% block meta_description %}Discover {{ product.name }} – {{ product.description|truncatewords:20 }}. Premium quality and beautifully presented, available now.{% endblock %}
+
+
+<!-- For styling purposes-->
 {% block body_class %}
   {% if product.category == 'coffee' %}
     brews-page

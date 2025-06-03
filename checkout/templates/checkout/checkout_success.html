@@ -1,5 +1,9 @@
 {% extends "base.html" %}
+{% block title %}Order Confirmed | Bloom and Brew{% endblock %}
+{% block meta_description %}Thank you for your order! Your Bloom & Brew purchase has been confirmed. Check your email for details.{% endblock %}
+
 {% block content %}
+<!--Success message-->
 <h2>Thank you!</h2>
 <p>Your order {{ order.order_number }} has been placed successfully.</p>
 <a href="/">Return to home</a>

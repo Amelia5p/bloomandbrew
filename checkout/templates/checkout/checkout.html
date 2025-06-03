@@ -7,10 +7,13 @@
 <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
 {% endblock %}
 
+{% block title %}Checkout | Bloom and Brew{% endblock %}
+{% block meta_description %}Secure checkout for your Bloom & Brew order. Review your cart and complete your purchase with ease.{% endblock %}
+
 {% block content %}
+<!-- Checkout form -->
 <div class="container py-5">
     <h2 class="mb-4 text-center">Checkout</h2>
-
     <form method="POST" id="payment-form">
         {% csrf_token %}
         {{ form|crispy }}

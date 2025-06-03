@@ -5,14 +5,14 @@
 <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
 {% endblock %}
 
-{% block title %}Shop all products{% endblock title %}
+{% block title %}Shop All Products | Bloom and Brew{% endblock %}
+{% block meta_description %}Browse our full collection of flowers, artisan coffee, and curated bundles. Something thoughtful for every occasion.{% endblock %}
+
 
 {% block content %}
 <section class="py-5">
   <div class="container">
     <h2 class="section-title text-center mb-4">Shop All Products</h2>
-
-    
     <form method="GET" class="row align-items-end mb-4">
       <!-- Search -->
       <div class="col-md-4 mb-2">
@@ -20,7 +20,6 @@
         <input type="text" id="search" name="q" class="form-control"
                placeholder="Search products..." value="{{ request.GET.q }}">
       </div>
-
       <!-- Category -->
       <div class="col-md-4 mb-2">
         <label for="category" class="form-label">Filter by Category</label>
@@ -31,7 +30,6 @@
           <option value="bundle" {% if request.GET.category == 'bundle' %}selected{% endif %}>Bundles</option>
         </select>
       </div>
-
       <!-- Sort -->
       <div class="col-md-4 mb-2 d-flex align-items-end justify-content-between">
         <div class="flex-grow-1 me-2">
@@ -44,7 +42,6 @@
             <option value="name_desc" {% if request.GET.sort == 'name_desc' %}selected{% endif %}>Name: Z-A</option>
           </select>
         </div>
-
         <!-- Reset Button -->
         <div class="align-self-end">
           <a href="{% url 'product_list' %}" class="btn btn-outline-secondary">Reset</a>
@@ -57,7 +54,6 @@
     {% endif %}
 
     <!-- Product Grid -->
-     
     <div class="row g-4">
       {% for product in products %}
         <div class="col-md-4">

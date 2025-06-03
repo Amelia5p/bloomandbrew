@@ -7,15 +7,18 @@
 
 {% block body_class %}bundles-page{% endblock %}
 
-{% block title %}Shop Bundles{% endblock title %}
+{% block title %}Shop Bundles | Bloom and Brew{% endblock %}
+{% block meta_description %}Save with our curated gift bundles combining flowers and coffee — thoughtful, elegant, and delivered with care.{% endblock %}
+
 
 {% block content %}
+<!--Title-->
 <body class="bundles-page">
 <section class="py-5">
   <div class="container">
     <h2 class="section-title blooms-section-title text-center mb-4">Bundles</h2>
     <p class="text-center">Explore our favourite bundles.</p>
-
+    <!--Products-->
     <div class="row g-4">
       {% for product in products %}
         <div class="col-md-4">

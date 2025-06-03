@@ -1,8 +1,13 @@
 {% extends "base.html" %}
+
+{% block title %}Order History | Bloom and Brew{% endblock %}
+{% block meta_description %}Track and view your full Bloom & Brew order history, including past purchases and delivery status.{% endblock %}
+
+
 {% block content %}
+<!--Orders-->
 <div class="container py-5">
     <h2 class="mb-4">My Orders</h2>
-
     {% if orders %}
         <ul class="list-group">
             {% for order in orders %}
