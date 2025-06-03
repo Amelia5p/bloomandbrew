@@ -68,10 +68,13 @@ Discover handcrafted bouquets and artisan coffee delivered with care.
       <button type="submit" class="btn btn-newsletter w-100">Subscribe</button>
     </form>
     {% if messages %}
-      {% for message in messages %}
+    {% for message in messages %}
+      {% if message.tags != 'success' %}
         <div class="alert alert-{{ message.tags }} mt-3">{{ message }}</div>
-      {% endfor %}
-    {% endif %}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  
   </div>
 </div>
 
@@ -102,7 +105,7 @@ Discover handcrafted bouquets and artisan coffee delivered with care.
 <section class="cta-section">
   <div class="container text-center py-5">
     <h2>Ready to make someone’s day?</h2>
-    <p class="cta-subtext">Choose from our beautiful selection.</p>
+    <p class="cta-subtext">Choose a gift from our beautiful selection.</p>
     <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg">Shop Now</a>
   </div>
 </section>

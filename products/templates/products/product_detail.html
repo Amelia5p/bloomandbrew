@@ -7,6 +7,18 @@
 {% endblock %}
 
 {% block title %}{{ product.name }}{% endblock %}
+{% block body_class %}
+  {% if product.category == 'coffee' %}
+    brews-page
+  {% elif product.category == 'bouquet' %}
+    blooms-page
+  {% elif product.category == 'bundle' %}
+    bundle-page
+  {% else %}
+    product-page
+  {% endif %}
+{% endblock %}
+
 
 {% block content %}
 <section class="product-detail py-5">
