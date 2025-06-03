@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>1.00</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/brews/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/blooms/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/bundles/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/about/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/accounts/login/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/accounts/signup/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/cart/cart/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/bundle/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/velvet-brew/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/wellspring-bloom/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/morning-brew/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/highgrove-bloom/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/bold-brew/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/cocoa-brew/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/cinder-brew/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/premium-brew/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/bloom-brew/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/haven-bloom/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/holloway-bloom/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/fenwick-bloom/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/lily-bloom/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/bellfield-bloom/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/accounts/password/reset/</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/wellspring-bloom/?all=1</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://bloom-and-brew-2265123bf17d.herokuapp.com/products/wellspring-bloom/?all=0</loc>
+  <lastmod>2025-06-03T09:16:05+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+
+
+</urlset>
