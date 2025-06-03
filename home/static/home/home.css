@@ -111,6 +111,23 @@
   margin: 0 auto;
 }
 
+.text-card {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.flower-beans-img{
+  max-height: 150px;
+  object-fit: cover;
+  width: 100%;
+}
+.flower-beans-text{
+  padding: 2rem;
+}
+
+.brand-accent-title {
+  padding-top: 2rem;
+}
 /* CTA Section */
 .cta-section {
   background-color: #06231D;
@@ -238,10 +255,6 @@
 
   .bundle-offer-section p {
     font-size: 0.95rem;
-  }
-
-  .extra-card {
-    display: none;
   }
 
   .featured-products h2 {

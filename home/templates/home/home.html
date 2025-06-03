@@ -25,8 +25,7 @@
   </div>
 </section>
 
-
-<!--Bundle and Newletter Section -->
+<!--Bundle and Newsletter Section -->
 <section class="bundle-offer-section py-5">
   <div class="container">
     <h2 class="section-title text-center mb-4"><span class="brand-accent">Bundle of the Week</span></h2>
@@ -51,18 +50,26 @@
         </div>
       </div>
 
-      
-      <div class="col-md-6 extra-card">
-        <div class="card unified-card extra-card compact-card text-center p-3 h-100 d-flex align-items-center justify-content-center" style="min-height: 100%;">
-          <p class="text-muted">Something special coming soon...</p>
+      <div class="col-md-6 d-none d-md-flex extra-card">
+        <div class="card unified-card compact-card text-center p-4 h-100 d-flex flex-column justify-content-start text-card">
+          <img src="{% static 'images/flower-beans.png' %}" alt="Weekly Bundle Banner" class="img-fluid rounded mb-3 flower-beans-img">
+          <h5 class="fw-bold mb-2 brand-accent brand-accent-title">Why a Weekly Bundle?</h5>
+          <p class="text-muted small mb-2 flower-beans-text">
+            Each week, our team hand-picks a flower & brew combo that captures the mood of the season. It's a thoughtful way to discover new pairings, try something fresh, or gift with extra meaning.
+          </p>
+          <p class="text-muted small mb-0">
+            Limited quantities. Special pricing. Updated every Monday.
+          </p>
         </div>
       </div>
 
-      <div class="col-md-6">
-        <div class="card unified-card compact-card extra-card p-3 h-100">
+   
+      <div class="col-md-6 d-none d-md-block extra-card">
+        <div class="card unified-card compact-card p-3 h-100">
           <img src="{% static 'images/dont-miss.png' %}" class="img-fluid rounded" alt="Don't Miss Out">
         </div>
       </div>
+
       <div class="col-md-6">
         <div class="card unified-card compact-card p-4 text-center d-flex flex-column justify-content-center h-100">
           <img src="{% static 'images/pinkletter.png' %}" alt="Newsletter" class="newsletter-img mb-3">
@@ -85,7 +92,6 @@
     </div>
   </div>
 </section>
-
 
 <!-- Featured Section -->
 <section class="featured-products py-5">
