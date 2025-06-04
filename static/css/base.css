@@ -187,6 +187,52 @@ display: flex;
     color: #000;
   }
   
+  /* Login Page */
+  .auth-section {
+    background-color: #fffdf9;
+    min-height: 90vh;
+    border-radius: 10px;
+  }
+  
+  .auth-card {
+    background-color: #ffffff;
+    border: 1px solid #eee;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  }
+  
+  .auth-card h2 {
+    font-family: 'Playfair Display', serif;
+    color: #A68A6D;
+  }
+  
+  .auth-card form input,
+  .auth-card form select {
+    border-radius: 8px;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+  }
+  
+  .auth-card form label {
+    font-weight: 600;
+    color: #5c3a2e;
+  }
+  
+  .auth-card .btn-primary {
+    background-color: #dce8d2;
+    color: #000;
+    border: none;
+    transition: all 0.3s ease;
+  }
+  
+  .auth-card .btn-primary:hover {
+    background-color: #c9dabf;
+  }
+
+  #id_remember {
+    margin-right: 0.5rem;
+  }
+
 
 /* Responsive Design */
 

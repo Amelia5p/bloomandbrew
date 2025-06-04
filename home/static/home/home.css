@@ -144,6 +144,7 @@
   background-color: #06231D;
   color: #fff;
   padding: 4rem 0;
+  border-radius: 10px;
 }
 
 .cta-section h2 {
@@ -185,6 +186,8 @@
   object-fit: cover;
   border-radius: 10px;
 }
+
+
 
 .contact-section {
   background-color: #fefefe;
