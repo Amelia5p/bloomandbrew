@@ -97,6 +97,8 @@ footer .icon:hover {
 }
 
 /* Search */
+
+
 #search-form {
     display: none;
     position: absolute;
@@ -111,9 +113,8 @@ footer .icon:hover {
 }
 
 #search-form.show {
-    display: flex;
+display: flex;
 }
-
 
 .cart-count-badge {
     position: absolute;
@@ -169,7 +170,22 @@ footer .icon:hover {
     background-color: #76a935;
 }
 
-
+/* Back to Top Button */
+.back-to-top-footer {
+    font-size: 0.95rem;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    background-color: #EECFD1;
+    color: #000;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .back-to-top-footer:hover {
+    background-color: #d9b8bb;
+    color: #000;
+  }
+  
 
 /* Responsive Design */
 
@@ -207,6 +223,11 @@ footer .icon:hover {
     .navbar .dropdown-menu {
         text-align: center;
     }
+
+    .back-to-top {
+        padding: 0.8rem 1rem;
+        font-size: 1.8rem;
+      }
 }
   
   /* Media Queries 576px */
