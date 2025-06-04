@@ -8,7 +8,6 @@
 {% block title %}Your Cart | Bloom and Brew{% endblock %}
 {% block meta_description %}Review your selected products before checkout. Update quantities or remove items from your cart with ease.{% endblock %}
 
-
 {% block content %}
 <!--Shopping Cart -->
 <section class="py-5">
@@ -22,7 +21,7 @@
       </div>
     {% else %}
       <div class="table-responsive">
-        <table class="table align-middle table-bordered">
+        <table class="table align-middle table-bordered cart-table">
           <thead class="table-light">
             <tr>
               <th scope="col">Product</th>
@@ -35,21 +34,21 @@
           <tbody>
             {% for item in cart %}
               <tr>
-                <td>
+                <td data-label="Product">
                   <strong>{{ item.product.name }}</strong><br>
                   <small class="text-muted">{{ item.product.category }}</small>
                 </td>
-                <td>€{{ item.price|floatformat:2 }}</td>
-                <td>
-                  <form action="{% url 'add_to_cart' item.product.id %}" method="post" class="d-flex align-items-center">
+                <td data-label="Price">€{{ item.price|floatformat:2 }}</td>
+                <td data-label="Qty">
+                  <form action="{% url 'add_to_cart' item.product.id %}" method="post" class="d-flex align-items-center flex-wrap gap-2">
                     {% csrf_token %}
-                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control form-control-sm me-2" style="width: 70px;">
+                    <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control form-control-sm" style="width: 70px;">
                     <input type="hidden" name="override_quantity" value="true">
                     <button type="submit" class="btn btn-sm btn-outline-primary">Update</button>
                   </form>
                 </td>
-                <td>€{{ item.total_price|floatformat:2 }}</td>
-                <td>
+                <td data-label="Total">€{{ item.total_price|floatformat:2 }}</td>
+                <td data-label="Remove Item">
                   <form action="{% url 'remove_from_cart' item.product.id %}" method="post">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-sm btn-outline-danger">×</button>
@@ -61,9 +60,9 @@
         </table>
       </div>
 
-      <div class="text-end mt-4">
-        <h4>Total: €{{ cart.get_total_price|floatformat:2 }}</h4>
-        <a href="{% url 'product_list' %}" class="btn continue-shopping mt-3">Continue Shopping</a>
+      <div class="mt-4 cart-buttons text-center">
+        <h4 class="cart-total">Total: €{{ cart.get_total_price|floatformat:2 }}</h4>
+        <a href="{% url 'product_list' %}" class="btn btn-secondary mt-3 continue-shopping">Continue Shopping</a>
         <a href="{% url 'checkout' %}" class="btn btn-success mt-3">Proceed to Checkout</a>
       </div>
     {% endif %}
