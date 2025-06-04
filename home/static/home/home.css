@@ -1,7 +1,6 @@
 /* Hero Section */
 .hero-section {
   padding: 4rem 0;
-  overflow-x: hidden;
 }
 
 .hero-content .text-block {
@@ -268,6 +267,7 @@
 
   .bundle-offer-section .card.unified-card {
     padding: 1.5rem 1rem;
+    margin-top: 2rem;
   }
 
   .newsletter-img {
