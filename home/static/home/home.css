@@ -28,6 +28,7 @@
   background-color: #fefaf6;
   padding: 4rem 0;
   border-radius: 15px;
+  
 }
 
 .section-title {
@@ -228,8 +229,14 @@
 @media (max-width: 768px) {
   .hero-content {
     padding: 0 1rem;
+    
   }
 
+  .hero-section {
+    padding: 4rem 0;
+ 
+  }
+  
   .hero-content .text-block {
     text-align: center;
     padding: 0;
@@ -254,7 +261,10 @@
     max-width: 100%;
     margin: 0 auto;
     display: block;
+    max-height: 250px;
+    object-fit: cover;
   }
+  
 
   .section-title {
     font-size: 1.4rem;

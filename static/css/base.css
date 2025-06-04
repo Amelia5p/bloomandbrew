@@ -6,6 +6,7 @@ body {
     color: #333;
     margin: 0;
     padding: 0;
+    overflow-x: hidden 
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -13,6 +14,7 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: 600;
     color: #A68A6D;
 }
+
 
 /* Nav bar */
 .logo-img {
@@ -190,24 +192,6 @@ display: flex;
 
  /* Media Queries 767px */
 @media (max-width: 767px) {
-    .hero-section {
-        background: url("/static/images/travel-hero-img600.jpg") no-repeat center center/cover;
-        height: 50vh;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-  
-    .hero .col-md-6 {
-      margin-bottom: 2rem;
-    }
-  
-    .hero-img {
-      height: 250px;
-      object-fit: cover;
-    }
 
     .navbar-nav {
         width: 100%;
