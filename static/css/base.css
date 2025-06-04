@@ -16,10 +16,11 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Nav bar */
 .logo-img {
-    height: 60px;
+    height: 70px;
     width: auto;
-    image-rendering: auto;
-  }
+    image-rendering: -webkit-optimize-contrast;
+      }
+  
   
 
 .navbar .badge {

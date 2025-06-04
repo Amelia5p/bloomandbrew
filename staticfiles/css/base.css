@@ -16,10 +16,11 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Nav bar */
 .logo-img {
-    height: 60px;
+    height: 70px;
     width: auto;
-    image-rendering: auto;
-  }
+    image-rendering: -webkit-optimize-contrast;
+      }
+  
   
 
 .navbar .badge {
@@ -46,6 +47,7 @@ h1, h2, h3, h4, h5, h6 {
 .navbar .dropdown-item:hover {
     background-color: #C8D5B9;
     color: #000;
+    border-radius: 10px;
 }
 
 .navbar .dropdown-menu {

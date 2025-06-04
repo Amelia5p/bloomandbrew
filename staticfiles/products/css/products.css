@@ -134,7 +134,11 @@ textarea {
 
 /* Brews Page */
 
-.brews-page .section-title .explore-brews {
+.brews-page .section-title{
+  color:#5C3A2E;
+}
+
+.brews-page .explore-brews {
   color:#5C3A2E;
 }
 
