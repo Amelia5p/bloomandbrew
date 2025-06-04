@@ -1,6 +1,7 @@
 /* Hero Section */
 .hero-section {
   padding: 4rem 0;
+  margin-bottom: 2rem;
 }
 
 .hero-content .text-block {
@@ -85,10 +86,26 @@
 }
 
 .product-card img {
-  height: 200px;
-  object-fit: cover;
+  width: 100%;
+  height: auto;
+  max-height: 200px;
+  object-fit: contain;
   margin-bottom: 1rem;
 }
+.image-wrapper {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.image-wrapper img {
+  height: 100%;
+  width: auto;
+  object-fit: cover;
+}
+
 
 .newsletter-img {
   width: 100%;
