@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.contrib import messages
 from .forms import ReviewForm
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import user_passes_test
 
 
 
@@ -133,3 +134,12 @@ def delete_review(request, product_slug, review_id):
 
     return render(request, 'products/delete_review.html', {'review': review, 'product': product})
 
+# Admin Only
+
+def is_admin(user):
+    return user.is_superuser or user.is_staff
+
+@user_passes_test(is_admin)
+def manage_products(request):
+    products = Product.objects.all()
+    return render(request, 'products/manage_products.html', {'products': products})
