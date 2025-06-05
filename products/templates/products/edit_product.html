@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block title %}Edit Product{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+  <h2>Edit Product</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    {% for field in form %}
+      {% if field.name != 'image' %}
+        {{ field|as_crispy_field }}
+      {% endif %}
+    {% endfor %}
+
+    <div class="mb-4">
+      <label for="id_image" class="form-label">Product Image</label>
+      {% if form.instance.image %}
+        <div class="mb-2">
+          <img src="{{ form.instance.image.url }}" alt="Current image" class="img-fluid rounded border" style="max-height: 200px;">
+        </div>
+      {% endif %}
+      {{ form.image }}
+    </div>
+
+    <button type="submit" class="btn btn-success">Update Product</button>
+  </form>
+</div>
+{% endblock %}

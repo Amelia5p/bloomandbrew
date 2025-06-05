@@ -15,6 +15,6 @@ class ReviewForm(forms.ModelForm):
 
 
 class ProductForm(forms.ModelForm):
-    class Meta: 
+    class Meta:
         model = Product
         fields = '__all__'
