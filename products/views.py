@@ -6,6 +6,7 @@ from django.contrib import messages
 from .forms import ReviewForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.decorators import user_passes_test
+from .forms import ProductForm
 
 
 
@@ -143,3 +144,38 @@ def is_admin(user):
 def manage_products(request):
     products = Product.objects.all()
     return render(request, 'products/manage_products.html', {'products': products})
+
+
+@user_passes_test(is_admin)
+def add_product(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Product added successfully.")
+            return redirect('product_admin')
+    else:
+        form = ProductForm()
+    return render(request, 'products/add_product.html', {'form': form})
+
+@user_passes_test(is_admin)
+def edit_product(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES, instance=product)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Product updated.")
+            return redirect('product_admin')
+    else:
+        form = ProductForm(instance=product)
+    return render(request, 'products/edit_product.html', {'form': form, 'product': product})
+
+@user_passes_test(is_admin)
+def delete_product(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+    if request.method == 'POST':
+        product.delete()
+        messages.success(request, "Product deleted.")
+        return redirect('product_admin')
+    return render(request, 'products/delete_product.html', {'product': product})
