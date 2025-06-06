@@ -7,21 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    {% block meta_description %}
-    <meta name="description" content="Bloom and Brew is your go-to destination for artisan coffee, fresh flower bouquets, and thoughtful gift bundles — all available for delivery across Dublin.">
-    {% endblock %}
+
+    <meta name="description" content="{% block meta_description %}Bloom and Brew is your go-to destination for artisan coffee, fresh flower bouquets, and thoughtful gift bundles — all available for delivery across Dublin.{% endblock %}">
 
     {% endblock %}
 
-    <title>{% block title %} Bloom and Brew {% endblock %}</title>
-   
-  <!-- Favicon -->
+    <title>{% block title %}Bloom and Brew{% endblock %}</title>
+
+    <!-- Favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="{% static 'favicon/apple-touch-icon.png' %}">
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon/favicon-32x32.png' %}">
     <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon/favicon-16x16.png' %}">
     <link rel="manifest" href="{% static 'favicon/site.webmanifest' %}">
     <link rel="shortcut icon" href="{% static 'favicon/favicon.ico' %}">
-
 
     <!-- Google Fonts -->
     <style>
@@ -72,13 +70,11 @@
                     {% if user.is_authenticated %}
                         <li class="nav-item"><a class="nav-link" href="{% url 'profile' %}">My Profile</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'order_history' %}">My Orders</a></li>
-                        {% if user.is_authenticated and user.is_staff %}
+                        {% if user.is_staff %}
                             <li class="nav-item">
-                            <a class="nav-link" href="{% url 'product_admin' %}">Admin Panel</a>
+                                <a class="nav-link" href="{% url 'product_admin' %}">Admin Panel</a>
                             </li>
-                    {% endif %}
-
-                        
+                        {% endif %}
                         <li class="nav-item">
                             <form action="{% url 'account_logout' %}" method="post" class="d-inline m-0 p-0">
                                 {% csrf_token %}
@@ -101,17 +97,17 @@
                     
                     <li class="nav-item position-relative">
                         <button class="btn btn-outline-light" id="search-toggle" type="button" aria-label="Open search">
-                          <i class="fas fa-search"></i>
+                            <i class="fas fa-search"></i>
                         </button>
                         <form method="GET" action="{% url 'product_list' %}" class="search-form position-absolute" id="search-form">
-                          <input class="form-control" type="search" placeholder="Search products..." name="q" aria-label="Search">
+                            <input class="form-control" type="search" placeholder="Search products..." name="q" aria-label="Search">
                         </form>
-                      </li> 
-                      
+                    </li> 
                 </ul>
             </div>
         </div>
     </nav>
+
 <!--Messages-->
     {% if messages %}
     <div class="container mt-3">
@@ -130,22 +126,20 @@
 
     <footer class="py-4 mt-5">
         <div class="container text-center">
-          <div class="mb-3">
-            <a href="https://www.facebook.com" target="_blank" class="icon" aria-label="Visit Facebook">
-              <i class="fa-brands fa-facebook"></i>
-            </a>
-            <a href="https://www.twitter.com" target="_blank" class="icon" aria-label="Visit Twitter">
-              <i class="fa-brands fa-x-twitter"></i>
-            </a>
-            <a href="https://www.instagram.com" target="_blank" class="icon" aria-label="Visit Instagram">
-              <i class="fa-brands fa-instagram"></i>
-            </a>
-          </div>
-          <p class="mb-0">&copy; 2025 Bloom and Brew. All Rights Reserved.</p>
+            <div class="mb-3">
+                <a href="https://www.facebook.com" target="_blank" class="icon" aria-label="Visit Facebook">
+                    <i class="fa-brands fa-facebook"></i>
+                </a>
+                <a href="https://www.twitter.com" target="_blank" class="icon" aria-label="Visit Twitter">
+                    <i class="fa-brands fa-x-twitter"></i>
+                </a>
+                <a href="https://www.instagram.com" target="_blank" class="icon" aria-label="Visit Instagram">
+                    <i class="fa-brands fa-instagram"></i>
+                </a>
+            </div>
+            <p class="mb-0">&copy; 2025 Bloom and Brew. All Rights Reserved.</p>
         </div>
-      </footer>
-      
-
+    </footer>
 </div>
 
 {% block corejs %}
@@ -156,5 +150,5 @@
 <script src="{% static 'js/base.js' %}"></script>
 {% endblock %}
 
-  </body>
+</body>
 </html>
