@@ -47,8 +47,8 @@
                 </td>
                 <td data-label="Stock">{{ product.stock }}</td>
                 <td data-label="Actions">
-                  <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-primary">Edit</a>
-                  <a href="{% url 'delete_product' product.id %}" class="btn btn-sm btn-danger">Delete</a>
+                  <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-primary" aria-label="Edit {{ product.name }}">Edit</a>
+                  <a href="{% url 'delete_product' product.id %}" class="btn btn-sm btn-danger" aria-label="Delete {{ product.name }}">Delete</a>
                 </td>
               </tr>
             {% endfor %}

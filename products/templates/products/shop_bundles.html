@@ -13,7 +13,6 @@
 
 {% block content %}
 <!--Title-->
-<body class="bundles-page">
 <section class="py-5">
   <div class="container">
     <h2 class="section-title blooms-section-title text-center mb-4">Bundles</h2>
@@ -40,11 +39,10 @@
       {% endfor %}
     </div>
     <div class="text-center my-4">
-        <a href="#" class="btn btn-outline-dark back-to-top-footer" title="Back to Top">
+        <a href="#" class="btn btn-outline-dark back-to-top-footer" title="Back to Top" aria-label="Scroll to top of bundles collection">
           <i class="fas fa-chevron-up me-1"></i> Back to Top
         </a>
       </div>
   </div>
 </section>
-</body>
 {% endblock %}

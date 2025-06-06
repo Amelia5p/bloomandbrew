@@ -12,9 +12,9 @@
   <div class="mt-4">
     <form method="post" class="d-inline-block">
       {% csrf_token %}
-      <button type="submit" class="btn btn-danger">Yes, Delete</button>
+      <button type="submit" class="btn btn-danger" aria-label="Confirm deletion of your review for {{ product.name }}">Yes, Delete</button>
     </form>
-    <a href="{% url 'product_detail' product.slug %}" class="btn btn-secondary ms-2">No, Go Back</a>
+    <a href="{% url 'product_detail' product.slug %}" class="btn btn-secondary ms-2" aria-label="Cancel and return to {{ product.name }} product page" >No, Go Back</a>
   </div>
 </div>
 {% endblock %}
