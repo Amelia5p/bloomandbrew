@@ -19,7 +19,7 @@
         <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg">Shop Now</a>
       </div>
       <div class="col-md-6 image-block text-center">
-        <img src="{% static 'images/hero.jpg' %}" alt="Hero" class="hero-img img-fluid rounded shadow-sm">
+        <img src="{% static 'images/hero.jpg' %}" alt="Bouquet and coffee on a table" class="hero-img img-fluid rounded shadow-sm">
       </div>
     </div>
   </div>
@@ -35,7 +35,7 @@
     <div class="row gx-4 gy-4 justify-content-center">
       <div class="col-md-6">
         <div class="card unified-card compact-card text-center p-3 h-100">
-          <img src="{{ bundle_of_the_week.image.url }}" class="card-img-top rounded mb-3" alt="{{ bundle_of_the_week.name }}">
+          <img src="{{ bundle_of_the_week.image.url }}" class="card-img-top rounded mb-3" alt="Illustration of flowers and coffee beans for weekly bundle">
           <div class="card-body">
             <h5 class="card-title fw-bold">{{ bundle_of_the_week.name }}</h5>
             <p class="card-text mb-3">
@@ -54,7 +54,7 @@
       <div class="col-md-6 d-none d-md-flex extra-card">
         <div class="card unified-card compact-card text-center p-4 h-100 d-flex flex-column justify-content-start text-card">
           <h5 class="fw-bold mb-5 brand-accent brand-accent-title">Our Weekly Bundle</h5>
-          <img src="{% static 'images/flower-beans.png' %}" alt="Weekly Bundle Banner" class="img-fluid rounded mb-3 flower-beans-img">
+          <img src="{% static 'images/flower-beans.png' %}" alt="image of coffee beans and flowers" class="img-fluid rounded mb-3 flower-beans-img">
           <p class="text-muted small mb-2 flower-beans-text">
             Each week, our team hand-picks a flower & brew combo that captures the mood of the season. It's a thoughtful way to discover new pairings, try something fresh, or gift with extra meaning.
           </p>
@@ -67,19 +67,19 @@
    
       <div class="col-md-6 d-none d-md-block extra-card">
         <div class="card unified-card compact-card p-3 h-100">
-          <img src="{% static 'images/dont-miss.png' %}" class="img-fluid rounded" alt="Don't Miss Out">
+          <img src="{% static 'images/dont-miss.png' %}" class="img-fluid rounded" alt="Don't Miss Out graphic text">
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="card unified-card compact-card p-4 text-center d-flex flex-column justify-content-center h-100">
-          <img src="{% static 'images/pinkletter.png' %}" alt="Newsletter" class="newsletter-img mb-3">
+          <img src="{% static 'images/pinkletter.png' %}" alt="Envelope illustration for newsletter signup" class="newsletter-img mb-3">
           <h5 class="fw-bold mb-2 brand-accent">Stay in the Loop</h5>
           <p class="small text-muted mb-3">Get exclusive offers, artisan coffee tips, and bouquet drops in your inbox.</p>
           <form method="post" action="{% url 'newsletter_signup' %}">
             {% csrf_token %}
-            <input type="email" name="email" class="form-control mb-2" placeholder="Your email address" required>
-            <button type="submit" class="btn btn-newsletter w-100">Subscribe</button>
+            <input type="email" name="email" class="form-control mb-2" placeholder="Your email address" required aria-label="Enter your email address to subscribe to the newsletter">
+            <button type="submit" class="btn btn-newsletter w-100" aria-label="Subscribe to Bloom and Brew newsletter">Subscribe</button>
           </form>
           {% if messages %}
             {% for message in messages %}
@@ -121,7 +121,7 @@
   <div class="container text-center py-5">
     <h2>Ready to make someone’s day?</h2>
     <p class="cta-subtext">Choose a gift from our beautiful selection.</p>
-    <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg">Shop Now</a>
+    <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg" aria-label="Browse all flower and coffee products">Shop Now</a>
   </div>
 </section>
 {% endblock %}
