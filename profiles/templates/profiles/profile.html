@@ -21,8 +21,8 @@
                         {{ profile.country|default:"" }}
                     </p>
                     <div class="mt-4 text-end">
-                        <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary">Edit My Details</a>
-                     <a href="{% url 'order_history' %}" class="btn btn-outline-primary">My Orders</a>
+                        <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary" aria-label="Edit your profile details">Edit My Details</a>
+                     <a href="{% url 'order_history' %}" class="btn btn-outline-primary" aria-label="View your order history">My Orders</a>
                     </div>
                 </div>
             </div>
