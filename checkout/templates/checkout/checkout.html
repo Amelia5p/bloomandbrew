@@ -22,13 +22,13 @@
         <div class="mb-3">
           <label class="form-label">Card Details</label>
 
-            <div id="card-element" class="StripeElement">
+            <div id="card-element" class="StripeElement" aria-label="Card number, expiry date, and CVC input fields">
                
             </div>
             <div id="card-errors" class="text-danger mt-2" role="alert"></div>
         </div>
 
-        <button type="submit" class="btn btn-primary">
+        <button type="submit" class="btn btn-primary" aria-label="Submit payment for your order">
             Place Order and Pay €{{ total_due|floatformat:2 }}
         </button>
     </form>
