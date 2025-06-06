@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% block title %}Delete Product{% endblock %}
+
+{% block meta_description %}
+<meta name="robots" content="noindex, nofollow">
+{% endblock %}
+
 {% block content %}
 <div class="container py-5">
   <h2>Delete {{ product.name }}</h2>
