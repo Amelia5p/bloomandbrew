@@ -44,14 +44,14 @@
                     {% csrf_token %}
                     <input type="number" name="quantity" value="{{ item.quantity }}" min="1" class="form-control form-control-sm" style="width: 70px;">
                     <input type="hidden" name="override_quantity" value="true">
-                    <button type="submit" class="btn btn-sm btn-outline-primary">Update</button>
+                    <button type="submit" class="btn btn-sm btn-outline-primary"  aria-label="Update quantity for {{ item.product.name }}">Update</button>
                   </form>
                 </td>
                 <td data-label="Total">€{{ item.total_price|floatformat:2 }}</td>
                 <td data-label="Remove Item">
                   <form action="{% url 'remove_from_cart' item.product.id %}" method="post">
                     {% csrf_token %}
-                    <button type="submit" class="btn btn-sm btn-outline-danger">×</button>
+                    <button type="submit" class="btn btn-sm btn-outline-danger" aria-label="Remove {{ item.product.name }} from cart">×</button>
                   </form>
                 </td>
               </tr>
@@ -62,8 +62,8 @@
 
       <div class="mt-4 cart-buttons text-center">
         <h4 class="cart-total">Total: €{{ cart.get_total_price|floatformat:2 }}</h4>
-        <a href="{% url 'product_list' %}" class="btn btn-secondary mt-3 continue-shopping">Continue Shopping</a>
-        <a href="{% url 'checkout' %}" class="btn btn-success mt-3">Proceed to Checkout</a>
+        <a href="{% url 'product_list' %}" class="btn btn-secondary mt-3 continue-shopping" aria-label="Return to product list">Continue Shopping</a>
+        <a href="{% url 'checkout' %}" class="btn btn-success mt-3"  aria-label="Go to checkout page">Proceed to Checkout</a>
       </div>
     {% endif %}
   </div>
