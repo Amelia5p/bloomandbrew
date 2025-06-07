@@ -219,7 +219,7 @@ STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
 STRIPE_ENDPOINT_SECRET = os.environ.get('STRIPE_ENDPOINT_SECRET')
 
 # Email
-DEFAULT_FROM_EMAIL = 'amelia.service6397@gmail.com'
+DEFAULT_FROM_EMAIL = 'bloomandbrewbusiness@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
