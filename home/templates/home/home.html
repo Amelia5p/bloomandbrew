@@ -79,7 +79,7 @@
           <form method="post" action="{% url 'newsletter_signup' %}">
             {% csrf_token %}
             <input type="email" name="email" class="form-control mb-2" placeholder="Your email address" required aria-label="Enter your email address to subscribe to the newsletter">
-            <button type="submit" class="btn btn-newsletter w-100" aria-label="Subscribe to Bloom and Brew newsletter">Subscribe</button>
+            <button type="submit" class="btn btn-outline-success w-100" aria-label="Subscribe to Bloom and Brew newsletter">Subscribe</button>
           </form>
           {% if messages %}
             {% for message in messages %}

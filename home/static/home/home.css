@@ -117,6 +117,11 @@
   display: block;
 }
 
+.btn-newsletter{
+  background-color: #C8D5B9;
+}
+
+
 .compact-card {
   max-width: 450px;
   margin: 0 auto;
