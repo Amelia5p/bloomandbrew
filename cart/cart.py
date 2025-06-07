@@ -12,12 +12,20 @@ class Cart:
 
     def add(self, product, quantity=1, override_quantity=False):
         product_id = str(product.id)
-        if product_id not in self.cart:
-            self.cart[product_id] = {'quantity': 0, 'price': str(product.price)}
+        current_quantity = self.cart.get(product_id, {}).get('quantity', 0)
+
         if override_quantity:
-            self.cart[product_id]['quantity'] = quantity
+            new_quantity = quantity
         else:
-            self.cart[product_id]['quantity'] += quantity
+            new_quantity = current_quantity + quantity
+
+        if new_quantity > product.stock:
+            raise ValueError(f"Cannot add {new_quantity} × {product.name}. Only {product.stock} in stock.")
+
+        self.cart[product_id] = {
+            'quantity': new_quantity,
+            'price': str(product.display_price())
+        }
         self.save()
 
     def save(self):
