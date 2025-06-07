@@ -1,17 +1,9 @@
-/* Button */
-.continue-shopping {
-    background-color: #eecfd1; 
-    color: #06231D;
-    border: none;
-  }
+.cart-section-title{
+    padding-bottom: 2rem;
+}
+
   
-  .continue-shopping:hover {
-    background-color: #cde0d0; 
-    color: #06231D;
-  }
-
-
-  @media (max-width: 767px) {
+ @media (max-width: 767px) {
     .cart-table thead {
       display: none;
     }
