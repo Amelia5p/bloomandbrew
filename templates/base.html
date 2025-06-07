@@ -87,7 +87,7 @@
                     {% endif %}
     
                     <li class="nav-item position-relative">
-                        <a href="{% url 'view_cart' %}" class="nav-link d-flex align-items-center position-relative">
+                        <a href="{% url 'view_cart' %}" class="nav-link d-flex align-items-center position-relative cart-icon">
                             <i class="fas fa-bag-shopping fa-lg text-dark cart-icon"></i>
                             {% if cart_item_count %}
                                 <span class="cart-count-badge">{{ cart_item_count }}</span>
