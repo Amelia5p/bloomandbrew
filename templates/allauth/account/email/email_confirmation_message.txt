@@ -1,7 +1,12 @@
-{% extends "account/email/base_message.txt" %}
-{% load account %}
-{% load i18n %}
+Hello {{ user.get_full_name|default:user.username }},
 
-{% block content %}{% autoescape off %}{% user_display user as user_display %}{% blocktrans with site_name=current_site.name site_domain=current_site.domain %}You're receiving this e-mail because user {{ user_display }} has given your e-mail address to register an account on {{ site_domain }}.
+Thanks for signing up at Bloom and Brew!
 
-To confirm this is correct, go to {{ activate_url }}{% endblocktrans %}{% endautoescape %}{% endblock %}
+Please confirm your email address by clicking the link below:
+
+{{ activate_url }}
+
+If you didn’t request this, you can safely ignore this email.
+
+Warm regards,  
+Bloom and Brew Team 🌸☕
