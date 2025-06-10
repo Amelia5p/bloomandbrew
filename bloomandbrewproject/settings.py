@@ -124,6 +124,8 @@ ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
+ACCOUNT_LOGOUT_ON_GET = False
+
 
 WSGI_APPLICATION = 'bloomandbrewproject.wsgi.application'
 SECRET_KEY = os.environ.get('SECRET_KEY')
@@ -203,10 +205,6 @@ CLOUDINARY_STORAGE = {
 
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-
-
-
 
 
 # Default primary key field type

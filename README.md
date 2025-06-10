@@ -153,38 +153,65 @@ Wireframes were created at the start of the project to plan the layout, structur
 
 #### Hero section
 
-![Footer](static/readme-images/hero-section.png)
+![Hero Section](static/readme-images/hero-section.png)
 
 #### Bundles and Newsletter
 
-![Footer](static/readme-images/bundle-newsletter.png)
+![Bundle/ Newsletter](static/readme-images/bundle-newsletter.png)
 
 #### Featured Picks
 
-![Footer](static/readme-images/featured-section.png)
+![Featured Picks](static/readme-images/featured-section.png)
 
 #### CTA
 
-![Footer](static/readme-images/home-cta.png)
+![Home cta](static/readme-images/home-cta.png)
 
 ### Shop All Products
+
+![Shop All](static/readme-images/shop-all.png)
+
 ### Shop Blooms
+
+![Shop Blooms](static/readme-images/shop-blooms.png)
+
 ### Shop Brews
+
+![Shop Brews](static/readme-images/shop-brews.png)
+
 ### Shop Bundles
 
-### About us
+![Shop Bundles](static/readme-images/shop-bundles.png)
 
+### Shopping Cart
+
+![Shopping Cart](static/readme-images/shopping-cart.png)
+
+### Order Success
+
+![Order Success](static/readme-images/order-success.png)
+
+### My Orders/ Order History
+
+![My orders](static/readme-images/my-orders.png)
+
+![Order History](static/readme-images/order-history.png)
+
+
+### About Us
+
+![About Us](static/readme-images/about-us.png)
 
 
 ### Profile
 
-- The profile page has user's
+![My Profile](static/readme-images/my_profile.png)
 
-![Profile]()
+
 
 ### Sign Up
 
-- When a user signs up, a profile is automatically created for them.
+- When a user signs up, a profile is automatically created for them, the use can add to and edit the profile.
 
 ![Sign Up]()
 
