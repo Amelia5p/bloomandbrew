@@ -55,9 +55,12 @@ def checkout(request):
             }
         form = OrderForm(initial=initial_data)
 
-        total = int(cart.get_total_price() * 100)
+        cart_total = cart.get_total_price()
+        delivery_fee = cart.get_delivery_fee()
+        total_due = cart_total + delivery_fee
+
         intent = stripe.PaymentIntent.create(
-            amount=total,
+            amount=int(total_due * 100),  
             currency='eur',
         )
 
@@ -67,15 +70,15 @@ def checkout(request):
         'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
         'client_secret': intent.client_secret,
         'stripe_pid': intent.id,
-        'total_due': cart.get_total_price(),
+        'cart_total': cart_total,
+        'delivery_fee': delivery_fee,
+        'total_due': total_due,
     }
     return render(request, 'checkout/checkout.html', context)
-
 
 def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
     return render(request, 'checkout/checkout_success.html', {'order': order})
-
 
 @login_required
 def order_history(request):

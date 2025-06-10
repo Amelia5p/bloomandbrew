@@ -154,21 +154,6 @@ footer .icon:hover {
     margin-bottom: 2rem;
 }
 
-.error-button {
-    display: inline-block;
-    background-color: #8CC63F;
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 1.5rem;
-    text-decoration: none;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease;
-}
-
-.error-button:hover {
-    background-color: #76a935;
-}
-
 /* Back to Top Button */
 .back-to-top-footer {
     font-size: 0.95rem;

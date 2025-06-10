@@ -152,83 +152,105 @@ Wireframes were created at the start of the project to plan the layout, structur
 ### Home Page
 
 #### Hero section
+- Purpose of the site is revealed right away. Eye-catching image and introduction text help set the tone and guide the user into the site.
 
 ![Hero Section](static/readme-images/hero-section.png)
 
 #### Bundles and Newsletter
+- Highlights bundle deals and encourages users to sign up for the newsletter.
 
 ![Bundle/ Newsletter](static/readme-images/bundle-newsletter.png)
 
 #### Featured Picks
+- Shows selected popular or seasonal items on the homepage to catch user interest.
 
 ![Featured Picks](static/readme-images/featured-section.png)
 
 #### CTA
+- A clear call-to-action encouraging users to start shopping right away.
 
 ![Home cta](static/readme-images/home-cta.png)
 
 ### Shop All Products
+- Displays the full range of available products with filters and search functionality.
 
 ![Shop All](static/readme-images/shop-all.png)
 
 ### Shop Blooms
+- Displays all flower-related products.
 
 ![Shop Blooms](static/readme-images/shop-blooms.png)
 
 ### Shop Brews
+- Displays all coffee-related products.
 
 ![Shop Brews](static/readme-images/shop-brews.png)
 
 ### Shop Bundles
+- Combines flowers and coffee into curated gift bundles.
 
 ![Shop Bundles](static/readme-images/shop-bundles.png)
 
 ### Shopping Cart
+- Lets the user view, update, or remove items before checking out.
 
 ![Shopping Cart](static/readme-images/shopping-cart.png)
 
 ### Order Success
+- Confirms the order has been placed and thanks the user.
 
 ![Order Success](static/readme-images/order-success.png)
 
 ### My Orders/ Order History
+- Shows a summary of all previous orders made by the user.
 
 ![My orders](static/readme-images/my-orders.png)
 
 ![Order History](static/readme-images/order-history.png)
 
 
-### About Us
+### About Us/ Contact Us
+- Introduces the brand and gives context about the company and its value, contact information provided also.
 
 ![About Us](static/readme-images/about-us.png)
 
 
 ### Profile
+- Users can view and manage their saved details here.
 
 ![My Profile](static/readme-images/my_profile.png)
 
-
-
 ### Sign Up
+- When a user signs up, a profile is automatically created for them, the user can add to and edit the profile.
 
-- When a user signs up, a profile is automatically created for them, the use can add to and edit the profile.
-
-![Sign Up]()
-
-### Log In
+![Sign Up](static/readme-images/signup.png)
 
 
+### Log In Page/ Success
+-Allows existing users to log in and confirms successful login.
 
-![Log In]()
+![Log in](static/readme-images/login.png)
+
+![Signed in](static/readme-images/signed-in.png)
+
+
+### Log Out Page/ Success
+- Confirms successful logout and ends the user session.
+![Log Out](static/readme-images/logout.png)
+
+![Logged Out](static/readme-images/logged-out.png)
+
 
 ### Error pages
-- I created my own error pages and these have navigation buttons.
+- Custom 404 page shown when a user tries to access a page that doesn't exist.
 
-![Log In]()
+![Error](static/readme-images/error-404.png)
+
 
 ### Success Messages
-- Success messages inform the user if they have made any changes to their 
-![Success]()
+- Success messages are shown on every action made by the user.
+
+![Success](static/readme-images/subscribe-success.png)
 
 ## Future Features
 
@@ -236,19 +258,53 @@ In the future I would like to add the following features to further improve the 
 
 ## CRUD Functionality
 
-- User's can Create, Read, Update and Delete both their . 
-
-## Agile Methodology
-
-Github projects was used to manage the development process using an agile approach. Please see link to my project board:
-
-[Project Board]()
+- User's can Create, Read, Update and Delete both their cart and their profile information.
 
 ## Data Model
 
 This is the data model I designed. It has the Django built-in user model that handles authentication and basic user information. 
 
 ![Database Schema]()
+
+### Checkout App
+#### Order
+ `Description:` Represents a customer's order including personal details, payment info, and address.
+
+ `order_number:` A unique identifier for the order, generated automatically.
+
+ `reference_code:` A second unique identifier used for tracking or verification.
+
+`user:` ForeignKey to the UserProfile model, representing the user who placed the order.
+
+`full_name:` Full name of the customer.
+
+`email_address:` Customer's email address.
+
+`contact_number:` Phone number of the customer.
+
+`address_line_1:` First line of the shipping address.
+
+`address_line_2:` Second line of the shipping address (optional).
+
+`town:` Town or city of the shipping address.
+
+`county:` County of the shipping address.
+
+`postal_code:` Postal or ZIP code.
+
+`country:` Country selected using Django Countries.
+
+`created_on:` Timestamp when the order was created.
+
+`subtotal:` The subtotal cost of all items before delivery.
+
+`delivery_fee:` Delivery charge, waived for orders over €50.
+
+`total_due:` The final total amount to be paid.
+
+`cart_snapshot:` Text snapshot of the cart contents at the time of order.
+
+`stripe_pid:` Stripe PaymentIntent ID for reference.
 
 ## Testing
 
@@ -260,19 +316,27 @@ HTML was passed through the W3C validator with no errors.
 |------------------------|------------|
 | base.html              | No errors  |
 | home.html              | No errors  |
-| all.trips.html         | No errors  |
-| create_trip.html       | No errors  |
-| delete_trip.html       | No errors  |
-| edit_trip.html         | No errors  |
-| my_trips.html          | No errors  |
-| suggest_activity.html  | No errors  |
-| trip_details.html      | No errors  |
-| profile.html           | No errors  |
-| delete_profile.html    | No errors  |
+| about.html             | No errors  |
+| add-product.html       | No errors  |
+| add-review.html        | No errors  |
+| delete_product.html    | No errors  |
+| delete_review.html     | No errors  |
+| edit_product.html      | No errors  |
+| edit_review.html       | No errors  |
+| manage_products.html   | No errors  |
+| product_detail.html    | No errors  |
+| product_list.html      | No errors  |
+| shop_blooms.html       | No errors  |
+| shop_brews.html        | No errors  |
+| shop_bundles.html      | No errors  |
+| cart.html              | No errors  |
+| checkout_success.html  | No errors  |
+| checkout.html          | No errors  |
+| order_history.html     | No errors  |
 | edit_profile.html      | No errors  |
+| profile.html           | No errors  |
 | login.html             | No errors  |
 | signup.html            | No errors  |
-| 403.html               | No errors  |
 | 404.html               | No errors  |
 | 500.html               | No errors  |
 
