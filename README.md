@@ -261,18 +261,18 @@ In the future I would like to add the following features to further improve the 
 - User's can Create, Read, Update and Delete both their cart and their profile information.
 
 ## Data Model
+- The data models for the project are shown below. 
 
-This is the data model I designed. It has the Django built-in user model that handles authentication and basic user information. 
-
-![Database Schema]()
+![Database Schema](static/readme-images/bloomandbrew-erd.png)
 
 ### Checkout App
 #### Order
- `Description:` Represents a customer's order including personal details, payment info, and address.
 
- `order_number:` A unique identifier for the order, generated automatically.
+- Description: Represents a customer's order including personal details, payment info, and address.
 
- `reference_code:` A second unique identifier used for tracking or verification.
+`order_number:` A unique identifier for the order, generated automatically.
+
+`reference_code:` A second unique identifier used for tracking or verification.
 
 `user:` ForeignKey to the UserProfile model, representing the user who placed the order.
 
@@ -305,6 +305,84 @@ This is the data model I designed. It has the Django built-in user model that ha
 `cart_snapshot:` Text snapshot of the cart contents at the time of order.
 
 `stripe_pid:` Stripe PaymentIntent ID for reference.
+
+#### OrderItem
+
+- Description: Represents an individual item within an order.
+
+`order:` ForeignKey to the Order model the item belongs to.
+
+`product:` ForeignKey to the Product model for the purchased item.
+
+`quantity:` Number of units ordered for that product.
+
+`item_total:` Total price for this item (product price × quantity), calculated automatically.
+
+### Products App
+#### Product
+
+- Description: Represents items available for sale in the store, including bouquets, coffee, and gift bundles.
+
+`name:` Name of the product.
+
+`sku:` A unique stock keeping unit for internal reference.
+
+`description:` A detailed description of the product.
+
+`category:` The product type – bouquet, coffee, or bundle.
+
+`price:` Standard selling price of the product.
+
+`special_offer_price:` Optional discounted price if on special offer.
+
+`image:` Product image stored via Cloudinary.
+
+`stock:` Quantity of the item available in inventory.
+
+`slug:` URL-friendly version of the product name, generated automatically.
+
+`is_featured:` Marks the product to be shown in the "Featured Picks" section.
+
+`bundle_of_the_week:` Highlights a product as the weekly featured bundle.
+
+#### Review
+- Description: Stores user-submitted reviews, including star rating and optional written feedback.
+
+`product:` ForeignKey to the Product being reviewed.
+
+`user:` ForeignKey to the User who wrote the review.
+
+`rating:` Star rating from 1 to 5.
+
+`comment:` Optional written comment left by the user.
+
+`created_on:` Timestamp of when the review was submitted.
+
+Reviews are ordered with the newest first and a user can only leave one review per product.
+
+### Profiles App
+#### UserProfile
+
+- Description: Stores additional information about each user, such as saved shipping details and contact number. Automatically created or updated when a User is saved.
+
+`user:` One-to-one relationship with Django's built-in User model.
+
+`phone:` Optional phone number for contact.
+
+`address_1:` First line of the user's saved address.
+
+`address_2:` Second line of the address (optional).
+
+`city:` City or town name.
+
+`county:` County name.
+
+`country:` Country field using django-countries.
+
+`postcode:` Postal or ZIP code.
+
+The profile is created automatically when a new user is registered, using Django signals.
+
 
 ## Testing
 
