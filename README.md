@@ -1,10 +1,10 @@
-# BloomandBrew
+# Bloom and Brew
 
-Bloom and Brew is
+Bloom and Brew is a full-stack e-commerce website built with Django. It sells fresh flower bouquets and artisan coffee, as well as gift bundles that combine both. Users can browse products, search by keyword or category, and place secure online orders through a simple checkout process.
 
-The live link can be found here - [BloomandBrew]()
+The live link can be found here - [Bloom and Brew](https://bloom-and-brew-2265123bf17d.herokuapp.com/)
 
-![Am I Responsive]()
+![Am I Responsive](static/readme-images/responsive.png)
 
 ## Table of Contents
 
@@ -13,37 +13,121 @@ The live link can be found here - [BloomandBrew]()
 
 
 
-## Epics and User Stories
+## Agile Development- Epics and User Stories
+This project was managed using a GitHub Kanban Project board with Epics and User Stories.
+Link: [Kanban Board](https://github.com/users/Amelia5p/projects/8)
 
 
+## EPIC 1: E-commerce & Payments
+### User Stories:
+
+#### #1 User Story: Browse Products
+As a user I want to browse all products so that I can choose what to purchase.
+
+#### #2 User Story: View Product Detail
+As a user I want to view the details of a product so that I can make an informed purchase decision.
+
+#### #3 User Story: Add Items to Cart
+As a user I want to add items to a cart so that I can buy multiple things in one checkout.
+
+#### #4 User Story: Checkout with Stripe
+As a user I want to pay for my order using Stripe so that I can complete my purchase securely.
+
+#### #5 User Story: View Past Orders
+As a user I want to view my previous orders so that I can track what I’ve purchased.
+
+#### #6 User Story: Create Products (Admin)
+As an admin I want to create new products so that I can update the store with new inventory.
+
+#### #7 User Story: Update or Delete Products (Admin)
+As an admin I want to edit or remove existing products so that I can manage inventory changes.
+
+
+## EPIC 2: UX Design & Front-End
+### User Stories:
+
+#### #8 User Story: User-Friendly Layout
+As a user I want to navigate easily on mobile and desktop so that I can shop from any device.
+
+#### #9 User Story: Feedback Messages
+As a user I want to see clear messages when actions succeed or fail so that I understand what happened.
+
+#### #10 User Story: Simple Admin UI
+As an admin I want a simple interface so that I can manage content without confusion.
+
+#### #17 User Story: View Custom 404 Page
+As a user I want to see a helpful 404 page when I visit a broken link so that I’m not confused and I'm redirected easily.
+
+#### #16 User Story: Understand the Site Purpose
+As a user I want to understand what the site is selling so that I can decide if it's relevant to me.
+
+## EPIC 3: Marketing Tools
+### User Stories:
+
+#### #14 User Story: Subscribe to Newsletter
+As a user I want to sign up for the newsletter so that I can receive news and offers.
+
+#### #15 User Story: View Facebook Page
+As a user I want to view the Facebook business page so that I can connect with the brand.
+
+## EPIC 4: Authentication & Role Based Access 
+### User Stories:
+
+####  #11 User Story: Register and Login
+As a user I want to create an account and log in so that I can view my orders.
+
+####  #12 User Story: Admin Access
+As an admin I want to access a private page so that I can manage products securely.
+
+## Business Plan and Marketing Strategy
+
+<details>
+<summary>View Business Plan and Marketing Strategy</summary>
+
+<br>
+
+![Business Plan (1)](static/readme-images/plan1.png)  
+![Business Plan (2)](static/readme-images/plan2.png)  
+![Business Plan (3)](static/readme-images/plan3.png)
+
+</details>
 
 ## Design
 
 #### Colour Scheme
 
-This particular colour scheme was chosen as 
-![Colour Palette]()
+This particular colour scheme was chosen to reflect the calm and earthy feel of the brand. The soft tones of Tea Green , Misty Rose, and Isabelline create a light, fresh look suitable for flowers and gift products. The richer shades of Beaver and Rose Ebony add warmth and depth, helping to balance the overall design — especially for the coffee product pages.
+
+![Colour Palette](static/readme-images/colour-palette.png)
 
 #### Imagery
 
-
+The product shots were created using Photo Recreator AI. Other images used were sourced from Pexels free images.
 
 #### Fonts
 
-I chose  and  as my fonts. 
+The site uses two main fonts to support brand personality and readability:
 
-![]()
+Playfair Display is used for headings. It gives the site an elegant and refined look, which suits the flower and gift elements of the brand.
 
-![]()
+Poppins is used for body text. Its clean, modern style makes content easy to read across all screen sizes.
+
+![Playfair Display](static/readme-images/playfair-display.png)
+
+![Poppins](static/readme-images/poppins.png)
 
 #### Wireframes
+Wireframes were created at the start of the project to plan the layout, structure, and user flow before development. This helped ensure a consistent design and smooth user experience across all pages.
 
 <details>
+<summary>View Wireframes</summary>
 
- <summary>Homepage</summary>
+<br>
 
-![Homepage]()
+![Wireframes](static/readme-images/wireframes.png)
+
 </details>
+
 
 ## Features
 
@@ -51,15 +135,44 @@ I chose  and  as my fonts.
 
 - The navigation at the top of each page provides easy access to all main sections of the website.
 
+![Navigation Bar](static/readme-images/navbar1.png)
+
+![Navigation Bar 2](static/readme-images/navbar2.png)
+
+![Navigation Bar 3](static/readme-images/navbar3.png)
+
 
 
 ### Footer
 
 - The footer is at the bottom of each page and contains social links. I made sure these links opened in another tab to prevent users from being driven away from the site.
 
-![Footer](docs/readme-images/footer.png)
+![Footer](static/readme-images/footer.png)
 
 ### Home Page
+
+#### Hero section
+
+![Footer](static/readme-images/hero-section.png)
+
+#### Bundles and Newsletter
+
+![Footer](static/readme-images/bundle-newsletter.png)
+
+#### Featured Picks
+
+![Footer](static/readme-images/featured-section.png)
+
+#### CTA
+
+![Footer](static/readme-images/home-cta.png)
+
+### Shop All Products
+### Shop Blooms
+### Shop Brews
+### Shop Bundles
+
+### About us
 
 
 
