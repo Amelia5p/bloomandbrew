@@ -252,6 +252,11 @@ Wireframes were created at the start of the project to plan the layout, structur
 
 ![Success](static/readme-images/subscribe-success.png)
 
+### Newsletter
+- The User can sign up to receive the newsletter easily on the landing page.
+
+![Newsletter](static/readme-images/newsletter.png)
+
 ## Future Features
 
 In the future I would like to add the following features to further improve the site:
