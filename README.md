@@ -450,25 +450,7 @@ Python code was passed through the PEP8 CI linter with no errors.
 
 ### Lighthouse
 
-Lighthouse validation was run on all pages (both mobile and desktop).  Here are the scores: 
-
-| Page           | Performance  | Accessibility | Best Practices  | SEO |
-|----------------|:------------:|:-------------:|:---------------:|:---:|
-|                |              |               |                 |     |
-| Home           |          97  |           98  |             100 | 100 |
-| My Trips       |          98  |           98  |             100 | 100 |
-| Trip Details   |          99  |           98  |             100 | 100 |
-| Delete trip*   |          99  |           98  |             100 | 100 |
-| Create trip*   |          99  |           98  |             100 | 100 |
-|SuggestActivity |          100 |           100 |             100 | 100 |
-| Delete Trip    |          100 |           100 |             100 | 90  |
-| Edit Trip      |          90  |           100 |             100 | 100 |
-|All Trips(admin)|          89  |           98  |             100 | 90  |
-| Profile        |          98  |           98  |             100 | 100 |
-| Login          |          99  |           99  |             100 | 100 |
-| Signup         |          100 |           99  |             100 | 100 |
-| Edit Profile   |          98  |           100 |             100 | 100 |
-| Delete Profile |          98  |           100 |             100 | 91  |
+Lighthouse validation was run on all pages (both mobile and desktop) and tested for performance, accessibility, best practices and SEO.
 
 ## Browser Testing
 The Website was tested on Google Chrome, Firefox, Safari browsers with no issues.
