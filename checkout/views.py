@@ -9,6 +9,7 @@ from cart.cart import Cart
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
+
 def checkout(request):
     cart = Cart(request)
 
@@ -20,7 +21,11 @@ def checkout(request):
         form = OrderForm(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
-            order.user = request.user.userprofile if request.user.is_authenticated else None
+            order.user = (
+                request.user.userprofile
+                if request.user.is_authenticated
+                else None
+            )
             order.cart_snapshot = str(cart)
             order.stripe_pid = request.POST.get('stripe_pid')
             order.save()
@@ -34,8 +39,14 @@ def checkout(request):
 
             order.update_totals()
             cart.clear()
-            messages.success(request, f"Order {order.order_number} placed successfully!")
-            return redirect('checkout_success', order_number=order.order_number)
+            messages.success(
+                request,
+                f"Order {order.order_number} placed successfully!"
+            )
+            return redirect(
+                'checkout_success',
+                order_number=order.order_number,
+            )
         else:
             messages.error(request, "There was an error with your form.")
     else:
@@ -60,7 +71,7 @@ def checkout(request):
         total_due = cart_total + delivery_fee
 
         intent = stripe.PaymentIntent.create(
-            amount=int(total_due * 100),  
+            amount=int(total_due * 100),
             currency='eur',
         )
 
@@ -76,15 +87,23 @@ def checkout(request):
     }
     return render(request, 'checkout/checkout.html', context)
 
+
 def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
-    return render(request, 'checkout/checkout_success.html', {'order': order})
+    return render(
+        request,
+        'checkout/checkout_success.html',
+        {'order': order},
+    )
+
 
 @login_required
 def order_history(request):
     user_profile = request.user.userprofile
     orders = Order.objects.filter(user=user_profile).order_by('-created_on')
 
-    return render(request, 'checkout/order_history.html', {
-        'orders': orders
-    })
+    return render(
+        request,
+        'checkout/order_history.html',
+        {'orders': orders},
+    )

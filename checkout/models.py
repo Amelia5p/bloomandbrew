@@ -6,11 +6,26 @@ from profiles.models import UserProfile
 
 
 class Order(models.Model):
-    order_number = models.CharField(max_length=20, null=False, editable=False, unique=True)
-    reference_code = models.CharField(max_length=32, null=False, editable=False, unique=True)
-    
-    user = models.ForeignKey(UserProfile, on_delete=models.SET_NULL,
-                             null=True, blank=True, related_name='orders')
+    order_number = models.CharField(
+        max_length=20,
+        null=False,
+        editable=False,
+        unique=True,
+    )
+    reference_code = models.CharField(
+        max_length=32,
+        null=False,
+        editable=False,
+        unique=True,
+    )
+
+    user = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name='orders',
+    )
     full_name = models.CharField(max_length=75)
     email_address = models.EmailField()
     contact_number = models.CharField(max_length=20)
@@ -23,9 +38,21 @@ class Order(models.Model):
     country = CountryField()
 
     created_on = models.DateTimeField(auto_now_add=True)
-    subtotal = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-    delivery_fee = models.DecimalField(max_digits=6, decimal_places=2, default=0)
-    total_due = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    subtotal = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+    )
+    delivery_fee = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+        default=0,
+    )
+    total_due = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        default=0,
+    )
 
     cart_snapshot = models.TextField()
     stripe_pid = models.CharField(max_length=254)
@@ -37,7 +64,10 @@ class Order(models.Model):
         return uuid.uuid4().hex.upper()
 
     def update_totals(self):
-        self.subtotal = self.items.aggregate(models.Sum('item_total'))['item_total__sum'] or 0
+        self.subtotal = (
+            self.items.aggregate(models.Sum('item_total'))['item_total__sum']
+            or 0
+        )
         self.delivery_fee = 0 if self.subtotal >= 50 else 5
         self.total_due = self.subtotal + self.delivery_fee
         self.save()
@@ -54,14 +84,25 @@ class Order(models.Model):
 
 
 class OrderItem(models.Model):
-    order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name='items')
+    order = models.ForeignKey(
+        Order,
+        on_delete=models.CASCADE,
+        related_name='items',
+    )
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.PositiveIntegerField(default=1)
-    item_total = models.DecimalField(max_digits=6, decimal_places=2, editable=False)
+    item_total = models.DecimalField(
+        max_digits=6,
+        decimal_places=2,
+        editable=False,
+    )
 
     def save(self, *args, **kwargs):
         self.item_total = self.product.price * self.quantity
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.quantity} x {self.product.name} in {self.order.order_number}"
+        return (
+            f"{self.quantity} x {self.product.name} "
+            f"in {self.order.order_number}"
+        )

@@ -4,6 +4,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from .webhook_handler import StripeWH_Handler
 
+
 @csrf_exempt
 def stripe_webhook(request):
     payload = request.body
@@ -23,7 +24,8 @@ def stripe_webhook(request):
 
     event_map = {
         'payment_intent.succeeded': handler.handle_payment_intent_succeeded,
-        'payment_intent.payment_failed': handler.handle_payment_intent_payment_failed,
+        'payment_intent.payment_failed':
+            handler.handle_payment_intent_payment_failed,
     }
 
     event_type = event['type']

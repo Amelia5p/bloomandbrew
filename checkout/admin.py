@@ -19,7 +19,11 @@ class OrderAdmin(admin.ModelAdmin):
         'stripe_pid',
     )
     list_filter = ('created_on', 'country', 'total_due')
-    search_fields = ('order_number', 'full_name', 'email_address', 'stripe_pid')
+    search_fields = (
+        'order_number',
+        'full_name',
+        'email_address',
+        'stripe_pid')
 
     readonly_fields = (
         'order_number',
