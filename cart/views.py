@@ -4,7 +4,6 @@ from .cart import Cart
 from django.contrib import messages
 
 
-
 def add_to_cart(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
@@ -12,8 +11,17 @@ def add_to_cart(request, product_id):
     override = request.POST.get('override_quantity') == 'true'
 
     try:
-        cart.add(product=product, quantity=quantity, override_quantity=override)
-        messages.success(request, f'{"Updated" if override else "Added"} {quantity} × "{product.name}" to your cart.')
+        cart.add(
+            product=product,
+            quantity=quantity,
+            override_quantity=override,
+        )
+        messages.success(
+            request,
+            f'{"Updated" if override else
+               "Added"}{quantity} × "{product.name}" '
+            f'to your cart.'
+        )
     except ValueError as e:
         messages.error(request, str(e))
 

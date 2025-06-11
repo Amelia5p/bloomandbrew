@@ -1,6 +1,7 @@
 from decimal import Decimal
 from products.models import Product
 
+
 class Cart:
     DELIVERY_THRESHOLD = Decimal('50.00')
     DELIVERY_FEE = Decimal('5.00')
@@ -22,11 +23,14 @@ class Cart:
             new_quantity = current_quantity + quantity
 
         if new_quantity > product.stock:
-            raise ValueError(f"Cannot add {new_quantity} × {product.name}. Only {product.stock} in stock.")
+            raise ValueError(
+                f"Cannot add {new_quantity} × {product.name}. "
+                f"Only {product.stock} in stock."
+            )
 
         self.cart[product_id] = {
             'quantity': new_quantity,
-            'price': str(product.display_price())
+            'price': str(product.display_price()),
         }
         self.save()
 
@@ -42,12 +46,12 @@ class Cart:
     def __iter__(self):
         product_ids = self.cart.keys()
         products = Product.objects.filter(id__in=product_ids)
-        cart = self.cart.copy()
+        cart_copy = self.cart.copy()
 
         for product in products:
-            cart[str(product.id)]['product'] = product
+            cart_copy[str(product.id)]['product'] = product
 
-        for item in cart.values():
+        for item in cart_copy.values():
             item['price'] = Decimal(item['price'])
             item['total_price'] = item['price'] * item['quantity']
             yield item
@@ -56,11 +60,18 @@ class Cart:
         return sum(item['quantity'] for item in self.cart.values())
 
     def get_total_price(self):
-        return sum(Decimal(item['price']) * item['quantity'] for item in self.cart.values())
+        return sum(
+            Decimal(item['price']) * item['quantity']
+            for item in self.cart.values()
+        )
 
     def get_delivery_fee(self):
         total = self.get_total_price()
-        return Decimal('0.00') if total >= self.DELIVERY_THRESHOLD else self.DELIVERY_FEE
+        return (
+            Decimal('0.00')
+            if total >= self.DELIVERY_THRESHOLD
+            else self.DELIVERY_FEE
+        )
 
     def get_total_due(self):
         return self.get_total_price() + self.get_delivery_fee()
