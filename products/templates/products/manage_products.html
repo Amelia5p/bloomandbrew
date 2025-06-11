@@ -1,20 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
+
+{% block extra_head %}
+<meta name="robots" content="noindex, nofollow">
+{% endblock extra_head %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
 {% endblock extra_css %}
+
 {% block title %}
 Product Management | Bloom and Brew
 {% endblock title %}
-{% block meta_description %}
-<!-- Prevent search engines from indexing this page -->
-<meta name="robots" content="noindex, nofollow">
-{% endblock meta_description %}
+<!--Admin Only- Manage Products-->
 {% block content %}
 <section class="product-admin py-5">
    <div class="container">
       <h2 class="section-title text-center mb-4">Manage Products</h2>
-      <!-- Add New Product Button -->
       <div class="d-flex justify-content-end mb-3">
          <a href="{% url 'add_product' %}" class="btn btn-success">+ Add New Product</a>
       </div>
