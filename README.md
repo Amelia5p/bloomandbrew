@@ -260,10 +260,12 @@ Wireframes were created at the start of the project to plan the layout, structur
 ## Future Features
 
 In the future I would like to add the following features to further improve the site:
+- Add functionality to save the user's cart if they log out and back in, once more products are added, this was not needed so I used a session-based cart as the product range is quite small.
+- A wishlist for users.
 
 ## CRUD Functionality
 
-- User's can Create, Read, Update and Delete both their cart and their profile information.
+- Full CRUD functionality is implemented on the site. User's can Create, Read, Update and Delete both their cart and their profile information.
 
 ## Data Model
 - The data models for the project are shown below. 
@@ -474,13 +476,13 @@ The Website was tested on Google Chrome, Firefox, Safari browsers with no issues
 ## Security Features
 
 ### User Authentication
-Authorisation is required to reach certain pages such as . Requesting these pages while unauthorised will redirect users to the Login page.
+Authorisation is required to reach certain pages such as the Admin Panel. Requesting these pages while unauthorised will redirect users to the Login page.
 
 ### Form Validation
-Incorrect or in certain cases empty data in forms is not accepted and the user is made aware.
+Incorrect or in certain cases empty data in forms is not accepted and the user is made aware of this.
 
 ### Database Security
-The database url and secret key are stored in the .env file to prevent unwanted connections.
+The database url and secret key are stored in the env.py file to prevent unwanted connections.
 
 Cross-Site Request Forgery (CSRF) tokens were used on all forms throughout this site.
 
