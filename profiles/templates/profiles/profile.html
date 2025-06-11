@@ -1,32 +1,31 @@
 {% extends "base.html" %}
 {% block title %}My Profile | Bloom and Brew{% endblock %}
 {% block meta_description %}View and manage your profile, track orders, and update personal information easily with Bloom & Brew.{% endblock %}
-
 {% block content %}
 <!--Profile information-->
 <div class="container py-5">
-    <h2 class="mb-4 text-center">My Profile</h2>
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow-sm">
-                <div class="card-body">
-                    <p><strong>Name:</strong> {{ request.user.username }}</p>
-                    <p><strong>Email:</strong> {{ request.user.email|default:"—" }}</p>
-                    <p><strong>Phone:</strong> {{ profile.phone|default:"—" }}</p>
-                    <p><strong>Address:</strong><br>
-                        {{ profile.address_1|default:"" }}<br>
-                        {{ profile.address_2|default:"" }}<br>
-                        {{ profile.city|default:"" }}{% if profile.county %}, {{ profile.county }}{% endif %}<br>
-                        {{ profile.postcode|default:"" }}<br>
-                        {{ profile.country|default:"" }}
-                    </p>
-                    <div class="mt-4 text-end">
-                        <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary" aria-label="Edit your profile details">Edit My Details</a>
-                     <a href="{% url 'order_history' %}" class="btn btn-outline-primary" aria-label="View your order history">My Orders</a>
-                    </div>
-                </div>
+   <h2 class="mb-4 text-center">My Profile</h2>
+   <div class="row justify-content-center">
+      <div class="col-md-8">
+         <div class="card shadow-sm">
+            <div class="card-body">
+               <p><strong>Name:</strong> {{ request.user.username }}</p>
+               <p><strong>Email:</strong> {{ request.user.email|default:"—" }}</p>
+               <p><strong>Phone:</strong> {{ profile.phone|default:"—" }}</p>
+               <p><strong>Address:</strong><br>
+                  {{ profile.address_1|default:"" }}<br>
+                  {{ profile.address_2|default:"" }}<br>
+                  {{ profile.city|default:"" }}{% if profile.county %}, {{ profile.county }}{% endif %}<br>
+                  {{ profile.postcode|default:"" }}<br>
+                  {{ profile.country|default:"" }}
+               </p>
+               <div class="mt-4 text-end">
+                  <a href="{% url 'edit_profile' %}" class="btn btn-outline-primary" aria-label="Edit your profile details">Edit My Details</a>
+                  <a href="{% url 'order_history' %}" class="btn btn-outline-primary" aria-label="View your order history">My Orders</a>
+               </div>
             </div>
-        </div>
-    </div>
+         </div>
+      </div>
+   </div>
 </div>
 {% endblock %}
