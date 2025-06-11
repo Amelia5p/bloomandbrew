@@ -1,61 +1,54 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
 {% endblock %}
-
 {% block title %}Checkout | Bloom and Brew{% endblock %}
 {% block meta_description %}Secure checkout for your Bloom & Brew order. Review your cart and complete your purchase with ease.{% endblock %}
-
 {% block content %}
 <!-- Checkout form -->
 <div class="container py-5">
-    <h2 class="mb-4 text-center">Checkout</h2>
-    <form method="POST" id="payment-form">
-        {% csrf_token %}
-        {{ form|crispy }}
-        <input type="hidden" name="stripe_pid" value="{{ stripe_pid }}">
-
-        <!-- Order Summary -->
-        <div class="mb-4">
-            <h4 class="mb-3">Order Summary</h4>
-            <ul class="list-group">
-                <li class="list-group-item d-flex justify-content-between">
-                    <span>Subtotal</span>
-                    <strong>€{{ cart_total|floatformat:2 }}</strong>
-                </li>
-                <li class="list-group-item d-flex justify-content-between">
-                    <span>Delivery</span>
-                    <strong>€{{ delivery_fee|floatformat:2 }}</strong>
-                </li>
-                <li class="list-group-item d-flex justify-content-between">
-                    <span>Total</span>
-                    <strong>€{{ total_due|floatformat:2 }}</strong>
-                </li>
-            </ul>
-        </div>
-
-        <!-- Payment Fields -->
-        <div class="mb-3">
-            <label class="form-label">Card Details</label>
-            <div id="card-element" class="StripeElement" aria-label="Card number, expiry date, and CVC input fields">
-            </div>
-            <div id="card-errors" class="text-danger mt-2" role="alert"></div>
-        </div>
-
-        <button type="submit" class="btn btn-primary mt-3" aria-label="Submit payment for your order">
-            Place Order and Pay €{{ total_due|floatformat:2 }}
-        </button>
-    </form>
+   <h2 class="mb-4 text-center">Checkout</h2>
+   <form method="POST" id="payment-form">
+      {% csrf_token %}
+      {{ form|crispy }}
+      <input type="hidden" name="stripe_pid" value="{{ stripe_pid }}">
+      <!-- Order Summary -->
+      <div class="mb-4">
+         <h4 class="mb-3">Order Summary</h4>
+         <ul class="list-group">
+            <li class="list-group-item d-flex justify-content-between">
+               <span>Subtotal</span>
+               <strong>€{{ cart_total|floatformat:2 }}</strong>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+               <span>Delivery</span>
+               <strong>€{{ delivery_fee|floatformat:2 }}</strong>
+            </li>
+            <li class="list-group-item d-flex justify-content-between">
+               <span>Total</span>
+               <strong>€{{ total_due|floatformat:2 }}</strong>
+            </li>
+         </ul>
+      </div>
+      <!-- Payment Fields -->
+      <div class="mb-3">
+         <label class="form-label">Card Details</label>
+         <div id="card-element" class="StripeElement">
+         </div>
+         <div id="card-errors" class="text-danger mt-2" role="alert"></div>
+      </div>
+      <button type="submit" class="btn btn-primary mt-3" aria-label="Submit payment for your order">
+      Place Order and Pay €{{ total_due|floatformat:2 }}
+      </button>
+   </form>
 </div>
 {% endblock %}
-
 {% block postloadjs %}
-    {{ block.super }}
-    {{ stripe_public_key|json_script:"id_stripe_public_key" }}
-    {{ client_secret|json_script:"id_client_secret" }}
-    <script src="https://js.stripe.com/v3/"></script>
-    <script src="{% static 'js/stripe.js' %}"></script>
+{{ block.super }}
+{{ stripe_public_key|json_script:"id_stripe_public_key" }}
+{{ client_secret|json_script:"id_client_secret" }}
+<script src="https://js.stripe.com/v3/"></script>
+<script src="{% static 'js/stripe.js' %}"></script>
 {% endblock %}

@@ -1,32 +1,27 @@
 {% extends "base.html" %}
-
 {% block title %}Order History | Bloom and Brew{% endblock %}
 {% block meta_description %}Track and view your full Bloom & Brew order history, including past purchases and delivery status.{% endblock %}
-
-
 {% block content %}
 <!--Orders-->
 <div class="container py-5">
-    <h2 class="mb-4 text-center">My Orders</h2>
-    {% if orders %}
-        <ul class="list-group">
-            {% for order in orders %}
-                <li class="list-group-item">
-                    <strong>Order #{{ order.order_number }}</strong> —
-                    {{ order.created_on|date:"F j, Y, H:i" }}<br>
-
-                    <strong>Items:</strong>
-                    {% for item in order.items.all %}
-                        {{ item.product.name }} (x{{ item.quantity }}){% if not forloop.last %}, {% endif %}
-                    {% endfor %}<br>
-
-                    Total: €{{ order.total_due }}<br>
-                    Status: <span class="text-success">Completed</span>
-                </li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p class="text-center">You haven't placed any orders yet.</p>
-    {% endif %}
+   <h2 class="mb-4 text-center">My Orders</h2>
+   {% if orders %}
+   <ul class="list-group">
+      {% for order in orders %}
+      <li class="list-group-item">
+         <strong>Order #{{ order.order_number }}</strong> —
+         {{ order.created_on|date:"F j, Y, H:i" }}<br>
+         <strong>Items:</strong>
+         {% for item in order.items.all %}
+         {{ item.product.name }} (x{{ item.quantity }}){% if not forloop.last %}, {% endif %}
+         {% endfor %}<br>
+         Total: €{{ order.total_due }}<br>
+         Status: <span class="text-success">Completed</span>
+      </li>
+      {% endfor %}
+   </ul>
+   {% else %}
+   <p class="text-center">You haven't placed any orders yet.</p>
+   {% endif %}
 </div>
 {% endblock %}
