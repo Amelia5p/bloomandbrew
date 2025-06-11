@@ -1,20 +1,35 @@
 {% extends "base.html" %}
 {% load static %}
-
-{% block title %}Delete Review | Bloom and Brew{% endblock %}
-{% block meta_description %}Confirm if you'd like to remove your product review. We value every customer's voice and appreciate your feedback.{% endblock %}
-
+{% block title %}
+Delete Review | Bloom and Brew
+{% endblock title %}
+{% block meta_description %}
+Confirm if you'd like to remove your product review. We value every customer's voice and appreciate your feedback.
+{% endblock meta_description %}
 {% block content %}
 <div class="container my-5 text-center">
-  <h2 class="mb-4">Delete Review</h2>
-  <p>Are you sure you want to delete your review for <strong>{{ product.name }}</strong>?</p>
-
-  <div class="mt-4">
-    <form method="post" class="d-inline-block">
-      {% csrf_token %}
-      <button type="submit" class="btn btn-danger" aria-label="Confirm deletion of your review for {{ product.name }}">Yes, Delete</button>
-    </form>
-    <a href="{% url 'product_detail' product.slug %}" class="btn btn-secondary ms-2" aria-label="Cancel and return to {{ product.name }} product page" >No, Go Back</a>
-  </div>
+   <h2 class="mb-4">Delete Review</h2>
+   <p>Are you sure you want to delete your review for <strong>{{ product.name }}</strong>?</p>
+   <div class="mt-4">
+      <!-- Confirmation Form -->
+      <form method="post" class="d-inline-block">
+         {% csrf_token %}
+         <button
+            type="submit"
+            class="btn btn-danger"
+            aria-label="Confirm deletion of your review for {{ product.name }}"
+            >
+         Yes, Delete
+         </button>
+      </form>
+      <!-- Cancel Button -->
+      <a
+         href="{% url 'product_detail' product.slug %}"
+         class="btn btn-secondary ms-2"
+         aria-label="Cancel and return to {{ product.name }} product page"
+         >
+      No, Go Back
+      </a>
+   </div>
 </div>
-{% endblock %}
+{% endblock content %}

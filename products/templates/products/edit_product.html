@@ -1,35 +1,46 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
-
-{% block title %}Edit Product{% endblock %}
-
+{% block title %}
+Edit Product
+{% endblock title %}
 {% block meta_description %}
+<!-- Prevent search engines from indexing this page -->
 <meta name="robots" content="noindex, nofollow">
-{% endblock %}
-
+{% endblock meta_description %}
 {% block content %}
 <div class="container py-5">
-  <h2>Edit Product</h2>
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-
-    {% for field in form %}
+   <h2>Edit Product</h2>
+   <!-- Product Edit Form -->
+   <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <!-- Other form fields (excluding image) -->
+      {% for field in form %}
       {% if field.name != 'image' %}
-        {{ field|as_crispy_field }}
+      {{ field|as_crispy_field }}
       {% endif %}
-    {% endfor %}
-
-    <div class="mb-4">
-      <label for="id_image" class="form-label">Product Image</label>
-      {% if form.instance.image %}
-        <div class="mb-2">
-          <img src="{{ form.instance.image.url }}" alt="Current image" class="img-fluid rounded border" style="max-height: 200px;">
-        </div>
-      {% endif %}
-      {{ form.image }}
-    </div>
-
-    <button type="submit" class="btn btn-success" aria-label="Save changes to {{ form.instance.name }}">Update Product</button>
-  </form>
+      {% endfor %}
+      <!-- Image Upload Field -->
+      <div class="mb-4">
+         <label for="id_image" class="form-label">Product Image</label>
+         {% if form.instance.image %}
+         <div class="mb-2">
+            <img
+               src="{{ form.instance.image.url }}"
+               alt="Current image"
+               class="img-fluid rounded border"
+               style="max-height: 200px;"
+               >
+         </div>
+         {% endif %}
+         {{ form.image }}
+      </div>
+      <button
+         type="submit"
+         class="btn btn-success"
+         aria-label="Save changes to {{ form.instance.name }}"
+         >
+      Update Product
+      </button>
+   </form>
 </div>
-{% endblock %}
+{% endblock content %}

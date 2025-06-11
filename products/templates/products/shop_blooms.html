@@ -1,48 +1,49 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
-{% endblock %}
-
-{% block body_class %}blooms-page{% endblock %}
-
-{% block title %}Shop Blooms | Bloom and Brew{% endblock %}
-{% block meta_description %}Hand-tied bouquets crafted with care. Seasonal blooms and timeless arrangements of flowers perfect for gifting or brightening your home.{% endblock %}
-
-
+{% endblock extra_css %}
+{% block title %}
+Shop Blooms | Bloom and Brew
+{% endblock title %}
+{% block meta_description %}
+Hand-tied bouquets crafted with care. Seasonal blooms and timeless arrangements of flowers perfect for gifting or brightening your home.
+{% endblock meta_description %}
+{% block body_class %}
+blooms-page
+{% endblock body_class %}
 {% block content %}
-<!--Title-->
+<!-- Blooms Collection -->
 <section class="py-5">
-  <div class="container">
-    <h2 class="section-title blooms-section-title text-center mb-4">Blooms Collection</h2>
-    <p class="text-center">Explore our handcrafted bouquet range.</p>
-    <!--Products-->
-    <div class="row g-4">
-      {% for product in products %}
-        <div class="col-md-4">
-          <div class="card h-100 border-0 shadow-sm">
-            <a href="{% url 'product_detail' product.slug %}">
-              <img src="{{ product.image.url }}" class="card-img-top img-fluid product-image" alt="{{ product.name }}">
-            </a>
-            <div class="card-body text-center">
-              <h5 class="card-title">{{ product.name }}</h5>
-              <p class="card-text">€{{ product.price }}</p>
-              <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary mt-2">View Product</a>
+   <div class="container">
+      <h2 class="section-title blooms-section-title text-center mb-4">Blooms Collection</h2>
+      <p class="text-center">Explore our handcrafted bouquet range.</p>
+      <!-- Products Grid -->
+      <div class="row g-4">
+         {% for product in products %}
+         <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+               <a href="{% url 'product_detail' product.slug %}">
+               <img src="{{ product.image.url }}" class="card-img-top img-fluid product-image" alt="{{ product.name }}">
+               </a>
+               <div class="card-body text-center">
+                  <h5 class="card-title">{{ product.name }}</h5>
+                  <p class="card-text">€{{ product.price }}</p>
+                  <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary mt-2">View Product</a>
+               </div>
             </div>
-          </div>
-        </div>
-      {% empty %}
-        <div class="col-12 text-center">
-          <p>No brews available at the moment.</p>
-        </div>
-      {% endfor %}
-    </div>
-    <div class="text-center my-4">
-      <a href="#" class="btn btn-outline-dark back-to-top-footer" title="Back to Top" aria-label="Scroll to top of blooms collection">
-        <i class="fas fa-chevron-up me-1"></i> Back to Top
-      </a>
-    </div>
-  </div>
+         </div>
+         {% empty %}
+         <div class="col-12 text-center">
+            <p>No brews available at the moment.</p>
+         </div>
+         {% endfor %}
+      </div>
+      <div class="text-center my-4">
+         <a href="#" class="btn btn-outline-dark back-to-top-footer" title="Back to Top" aria-label="Scroll to top of blooms collection">
+         <i class="fas fa-chevron-up me-1"></i> Back to Top
+         </a>
+      </div>
+   </div>
 </section>
-{% endblock %}
+{% endblock content %}

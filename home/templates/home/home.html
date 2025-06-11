@@ -1,127 +1,115 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'home/home.css' %}">
 {% endblock %}
-
 {% block title %}Bloom and Brew | Flowers & Coffee Delivered{% endblock %}
 {% block meta_description %}Discover Bloom and Brew – your destination for handcrafted flower bouquets and artisan coffee. Thoughtful gifts, beautiful bundles, fast delivery.{% endblock %}
-
 {% block content %}
 <!-- Hero Section -->
-<section class="hero-section"> 
-  <div class="container hero-content">
-    <div class="row align-items-center flex-column-reverse flex-md-row gy-4">
-      <div class="col-md-6 text-block text-center text-md-start">
-        <h1 class="display-4">Welcome to Bloom and Brew</h1>
-        <p class="lead">Fresh bouquets & artisan coffee delivered with care.</p>
-        <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg">Shop Now</a>
+<section class="hero-section">
+   <div class="container hero-content">
+      <div class="row align-items-center flex-column-reverse flex-md-row gy-4">
+         <div class="col-md-6 text-block text-center text-md-start">
+            <h1 class="display-4">Welcome to Bloom and Brew</h1>
+            <p class="lead">Fresh bouquets & artisan coffee delivered with care.</p>
+            <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg">Shop Now</a>
+         </div>
+         <div class="col-md-6 image-block text-center">
+            <img src="{% static 'images/hero.jpg' %}" alt="Bouquet and coffee on a table" class="hero-img img-fluid rounded shadow-sm">
+         </div>
       </div>
-      <div class="col-md-6 image-block text-center">
-        <img src="{% static 'images/hero.jpg' %}" alt="Bouquet and coffee on a table" class="hero-img img-fluid rounded shadow-sm">
-      </div>
-    </div>
-  </div>
+   </div>
 </section>
-
-
 <!--Bundle and Newsletter Section -->
 <section class="bundle-offer-section py-5">
-  <div class="container">
-    <h2 class="section-title text-center mb-4"><span class="brand-accent">Bundle of the Week</span></h2>
-    <p class="text-center text-muted mb-5">Our weekly pick + something special for you.</p>
-
-    <div class="row gx-4 gy-4 justify-content-center">
-      <div class="col-md-6">
-        <div class="card unified-card compact-card text-center p-3 h-100">
-          <img src="{{ bundle_of_the_week.image.url }}" class="card-img-top rounded mb-3" alt="Illustration of flowers and coffee beans for weekly bundle">
-          <div class="card-body">
-            <h5 class="card-title fw-bold">{{ bundle_of_the_week.name }}</h5>
-            <p class="card-text mb-3">
-              {% if bundle_of_the_week.special_offer_price %}
-                <strong>€{{ bundle_of_the_week.special_offer_price }}</strong>
-                <span class="text-muted text-decoration-line-through ms-2">€{{ bundle_of_the_week.price }}</span>
-              {% else %}
-                €{{ bundle_of_the_week.price }}
-              {% endif %}
-            </p>
-            <a href="{% url 'product_detail' bundle_of_the_week.slug %}" class="btn btn-outline-success">View Bundle</a>
-          </div>
-        </div>
+   <div class="container">
+      <h2 class="section-title text-center mb-4"><span class="brand-accent">Bundle of the Week</span></h2>
+      <p class="text-center text-muted mb-5">Our weekly pick + something special for you.</p>
+      <div class="row gx-4 gy-4 justify-content-center">
+         <div class="col-md-6">
+            <div class="card unified-card compact-card text-center p-3 h-100">
+               <img src="{{ bundle_of_the_week.image.url }}" class="card-img-top rounded mb-3" alt="Illustration of flowers and coffee beans for weekly bundle">
+               <div class="card-body">
+                  <h5 class="card-title fw-bold">{{ bundle_of_the_week.name }}</h5>
+                  <p class="card-text mb-3">
+                     {% if bundle_of_the_week.special_offer_price %}
+                     <strong>€{{ bundle_of_the_week.special_offer_price }}</strong>
+                     <span class="text-muted text-decoration-line-through ms-2">€{{ bundle_of_the_week.price }}</span>
+                     {% else %}
+                     €{{ bundle_of_the_week.price }}
+                     {% endif %}
+                  </p>
+                  <a href="{% url 'product_detail' bundle_of_the_week.slug %}" class="btn btn-outline-success">View Bundle</a>
+               </div>
+            </div>
+         </div>
+         <div class="col-md-6 d-none d-md-flex extra-card">
+            <div class="card unified-card compact-card text-center p-4 h-100 d-flex flex-column justify-content-start text-card">
+               <h5 class="fw-bold mb-5 brand-accent brand-accent-title">Our Weekly Bundle</h5>
+               <img src="{% static 'images/flower-beans.png' %}" alt="image of coffee beans and flowers" class="img-fluid rounded mb-3 flower-beans-img">
+               <p class="text-muted small mb-2 flower-beans-text">
+                  Each week, our team hand-picks a flower & brew combo that captures the mood of the season. It's a thoughtful way to discover new pairings, try something fresh, or gift with extra meaning.
+               </p>
+               <p class="text-muted flower-beans-text-small small mb-0">
+                  Limited quantities. Special pricing. Updated every Monday.
+               </p>
+            </div>
+         </div>
+         <div class="col-md-6 d-none d-md-block extra-card">
+            <div class="card unified-card compact-card p-3 h-100">
+               <img src="{% static 'images/dont-miss.png' %}" class="img-fluid rounded" alt="Don't Miss Out graphic text">
+            </div>
+         </div>
+         <div class="col-md-6">
+            <div class="card unified-card compact-card p-4 text-center d-flex flex-column justify-content-center h-100">
+               <img src="{% static 'images/pinkletter.png' %}" alt="Envelope illustration for newsletter signup" class="newsletter-img mb-3">
+               <h5 class="fw-bold mb-2 brand-accent">Stay in the Loop</h5>
+               <p class="small text-muted mb-3">Get exclusive offers, artisan coffee tips, and bouquet drops in your inbox.</p>
+               <form method="post" action="{% url 'newsletter_signup' %}">
+                  {% csrf_token %}
+                  <input type="email" name="email" class="form-control mb-2" placeholder="Your email address" required aria-label="Enter your email address to subscribe to the newsletter">
+                  <button type="submit" class="btn btn-outline-success w-100" aria-label="Subscribe to Bloom and Brew newsletter">Subscribe</button>
+               </form>
+               <!---Messages-->
+               {% if messages %}
+               {% for message in messages %}
+               {% if message.tags != 'success' %}
+               <div class="alert alert-{{ message.tags }} mt-3">{{ message }}</div>
+               {% endif %}
+               {% endfor %}
+               {% endif %}
+            </div>
+         </div>
       </div>
-
-      <div class="col-md-6 d-none d-md-flex extra-card">
-        <div class="card unified-card compact-card text-center p-4 h-100 d-flex flex-column justify-content-start text-card">
-          <h5 class="fw-bold mb-5 brand-accent brand-accent-title">Our Weekly Bundle</h5>
-          <img src="{% static 'images/flower-beans.png' %}" alt="image of coffee beans and flowers" class="img-fluid rounded mb-3 flower-beans-img">
-          <p class="text-muted small mb-2 flower-beans-text">
-            Each week, our team hand-picks a flower & brew combo that captures the mood of the season. It's a thoughtful way to discover new pairings, try something fresh, or gift with extra meaning.
-          </p>
-          <p class="text-muted flower-beans-text-small small mb-0">
-            Limited quantities. Special pricing. Updated every Monday.
-          </p>
-        </div>
-      </div>
-
-   
-      <div class="col-md-6 d-none d-md-block extra-card">
-        <div class="card unified-card compact-card p-3 h-100">
-          <img src="{% static 'images/dont-miss.png' %}" class="img-fluid rounded" alt="Don't Miss Out graphic text">
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="card unified-card compact-card p-4 text-center d-flex flex-column justify-content-center h-100">
-          <img src="{% static 'images/pinkletter.png' %}" alt="Envelope illustration for newsletter signup" class="newsletter-img mb-3">
-          <h5 class="fw-bold mb-2 brand-accent">Stay in the Loop</h5>
-          <p class="small text-muted mb-3">Get exclusive offers, artisan coffee tips, and bouquet drops in your inbox.</p>
-          <form method="post" action="{% url 'newsletter_signup' %}">
-            {% csrf_token %}
-            <input type="email" name="email" class="form-control mb-2" placeholder="Your email address" required aria-label="Enter your email address to subscribe to the newsletter">
-            <button type="submit" class="btn btn-outline-success w-100" aria-label="Subscribe to Bloom and Brew newsletter">Subscribe</button>
-          </form>
-          {% if messages %}
-            {% for message in messages %}
-              {% if message.tags != 'success' %}
-                <div class="alert alert-{{ message.tags }} mt-3">{{ message }}</div>
-              {% endif %}
-            {% endfor %}
-          {% endif %}
-        </div>
-      </div>
-    </div>
-  </div>
+   </div>
 </section>
-
 <!-- Featured Section -->
 <section class="featured-products py-5">
-  <div class="container">
-    <h2 class="text-center mb-4">Featured Picks</h2>
-    <div class="row g-4 justify-content-center">
-      {% for product in featured_products %}
-        <div class="col-12 col-sm-6 col-md-6 col-lg-3">
-          <div class="product-card text-center">
-            <div class="image-wrapper mb-2">
-            <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded mb-2">
+   <div class="container">
+      <h2 class="text-center mb-4">Featured Picks</h2>
+      <div class="row g-4 justify-content-center">
+         {% for product in featured_products %}
+         <div class="col-12 col-sm-6 col-md-6 col-lg-3">
+            <div class="product-card text-center">
+               <div class="image-wrapper mb-2">
+                  <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded mb-2">
+               </div>
+               <h5>{{ product.name }}</h5>
+               <p>€{{ product.price }}</p>
+               <a href="{% url 'product_detail' product.slug %}" class="btn btn-outline-secondary btn-sm">View</a>
             </div>
-            <h5>{{ product.name }}</h5>
-            <p>€{{ product.price }}</p>
-            <a href="{% url 'product_detail' product.slug %}" class="btn btn-outline-secondary btn-sm">View</a>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
+         </div>
+         {% endfor %}
+      </div>
+   </div>
 </section>
-
-
 <!-- CTA -->
 <section class="cta-section">
-  <div class="container text-center py-5">
-    <h2>Ready to make someone’s day?</h2>
-    <p class="cta-subtext">Choose a gift from our beautiful selection.</p>
-    <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg" aria-label="Browse all flower and coffee products">Shop Now</a>
-  </div>
+   <div class="container text-center py-5">
+      <h2>Ready to make someone’s day?</h2>
+      <p class="cta-subtext">Choose a gift from our beautiful selection.</p>
+      <a href="{% url 'product_list' %}" class="btn btn-primary btn-lg" aria-label="Browse all flower and coffee products">Shop Now</a>
+   </div>
 </section>
 {% endblock %}

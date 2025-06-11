@@ -1,120 +1,161 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
-{% endblock %}
-
-{% block title %}{{ product.name }} | Bloom and Brew{% endblock %}
-{% block meta_description %}Discover {{ product.name }} – {{ product.description|truncatewords:20 }}. Premium quality and beautifully presented, available now.{% endblock %}
-
-
-<!-- For styling purposes-->
+{% endblock extra_css %}
+{% block title %}
+{{ product.name }} | Bloom and Brew
+{% endblock title %}
+{% block meta_description %}
+Discover {{ product.name }} – {{ product.description|truncatewords:20 }}. Premium quality and beautifully presented, available now.
+{% endblock meta_description %}
+<!--Classes for Styling Purposes-->
 {% block body_class %}
-  {% if product.category == 'coffee' %}
-    brews-page
-  {% elif product.category == 'bouquet' %}
-    blooms-page
-  {% elif product.category == 'bundle' %}
-    bundle-page
-  {% else %}
-    product-page
-  {% endif %}
-{% endblock %}
-
-
+{# Add category-specific body class for styling #}
+{% if product.category == 'coffee' %}
+brews-page
+{% elif product.category == 'bouquet' %}
+blooms-page
+{% elif product.category == 'bundle' %}
+bundle-page
+{% else %}
+product-page
+{% endif %}
+{% endblock body_class %}
 {% block content %}
 <section class="product-detail py-5">
-  <div class="container">
-    <div class="row">
-      <!-- Product Image -->
-      <div class="col-md-6 mb-4">
-        <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded product-detail-image">
-      </div>
-
-      <!-- Product Details -->
-      <div class="col-md-6">
-        <h2 class="product-title mb-3">{{ product.name }}</h2>
-
-        {% if product.has_discount %}
-          <p class="product-price h4">
-            <strong>€{{ product.special_offer_price }}</strong>
-            <span class="text-muted text-decoration-line-through ms-2">€{{ product.price }}</span>
-          </p>
-        {% else %}
-          <p class="product-price h4">€{{ product.price }}</p>
-        {% endif %}
-
-        <p class="product-category text-muted text-capitalize mb-2">Category: {{ product.category }}</p>
-        <p class="product-description">{{ product.description }}</p>
-
-        <hr class="my-4">
-
-        {% if product.stock == 0 %}
-          <p class="text-danger">Out of stock</p>
-        {% else %}
-          <form method="POST" action="{% url 'add_to_cart' product.id %}" class="add-to-cart-form mb-4">
-            {% csrf_token %}
-            <div class="row g-2 align-items-center">
-              <div class="col-auto">
-                <label for="quantity" class="col-form-label">Quantity</label>
-              </div>
-              <div class="col-auto">
-                <input type="number" name="quantity" id="quantity" value="1" min="1" class="form-control" required>
-              </div>
-              <div class="col-auto">
-                <button type="submit" class="btn btn-primary" aria-label="Add {{ product.name }} to cart">Add to Cart</button>
-              </div>
-            </div>
-          </form>
-        {% endif %}
-
-        <!-- Customer Reviews Section -->
-        <div class="customer-reviews mt-5">
-          <h5 class="fw-semibold mb-3">Customer Reviews</h5>
-
-          {% if user.is_authenticated %}
-            <a href="{% url 'add_review' product.slug %}" class="btn btn-outline-secondary btn-sm mb-3" aria-label="Write a review for {{ product.name }}">Write a Review</a>
-          {% else %}
-            <p class="mb-3"><a href="{% url 'account_login' %}">Log in</a> to write a review.</p>
-          {% endif %}
-
-          {% if reviews %}
-            {% for review in reviews %}
-              <div class="review mb-4">
-                <div class="review-stars mb-1">
-                  {% for i in "12345" %}
-                    {% if forloop.counter <= review.rating %}
-                      <i class="fa-solid fa-star text-warning" aria-label="Star"></i>
-                    {% else %}
-                      <i class="fa-regular fa-star text-muted" aria-label="Star"></i>
-                    {% endif %}
-                  {% endfor %}
-                </div>
-                <p class="review-comment mb-1">{{ review.comment }}</p>
-                <small class="text-muted d-block mb-1">By {{ review.user.username }} on {{ review.created_on|date:"M d, Y" }}</small>
-
-                {% if user == review.user %}
-                  <div class="review-actions">
-                    <a href="{% url 'edit_review' product.slug review.id %}" class="btn btn-sm btn-outline-primary me-2" aria-label="Edit your review of {{ product.name }}">Edit</a>
-                    <a href="{% url 'delete_review' product.slug review.id %}" class="btn btn-sm btn-outline-danger" aria-label="Delete your review of {{ product.name }}">Delete</a>
-                  </div>
-                {% endif %}
-              </div>
-            {% endfor %}
-
-            {% if not show_all_reviews and review_count > 3 %}
-              <a href="?all=1" class="btn btn-outline-secondary btn-sm" aria-label="Show all reviews for {{ product.name }}">Show all {{ review_count }} reviews</a>
-            {% elif show_all_reviews %}
-              <a href="?all=0" class="btn btn-outline-secondary btn-sm">Show fewer reviews</a>
+   <div class="container">
+      <div class="row">
+         <!-- Product Image -->
+         <div class="col-md-6 mb-4">
+            <img
+               src="{{ product.image.url }}"
+               alt="{{ product.name }}"
+               class="img-fluid rounded product-detail-image"
+               >
+         </div>
+         <!-- Product Details & Add to Cart -->
+         <div class="col-md-6">
+            <h2 class="product-title mb-3">{{ product.name }}</h2>
+            {% if product.has_discount %}
+            <p class="product-price h4">
+               <strong>€{{ product.special_offer_price }}</strong>
+               <span class="text-muted text-decoration-line-through ms-2">€{{ product.price }}</span>
+            </p>
+            {% else %}
+            <p class="product-price h4">€{{ product.price }}</p>
             {% endif %}
-          {% else %}
-            <p>No reviews yet.</p>
-          {% endif %}
-        </div>
+            <p class="product-category text-muted text-capitalize mb-2">
+               Category: {{ product.category }}
+            </p>
+            <p class="product-description">{{ product.description }}</p>
+            <hr class="my-4">
+            {% if product.stock == 0 %}
+            <p class="text-danger">Out of stock</p>
+            {% else %}
+            <!-- Add to Cart Form -->
+            <form method="POST" action="{% url 'add_to_cart' product.id %}" class="add-to-cart-form mb-4">
+               {% csrf_token %}
+               <div class="row g-2 align-items-center">
+                  <div class="col-auto">
+                     <label for="quantity" class="col-form-label">Quantity</label>
+                  </div>
+                  <div class="col-auto">
+                     <input
+                        type="number"
+                        name="quantity"
+                        id="quantity"
+                        value="1"
+                        min="1"
+                        class="form-control"
+                        required
+                        >
+                  </div>
+                  <div class="col-auto">
+                     <button
+                        type="submit"
+                        class="btn btn-primary"
+                        aria-label="Add {{ product.name }} to cart"
+                        >
+                     Add to Cart
+                     </button>
+                  </div>
+               </div>
+            </form>
+            {% endif %}
+            <!-- Customer Reviews Section -->
+            <div class="customer-reviews mt-5">
+               <h5 class="fw-semibold mb-3">Customer Reviews</h5>
+               {% if user.is_authenticated %}
+               <a
+                  href="{% url 'add_review' product.slug %}"
+                  class="btn btn-outline-secondary btn-sm mb-3"
+                  aria-label="Write a review for {{ product.name }}"
+                  >
+               Write a Review
+               </a>
+               {% else %}
+               <p class="mb-3">
+                  <a href="{% url 'account_login' %}">Log in</a> to write a review.
+               </p>
+               {% endif %}
+               {% if reviews %}
+               {% for review in reviews %}
+               <div class="review mb-4">
+                  <!-- Star Rating Display -->
+                  <div class="review-stars mb-1">
+                     {% for i in "12345" %}
+                     {% if forloop.counter <= review.rating %}
+                     <i class="fa-solid fa-star text-warning" aria-label="Star"></i>
+                     {% else %}
+                     <i class="fa-regular fa-star text-muted" aria-label="Star"></i>
+                     {% endif %}
+                     {% endfor %}
+                  </div>
+                  <p class="review-comment mb-1">{{ review.comment }}</p>
+                  <small class="text-muted d-block mb-1">
+                  By {{ review.user.username }} on {{ review.created_on|date:"M d, Y" }}
+                  </small>
+                  {% if user == review.user %}
+                  <div class="review-actions">
+                     <a
+                        href="{% url 'edit_review' product.slug review.id %}"
+                        class="btn btn-sm btn-outline-primary me-2"
+                        aria-label="Edit your review of {{ product.name }}"
+                        >
+                     Edit
+                     </a>
+                     <a
+                        href="{% url 'delete_review' product.slug review.id %}"
+                        class="btn btn-sm btn-outline-danger"
+                        aria-label="Delete your review of {{ product.name }}"
+                        >
+                     Delete
+                     </a>
+                  </div>
+                  {% endif %}
+               </div>
+               {% endfor %}
+               {% if not show_all_reviews and review_count > 3 %}
+               <a
+                  href="?all=1"
+                  class="btn btn-outline-secondary btn-sm"
+                  aria-label="Show all reviews for {{ product.name }}"
+                  >
+               Show all {{ review_count }} reviews
+               </a>
+               {% elif show_all_reviews %}
+               <a href="?all=0" class="btn btn-outline-secondary btn-sm">
+               Show fewer reviews
+               </a>
+               {% endif %}
+               {% else %}
+               <p>No reviews yet.</p>
+               {% endif %}
+            </div>
+         </div>
       </div>
-    </div>
-  </div>
+   </div>
 </section>
-{% endblock %}
+{% endblock content %}

@@ -1,104 +1,92 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
 {% endblock %}
-
 {% block title %}Shop All Products | Bloom and Brew{% endblock %}
 {% block meta_description %}Browse our full collection of flowers, artisan coffee, and curated bundles. Something thoughtful for every occasion.{% endblock %}
-
-
 {% block content %}
 <section class="py-5">
-  <div class="container">
-    <h2 class="section-title text-center mb-4">Shop All Products</h2>
-    <form method="GET" class="row align-items-end mb-4">
-        <!-- Search -->
-        <div class="col-md-4 mb-2">
-          <label for="search" class="form-label">Search</label>
-          <input type="text" id="search" name="q" class="form-control"
-                 placeholder="Search products..." value="{{ request.GET.q }}">
-        </div>
-      
-        <!-- Category -->
-        <div class="col-md-4 mb-2">
-          <label for="category" class="form-label">Filter by Category</label>
-          <select name="category" id="category" class="form-select">
-            <option value="">All Categories</option>
-            <option value="bouquet" {% if request.GET.category == 'bouquet' %}selected{% endif %}>Blooms</option>
-            <option value="coffee" {% if request.GET.category == 'coffee' %}selected{% endif %}>Brews</option>
-            <option value="bundle" {% if request.GET.category == 'bundle' %}selected{% endif %}>Bundles</option>
-          </select>
-        </div>
-      
-        <!-- Sort + Buttons -->
-        <div class="col-md-4 mb-2 d-flex align-items-end justify-content-between">
-          <div class="flex-grow-1 me-2">
-            <label for="sort" class="form-label">Sort by</label>
-            <select name="sort" id="sort" class="form-select" onchange="this.form.submit()">
-              <option value="">-- Choose --</option>
-              <option value="price_asc" {% if request.GET.sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
-              <option value="price_desc" {% if request.GET.sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
-              <option value="name_asc" {% if request.GET.sort == 'name_asc' %}selected{% endif %}>Name: A-Z</option>
-              <option value="name_desc" {% if request.GET.sort == 'name_desc' %}selected{% endif %}>Name: Z-A</option>
+   <div class="container">
+      <h2 class="section-title text-center mb-4">Shop All Products</h2>
+      <form method="GET" class="row align-items-end mb-4">
+         <!-- Search -->
+         <div class="col-md-4 mb-2">
+            <label for="search" class="form-label">Search</label>
+            <input type="text" id="search" name="q" class="form-control"
+               placeholder="Search products..." value="{{ request.GET.q }}">
+         </div>
+         <!-- Category -->
+         <div class="col-md-4 mb-2">
+            <label for="category" class="form-label">Filter by Category</label>
+            <select name="category" id="category" class="form-select">
+               <option value="">All Categories</option>
+               <option value="bouquet" {% if request.GET.category == 'bouquet' %}selected{% endif %}>Blooms</option>
+               <option value="coffee" {% if request.GET.category == 'coffee' %}selected{% endif %}>Brews</option>
+               <option value="bundle" {% if request.GET.category == 'bundle' %}selected{% endif %}>Bundles</option>
             </select>
-          </div>
-          <!-- Reset and Search Button -->
-          <div class="align-self-end d-flex gap-2">
-            <a href="{% url 'product_list' %}" class="btn btn-outline-secondary">Reset</a>
-            <button type="submit" class="btn btn-success" aria-label="Search">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
-      </form>
-      
-    {% if search_query %}
-      <p class="text-center">Showing results for: <strong>{{ search_query }}</strong></p>
-    {% endif %}
-
-    <!-- Product Grid -->
-    <div class="row g-4">
-      {% for product in products %}
-        <div class="col-md-4">
-          <div class="card h-100 border-0 shadow-sm">
-            <a href="{% url 'product_detail' product.slug %}">
-              <img src="{{ product.image.url }}" class="card-img-top img-fluid product-image" alt="{{ product.name }}">
-            </a>
-            <div class="card-body text-center">
-              <h5 class="card-title">{{ product.name }}</h5>
-
-              {% if product.has_discount %}
-                <p class="card-text">
-                  <strong>€{{ product.special_offer_price }}</strong>
-                  <span class="text-muted text-decoration-line-through ms-2">€{{ product.price }}</span>
-                </p>
-              {% else %}
-                <p class="card-text">€{{ product.price }}</p>
-              {% endif %}
-
-              <p class="text-muted text-capitalize">{{ product.category }}</p>
-              <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary mt-2">View Product</a>
+         </div>
+         <!-- Sort + Buttons -->
+         <div class="col-md-4 mb-2 d-flex align-items-end justify-content-between">
+            <div class="flex-grow-1 me-2">
+               <label for="sort" class="form-label">Sort by</label>
+               <select name="sort" id="sort" class="form-select" onchange="this.form.submit()">
+                  <option value="">-- Choose --</option>
+                  <option value="price_asc" {% if request.GET.sort == 'price_asc' %}selected{% endif %}>Price: Low to High</option>
+                  <option value="price_desc" {% if request.GET.sort == 'price_desc' %}selected{% endif %}>Price: High to Low</option>
+                  <option value="name_asc" {% if request.GET.sort == 'name_asc' %}selected{% endif %}>Name: A-Z</option>
+                  <option value="name_desc" {% if request.GET.sort == 'name_desc' %}selected{% endif %}>Name: Z-A</option>
+               </select>
             </div>
-          </div>
-        </div>
-      {% empty %}
-        <div class="col-12 text-center">
-          <p>No products found matching your search or filters.</p>
-        </div>
-      {% endfor %}
-    </div>
-    <div class="text-center my-4">
-      <a href="#" class="btn btn-outline-dark back-to-top-footer" title="Back to Top" aria-label="Scroll back to top">
-        <i class="fas fa-chevron-up me-1"></i> Back to Top
-      </a>
-    </div>
-  </div>
+            <!-- Reset and Search Button -->
+            <div class="align-self-end d-flex gap-2">
+               <a href="{% url 'product_list' %}" class="btn btn-outline-secondary">Reset</a>
+               <button type="submit" class="btn btn-success" aria-label="Search">
+               <i class="fas fa-search"></i>
+               </button>
+            </div>
+         </div>
+      </form>
+      {% if search_query %}
+      <p class="text-center">Showing results for: <strong>{{ search_query }}</strong></p>
+      {% endif %}
+      <!-- Product Grid -->
+      <div class="row g-4">
+         {% for product in products %}
+         <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm">
+               <a href="{% url 'product_detail' product.slug %}">
+               <img src="{{ product.image.url }}" class="card-img-top img-fluid product-image" alt="{{ product.name }}">
+               </a>
+               <div class="card-body text-center">
+                  <h5 class="card-title">{{ product.name }}</h5>
+                  {% if product.has_discount %}
+                  <p class="card-text">
+                     <strong>€{{ product.special_offer_price }}</strong>
+                     <span class="text-muted text-decoration-line-through ms-2">€{{ product.price }}</span>
+                  </p>
+                  {% else %}
+                  <p class="card-text">€{{ product.price }}</p>
+                  {% endif %}
+                  <p class="text-muted text-capitalize">{{ product.category }}</p>
+                  <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary mt-2">View Product</a>
+               </div>
+            </div>
+         </div>
+         {% empty %}
+         <div class="col-12 text-center">
+            <p>No products found matching your search or filters.</p>
+         </div>
+         {% endfor %}
+      </div>
+      <div class="text-center my-4">
+         <a href="#" class="btn btn-outline-dark back-to-top-footer" title="Back to Top" aria-label="Scroll back to top">
+         <i class="fas fa-chevron-up me-1"></i> Back to Top
+         </a>
+      </div>
+   </div>
 </section>
 {% block extra_js %}
 <script src="{% static 'products/js/products.js' %}"></script>
-
 {% endblock %}
-
 {% endblock content %}

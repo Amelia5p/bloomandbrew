@@ -1,18 +1,32 @@
 {% extends "base.html" %}
-{% block title %}Delete Product{% endblock %}
-
+{% block title %}
+Delete Product
+{% endblock title %}
 {% block meta_description %}
+<!-- Prevent search engines from indexing this page -->
 <meta name="robots" content="noindex, nofollow">
-{% endblock %}
-
+{% endblock meta_description %}
 {% block content %}
 <div class="container py-5">
-  <h2>Delete {{ product.name }}</h2>
-  <p>Are you sure you want to delete this product?</p>
-  <form method="post">
-    {% csrf_token %}
-    <button type="submit" class="btn btn-danger" aria-label="Confirm deletion of {{ product.name }}">Delete</button>
-    <a href="{% url 'product_admin' %}" class="btn btn-secondary" aria-label="Cancel deletion and return to product admin">Cancel</a>
-  </form>
+   <h2>Delete {{ product.name }}</h2>
+   <p>Are you sure you want to delete this product?</p>
+   <!-- Deletion Form -->
+   <form method="post">
+      {% csrf_token %}
+      <button
+         type="submit"
+         class="btn btn-danger"
+         aria-label="Confirm deletion of {{ product.name }}"
+         >
+      Delete
+      </button>
+      <a
+         href="{% url 'product_admin' %}"
+         class="btn btn-secondary"
+         aria-label="Cancel deletion and return to product admin"
+         >
+      Cancel
+      </a>
+   </form>
 </div>
-{% endblock %}
+{% endblock content %}
