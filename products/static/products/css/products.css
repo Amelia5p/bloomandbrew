@@ -29,7 +29,6 @@
   object-fit: contain;
   border-radius: 6px;
 }
-
 /* Product Detail Page */
 .product-detail {
   background-color: #fdfaf6;
@@ -75,7 +74,6 @@
 .add-to-cart-form .btn {
   min-width: 130px;
 }
-
 /*  Reviews  */
 .customer-reviews {
   border-top: 1px solid #ddd;
@@ -105,7 +103,6 @@
 .review-actions .btn {
   margin-top: 0.5rem;
 }
-
 /*  Rating  */
 .star-rating {
   display: inline-flex;
@@ -129,11 +126,7 @@ textarea {
   width: 100%;
   min-height: 100px;
 }
-
-
-
 /* Brews Page */
-
 .brews-page .section-title{
   color:#5C3A2E;
 }
@@ -213,8 +206,6 @@ body.shopall-page {
 .shopall-page .card-body .btn:hover {
   background-color: #A6C7B5;
 }
-
-
 
 /*  Responsive */
 @media (max-width: 768px) {
