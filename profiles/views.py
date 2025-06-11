@@ -8,6 +8,7 @@ def profile(request):
     profile = request.user.userprofile
     return render(request, 'profiles/profile.html', {'profile': profile})
 
+
 @login_required
 def edit_profile(request):
     profile = request.user.userprofile
