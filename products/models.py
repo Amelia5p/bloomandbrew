@@ -4,13 +4,12 @@ from cloudinary.models import CloudinaryField
 from django.contrib.auth.models import User
 
 
-
-
 class Product(models.Model):
     """
-Product model representing items sold in the store.
+    Product model representing items sold in the store.
 
-Includes category, pricing (with optional discount), image, stock, and auto-generated slug.
+    Includes category, pricing (with optional discount), image, stock,
+    and auto-generated slug.
     """
 
     CATEGORY_CHOICES = [
@@ -22,9 +21,16 @@ Includes category, pricing (with optional discount), image, stock, and auto-gene
     name = models.CharField(max_length=100)
     sku = models.CharField(max_length=20, unique=True)
     description = models.TextField()
-    category = models.CharField(max_length=10, choices=CATEGORY_CHOICES)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
-    special_offer_price = models.DecimalField(max_digits=6, decimal_places=2, null=True, blank=True)
+    category = models.CharField(
+        max_length=10, choices=CATEGORY_CHOICES
+    )
+    price = models.DecimalField(
+        max_digits=6, decimal_places=2
+    )
+    special_offer_price = models.DecimalField(
+        max_digits=6, decimal_places=2,
+        null=True, blank=True
+    )
     image = CloudinaryField('image')
     stock = models.PositiveIntegerField(default=0)
     slug = models.SlugField(unique=True, blank=True)
@@ -37,10 +43,17 @@ Includes category, pricing (with optional discount), image, stock, and auto-gene
         super().save(*args, **kwargs)
 
     def has_discount(self):
-        return self.special_offer_price is not None and self.special_offer_price < self.price
+        return (
+            self.special_offer_price is not None
+            and self.special_offer_price < self.price
+        )
 
     def display_price(self):
-        return self.special_offer_price if self.has_discount() else self.price
+        return (
+            self.special_offer_price
+            if self.has_discount()
+            else self.price
+        )
 
     def __str__(self):
         return self.name
@@ -48,15 +61,28 @@ Includes category, pricing (with optional discount), image, stock, and auto-gene
 
 class Review(models.Model):
     """
-    Stores a user review for a product, including star rating and optional comment.
+    Stores a user review for a product, including star
+    rating and optional comment.
     """
 
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='reviews')
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    rating = models.IntegerField(choices=[(i, str(i)) for i in range(1, 6)])
-    comment = models.TextField(blank=True, null=True)
-    created_on = models.DateTimeField(auto_now_add=True)
-
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name='reviews'
+    )
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE
+    )
+    rating = models.IntegerField(
+        choices=[(i, str(i)) for i in range(1, 6)]
+    )
+    comment = models.TextField(
+        blank=True, null=True
+    )
+    created_on = models.DateTimeField(
+        auto_now_add=True
+    )
 
     class Meta:
         ordering = ['-created_on']
@@ -64,4 +90,3 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.product.name} - {self.user.username} ({self.rating}★)"
-
