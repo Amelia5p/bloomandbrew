@@ -63,7 +63,7 @@ def product_detail(request, slug):
 
 
 def shop_brews(request):
-    """Brews-only product page."""
+    """Brews-only product."""
     products = Product.objects.filter(category='coffee')
     return render(
         request,
@@ -73,7 +73,7 @@ def shop_brews(request):
 
 
 def shop_blooms(request):
-    """Blooms-only product page."""
+    """Blooms-only product."""
     products = Product.objects.filter(category='bouquet')
     return render(
         request,
@@ -83,7 +83,7 @@ def shop_blooms(request):
 
 
 def shop_bundles(request):
-    """Bundles-only product page."""
+    """Bundles-only product."""
     products = Product.objects.filter(category='bundle')
     return render(
         request,
@@ -93,7 +93,7 @@ def shop_bundles(request):
 
 
 def add_review(request, product_slug):
-    """Add review page."""
+    """Add review."""
     product = get_object_or_404(Product, slug=product_slug)
 
     if not request.user.is_authenticated:
@@ -138,7 +138,7 @@ def add_review(request, product_slug):
 
 @login_required
 def edit_review(request, product_slug, review_id):
-    """Edit review page."""
+    """Edit review."""
     product = get_object_or_404(Product, slug=product_slug)
     review = get_object_or_404(
         Review,

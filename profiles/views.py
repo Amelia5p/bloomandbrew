@@ -5,12 +5,14 @@ from .forms import UserProfileForm
 
 @login_required
 def profile(request):
+    """ User Profile View"""
     profile = request.user.userprofile
     return render(request, 'profiles/profile.html', {'profile': profile})
 
 
 @login_required
 def edit_profile(request):
+    """ Edit Profile View"""
     profile = request.user.userprofile
     if request.method == 'POST':
         form = UserProfileForm(request.POST, instance=profile)

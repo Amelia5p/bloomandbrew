@@ -5,6 +5,7 @@ from django.contrib import messages
 
 
 def add_to_cart(request, product_id):
+    """Add a product to the cart."""
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     quantity = int(request.POST.get('quantity', 1))

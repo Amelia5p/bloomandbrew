@@ -11,6 +11,7 @@ stripe.api_key = settings.STRIPE_SECRET_KEY
 
 
 def checkout(request):
+    """ Checkout View """
     cart = Cart(request)
 
     if len(cart) == 0:
@@ -89,6 +90,7 @@ def checkout(request):
 
 
 def checkout_success(request, order_number):
+    """ Checkout Success View """
     order = get_object_or_404(Order, order_number=order_number)
     return render(
         request,
@@ -99,6 +101,7 @@ def checkout_success(request, order_number):
 
 @login_required
 def order_history(request):
+    """ Order history view """
     user_profile = request.user.userprofile
     orders = Order.objects.filter(user=user_profile).order_by('-created_on')
 
