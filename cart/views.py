@@ -19,9 +19,8 @@ def add_to_cart(request, product_id):
         )
         messages.success(
             request,
-            f'{"Updated" if override else
-               "Added"}{quantity} × "{product.name}" '
-            f'to your cart.'
+            f'{"Updated" if override else "Added"} {quantity} × '
+            f'"{product.name}" to your cart.'
         )
     except ValueError as e:
         messages.error(request, str(e))
@@ -34,11 +33,18 @@ def remove_from_cart(request, product_id):
     cart = Cart(request)
     product = get_object_or_404(Product, id=product_id)
     cart.remove(product)
-    messages.success(request, f'Removed "{product.name}" from your cart.')
+    messages.success(
+        request,
+        f'Removed "{product.name}" from your cart.'
+    )
     return redirect('view_cart')
 
 
 def view_cart(request):
     """Display the full cart contents."""
     cart = Cart(request)
-    return render(request, 'cart/cart.html', {'cart': cart})
+    return render(
+        request,
+        'cart/cart.html',
+        {'cart': cart}
+    )
