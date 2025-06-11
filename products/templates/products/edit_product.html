@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% block extra_head %}
+<meta name="robots" content="noindex, nofollow">
+{% endblock extra_head %}
 {% block title %}
 Edit Product
 {% endblock title %}
 {% block meta_description %}
-<!-- Prevent search engines from indexing this page -->
-<meta name="robots" content="noindex, nofollow">
+Edit an existing product’s details on Bloom and Brew.
 {% endblock meta_description %}
 {% block content %}
 <div class="container py-5">
@@ -13,13 +15,13 @@ Edit Product
    <!-- Product Edit Form -->
    <form method="post" enctype="multipart/form-data">
       {% csrf_token %}
-      <!-- Other form fields (excluding image) -->
+      {# Render all fields except the image #}
       {% for field in form %}
       {% if field.name != 'image' %}
       {{ field|as_crispy_field }}
       {% endif %}
       {% endfor %}
-      <!-- Image Upload Field -->
+      {# Image Upload Field #}
       <div class="mb-4">
          <label for="id_image" class="form-label">Product Image</label>
          {% if form.instance.image %}
