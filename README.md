@@ -259,8 +259,8 @@ Wireframes were created at the start of the project to plan the layout, structur
 
 ## Future Features
 
-In the future I would like to add the following features to further improve the site:
-- Add functionality to save the user's cart if they log out and back in, once more products are added, this was not needed so I used a session-based cart as the product range is quite small.
+In the future the following features would further improve the site:
+- Add functionality to save the user's cart if they log out and back in, once more products are added, this was not needed so a session-based cart was used as the product range is quite small.
 - A wishlist for users.
 
 ## CRUD Functionality
@@ -391,11 +391,15 @@ Reviews are ordered with the newest first and a user can only leave one review p
 The profile is created automatically when a new user is registered, using Django signals.
 
 
-## Testing
+# Testing
+
+## General Testing
 
 ### HTML
 
-HTML was passed through the W3C validator with no errors.
+All HTML was passed through the W3C validator with no errors.
+
+![HTML](static/readme-images/html-validation.png)
 
 | Page                   | Result     |
 |------------------------|------------|
@@ -428,18 +432,23 @@ HTML was passed through the W3C validator with no errors.
 
 ### CSS
 
-CSS was passed through W3C validator with no errors.
+All CSS was passed through W3C validator with no errors.
+
+![CSS Validation](static/readme-images/css-validation.png)
 
 ### JavaScript
 
-JavaScript was passed through JShint with no errors.
+All JavaScript was passed through JShint with no errors.
+
+![JS Validation](static/readme-images/js-validation.png)
 
 ### Python
 
-Python code was passed through the PEP8 CI linter with no errors.
+All Python code was passed through the PEP8 CI linter with no errors.
 
-## General Testing
+![Python Validation](static/readme-images/python-validation.png)
 
+## General Tests
 
 | Test             | Action                                                                 | Success Criteria                                                 |
 | --------------- | ---------------------------------------------------------------------- | ---------------------------------------------------------------- |
@@ -455,6 +464,119 @@ Lighthouse validation was run on all pages (both mobile and desktop) and tested 
 ## Browser Testing
 The Website was tested on Google Chrome, Firefox, Safari browsers with no issues.
 
+
+## Homepage Tests
+<details>
+<summary>Expand test details</summary>
+
+| Test                             | Action                                                                 | Success Criteria                                                       |
+|----------------------------------|------------------------------------------------------------------------|------------------------------------------------------------------------|
+| Hero Section CTA Clickability    | - Click on "Shop Now" button in the hero section                       | - Redirects to the product listing page                                |
+| Featured Products Display        | - Verify the featured products section loads                           | - Exactly 4 featured products are shown with consistent layout         |
+| Bundle of the Week Display       | - Scroll to the "Bundle of the Week" section                           | - One bundle product and accompanying image are displayed              |
+| Product Card Responsiveness      | - Resize browser on featured products section                          | - All product cards remain the same size and stack cleanly             |
+| Hero Section Layout              | - View hero section on various screen sizes                            | - Text and image columns stack correctly on smaller screens            |
+| CTA Button Placement             | - Check "Shop Now" placement above bundle section                      | - Button appears visually within the hero section background           |
+| Product Image Display            | - Confirm each product card contains an image                          | - All product images are present and not stretched or broken           |
+| Navigation Link Functionality    | - Click on nav links like "Brews", "Blooms", "Bundles"                 | - Each link leads to the correct filtered product page                 |
+| Cart Icon Display                | - Add product to cart and check cart icon                              | - Cart count updates and badge is visible in navbar                    |
+| Homepage Load Performance        | - Open homepage with dev tools open (network tab)                      | - Page assets load within acceptable time (<3s on fast connection)     |
+
+
+</details>
+
+## Product App Tests
+
+<details>
+<summary>Expand test details</summary>
+
+| Test                           | Action                                                             | Success Criteria                                                    |
+|--------------------------------|--------------------------------------------------------------------|----------------------------------------------------------------------|
+| Product Grid Display           | Visit the product listing page                                     | Products display in 3-column layout with name, image, price, category |
+| Product Card Link Functionality| Click on product image or name                                     | Redirects to the correct product detail page                        |
+| Search Bar Functionality       | Enter search term and submit                                       | Products matching the term appear; irrelevant ones are excluded     |
+| Category Filter Functionality  | Select a category and submit                                       | Only products in selected category are shown                        |
+| Sort Option Functionality      | Select "Price: Low to High" or "Name: Z-A" and submit              | Products reorder accordingly                                        |
+| Reset Button                   | Click the "Reset" button                                           | Clears filters and displays all products                            |
+| No Results Message             | Enter nonsense in search or filter to an empty result              | "No products found..." message is shown                             |
+| Discount Price Display         | Find a discounted product                                          | Special price shows with original price struck through              |
+| Image Display Check            | Inspect product cards                                              | Product image loads and is proportionate                            |
+| Back to Top Button Functionality| Scroll down and click "Back to Top"                                | Smooth scrolls page back to top                                     |
+
+
+| Test                           | Action                                                             | Success Criteria                                                    |
+|--------------------------------|--------------------------------------------------------------------|----------------------------------------------------------------------|
+| Product Info Display           | Visit product detail page                                          | Product name, image, description, category, and price are shown     |
+| Discount Display               | View a discounted product                                          | Shows discount price and original price with strikethrough          |
+| Out of Stock Message           | View a product with stock = 0                                      | "Out of stock" appears, Add to Cart is hidden or disabled           |
+| Add to Cart Functionality      | Choose quantity and submit                                         | Product added to cart, success message appears                      |
+| Quantity Validation            | Enter quantity beyond available stock                              | Prevents adding more than available; shows error or restricts input |
+| Review Section Visibility      | Scroll to reviews                                                  | Reviews list shows if reviews exist; message shown if none exist    |
+| Review Auth Display            | Visit as anonymous vs logged-in user                               | Login prompt for guests; “Write a Review” button for users          |
+| Review Edit/Delete Buttons     | Logged-in reviewer views their review                              | Edit/Delete buttons shown only to author                            |
+| Review Star Rating Display     | View reviews                                                       | Star rating (filled/empty) reflects review rating accurately        |
+| Review Toggle                  | Click “Show all reviews” or “Show fewer reviews”                   | Expands or collapses review list appropriately                      |
+
+
+</details>
+
+## Checkout App Tests
+
+<details>
+<summary>Expand test details</summary>
+
+| Test                            | Action                                                                   | Success Criteria                                                                 |
+|---------------------------------|--------------------------------------------------------------------------|----------------------------------------------------------------------------------|
+| Checkout Form Loads             | Go to checkout with items in cart                                    | Form displays with Stripe card element and order summary                        |
+| Checkout Redirect With Empty Cart | Try visit checkout with empty cart                                      | At least 1 item needed to checkout-“Your cart is empty” shown.                          |
+| Stripe Card Element Loads       | Inspect checkout page                                                    | Stripe element is visible, no JS errors                                         |
+| Valid Stripe Payment            | Use test card `4242 4242 4242 4242`, submit form                          | Order completes and redirects to confirmation page                              |
+| Declined Card Error             | Use test card `4000 0000 0000 0002`, submit form                          | Stripe shows "Your card was declined", no order saved                           |
+| Order Saved to DB               | Complete payment and check admin/DB                                       | Order and OrderItem records created with correct values                     |
+| Cart Clears After Checkout      | Complete order, then visit cart                                      | Cart is empty and displays empty cart message                                   |
+| Confirmation Page Accuracy      | Visit checkout/success after purchase                                | Order number and confirmation message are displayed                             |
+| Delivery and Subtotal Calculation | Add items to cart and go to checkout                              | Subtotal, delivery fee, and total due are calculated and displayed accurately   |
+| Stripe JavaScript Loads         | Inspect page source for Stripe scripts                                   | JS loaded with valid public key and client secret      |
+
+</details>
+
+## Cart App Tests
+
+<details>
+<summary>Expand test details</summary>
+
+| Test                        | Action                                                                | Success Criteria                                                        |
+|-----------------------------|-----------------------------------------------------------------------|-------------------------------------------------------------------------|
+| Cart Page Loads             | Visit cart                                                        | Cart table displays products, prices, quantities, and totals           |
+| Update Quantity             | Change quantity input and click “Update”                              | Quantity updates and total recalculates                                |
+| Remove Item                 | Click × “Remove” button                                               | Item is removed and cart updates accordingly                           |
+| Empty Cart Message          | Visit cart with no items                                          | Displays: “Your cart is empty.” with button to start shopping          |
+| Add Excessive Quantity      | Attempt to add quantity beyond available stock                        | Form prevents submission or shows validation error                     |
+| Proceed to Checkout         | Click “Proceed to Checkout”                                           | Redirects to checkout if cart has items                            |
+| Continue Shopping Button    | Click “Continue Shopping”                                             | Redirects to full product listing page                                 |
+| Cart Total Accuracy         | Add items, update quantities, and review totals                       | cart.get_total_price` reflects correct calculation                    |
+| Cart Icon Badge Updates     | Add/remove items and observe cart icon in navbar                      | Count badge updates in real time                                       |
+
+</details>
+
+## Profile App and Order History Tests
+
+<details>
+<summary>Expand test details</summary>
+
+| Test                      | Action                                                                   | Success Criteria                                                             |
+|---------------------------|--------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| Profile Page Loads        | Visit profile while logged in                                        | Shows username, email, address, and buttons for edit and order history      |
+| Edit Profile Form Loads   | Go to profile/edit                                                   | Form is pre-filled with user data                                           |
+| Save Profile Changes      | Update fields and submit                                                 | Redirects to profile page with updated information                          |
+| Required Field Validation | Clear required fields and submit                                         | Errors shown for empty fields                                               |
+| Order History Lists Orders| Go to order-history with past orders                                 | Orders display with numbers, dates, items, total, and status                |
+| Order History Empty State | Visit order-history with no orders                                   | Message: “You haven't placed any orders yet.” is displayed                  |
+| Order Details Display     | Check content of order summary                                           | Includes items, quantities, total due, and created date                     |
+| Buttons Function Properly | Click “Edit My Details” and “My Orders” buttons                          | Routes correctly to respective views                                        |
+
+</details>
+
 ## Security Features
 
 ### User Authentication
@@ -464,7 +586,7 @@ Authorisation is required to reach certain pages such as the Admin Panel. Reques
 Incorrect or in certain cases empty data in forms is not accepted and the user is made aware of this.
 
 ### Database Security
-The database url and secret key are stored in the env.py file to prevent unwanted connections.
+The Database URL, Secret Keys, APIs etc. are stored in the env.py file to prevent unwanted connections.
 
 Cross-Site Request Forgery (CSRF) tokens were used on all forms throughout this site.
 
@@ -483,11 +605,13 @@ To deploy this page to Heroku from its GitHub repository, the following steps we
 -  Under 'Config Vars' the following variables to be set:
 
     - `DATABASE_URL` - the URL for your Postgres database.
-    - `NAME` - the name of your database.
-    - `USER` - the username for your database.
-    - `PASSWORD` - the password for your database.
     - `HOST` - the host for your database.
     - `PORT` - the port for your database.
+    - `CLOUDINARY_API_KEYS` - API Keys to host images.
+    - `EMAIL_HOST_USER` - Email address
+    - `MAILCHIMP_API_KEYS` - API Keys for Mailchimp.
+    - `STRIPE KEYS`- For card payments 
+
     - Django settings:
     - `SECRET_KEY` - the secret key for your Django project. (kept in .env file)
     - `DEBUG` - set to `True` for development, `False` for production.
@@ -558,19 +682,12 @@ There is now a forked copy on GitHub.
 - [Coolors](https://coolors.co/) used for creating colour palette
 
 ## Bugs
-
-- Some users do not have a Profile associated with them- fixed by using django signals to auto make profile when sign up.
-
-
-
-
-
+- Responsive-layout issue: Navbar overflowed on screens under 480 px width. Fix: Introduced mobile media-queries and stacked links.
+- Cart issue: User was able to add in 99 of one item when there was only 50 in stock. Fix:  implement a validation check in the view that handles adding products to the cart.
+- Meta Descriptions: These were being rendered in the HTML. Fix: removed these issues by reorderig HTML.
 
 ## Credits
 - [Code Institute - Walkthrough Project](https://github.com/Code-Institute-Solutions/boutique_ado_v1_sourcecode)
-
-
-
 
 ## Acknowledgements 
 This is the fifth and final project, created for the Code Institutes Full Stack Web Developer (eCommerce) course. I would like to thank my cohort facilitator and the Code Institute team for their support.
