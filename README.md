@@ -605,6 +605,7 @@ To deploy this page to Heroku from its GitHub repository, the following steps we
 -  Under 'Config Vars' the following variables to be set:
 
     - `DATABASE_URL` - the URL for your Postgres database.
+    ( Used dj-database-url, Heroku auto-configured everything from DATABASE_URL — no need to split it up manually.)
     - `HOST` - the host for your database.
     - `PORT` - the port for your database.
     - `CLOUDINARY_API_KEYS` - API Keys to host images.
