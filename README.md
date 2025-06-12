@@ -82,13 +82,14 @@ As an admin I want to access a private page so that I can manage products secure
 ## Business Plan and Marketing Strategy
 
 <details>
-<summary>View Business Plan and Marketing Strategy</summary>
+<summary>View Business Plan and Marketing Strategy including Facebook Mockups</summary>
 
 <br>
 
 ![Business Plan (1)](static/readme-images/plan1.png)  
 ![Business Plan (2)](static/readme-images/plan2.png)  
 ![Business Plan (3)](static/readme-images/plan3.png)
+![Facebook](static/readme-images/facebook.png)
 
 </details>
 
