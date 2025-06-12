@@ -580,7 +580,7 @@ The Website was tested on Google Chrome, Firefox, Safari browsers with no issues
 ## Security Features
 
 ### User Authentication
-Authorisation is required to reach certain pages such as the Admin Panel. Requesting these pages while unauthorised will redirect users to the Login page.
+Authorisation is required to reach certain pages such as the Admin Panel. Requesting these pages while unauthorised will not work.
 
 ### Form Validation
 Incorrect or in certain cases empty data in forms is not accepted and the user is made aware of this.
