@@ -11,8 +11,6 @@
     width: 100%;
     box-sizing: border-box;
 }
-
-
 .StripeElement {
     background-color: transparent;
     width: 100%;
@@ -22,18 +20,15 @@
     border: none;
     box-sizing: border-box;
 }
-
 .StripeElement--focus {
     outline: none;
     border-color: #76a935;
     box-shadow: 0 0 0 2px rgba(118, 169, 53, 0.2);
 }
-
 .StripeElement--invalid {
     border-color: #dc3545;
     color: #dc3545;
 }
-
 #card-errors {
     color: #dc3545;
     font-size: 0.9rem;
