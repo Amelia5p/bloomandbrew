@@ -37,7 +37,7 @@
       <div class="row gx-4 gy-4 justify-content-center">
          <div class="col-md-6">
             <div class="card unified-card compact-card text-center p-3 h-100">
-               <img src="{{ bundle_of_the_week.image.secure_url }}" class="card-img-top rounded mb-3" alt="Illustration of flowers and coffee beans for weekly bundle">
+               <img src="{{ bundle_of_the_week.image.url }}" class="card-img-top rounded mb-3" alt="Illustration of flowers and coffee beans for weekly bundle">
                <div class="card-body">
                   <h5 class="card-title fw-bold">{{ bundle_of_the_week.name }}</h5>
                   <p class="card-text mb-3">
@@ -101,7 +101,7 @@
          <div class="col-12 col-sm-6 col-md-6 col-lg-3">
             <div class="product-card text-center">
                <div class="image-wrapper mb-2">
-                  <img src="{{ product.image.secure_url }}" alt="{{ product.name }}" class="img-fluid rounded mb-2">
+                  <img src="{{ product.image.url }}" alt="{{ product.name }}" class="img-fluid rounded mb-2">
                </div>
                <h5>{{ product.name }}</h5>
                <p>€{{ product.price }}</p>

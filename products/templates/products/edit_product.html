@@ -27,7 +27,7 @@ Edit an existing product’s details on Bloom and Brew.
          {% if form.instance.image %}
          <div class="mb-2">
             <img
-               src="{{ form.instance.image.secure_url }}"
+               src="{{ form.instance.image.url }}"
                alt="Current image"
                class="img-fluid rounded border"
                style="max-height: 200px;"
