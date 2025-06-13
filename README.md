@@ -727,7 +727,7 @@ To deploy this page to Heroku from its GitHub repository, the following steps we
 
 ### <ins> Step 1: </ins>
 
-From the <a href="https://github.com/Amelia5p/travel-planner" target="_blank">GitHub repository</a> click on the 'code' button.
+From the <a href="https://github.com/Amelia5p/bloomandbrew/" target="_blank">GitHub repository</a> click on the 'code' button.
 
 ### <ins> Step 2:</ins>
 
@@ -749,7 +749,7 @@ You now have a local copy of the Github repository.
 
 ### <ins>Step 1:</ins>
 
-From the <a href="https://github.com/Amelia5p/travel-planner" target="_blank">GitHub repository</a> click on the 'fork' button in the top right corner of the page. 
+From the <a href="https://github.com/Amelia5p/bloomandbrew/" target="_blank">GitHub repository</a> click on the 'fork' button in the top right corner of the page. 
 
 ### <ins>Step 2:</ins> 
 
