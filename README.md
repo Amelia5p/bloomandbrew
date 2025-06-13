@@ -787,6 +787,9 @@ There is now a forked copy on GitHub.
 - [Bootstrap 5](https://getbootstrap.com/docs/5.0/):Framework for developing responsiveness and styling
 - [Am I responsive](https://ui.dev/amiresponsive) used for responsive picture
 - [Coolors](https://coolors.co/) used for creating colour palette
+- [Stripe](https://stripe.com/ie) used for taking payments
+- [Pexels](https://www.pexels.com/) used free images
+
 
 ## Bugs
 - Responsive-layout issue: Navbar overflowed on screens under 480 px width. Fix: Introduced mobile media-queries and stacked links.
