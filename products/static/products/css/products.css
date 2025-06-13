@@ -29,6 +29,10 @@
   object-fit: contain;
   border-radius: 6px;
 }
+
+.reset-btn {
+  background-color: #EECFD1;
+}
 /* Product Detail Page */
 .product-detail {
   background-color: #fdfaf6;
