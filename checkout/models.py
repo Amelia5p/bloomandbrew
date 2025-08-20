@@ -98,8 +98,13 @@ class OrderItem(models.Model):
     )
 
     def save(self, *args, **kwargs):
-        self.item_total = self.product.price * self.quantity
+        if self.product.has_discount and self.product.special_offer_price:
+            price = self.product.special_offer_price
+        else:
+            price = self.product.price
+        self.item_total = price * self.quantity
         super().save(*args, **kwargs)
+
 
     def __str__(self):
         return (
