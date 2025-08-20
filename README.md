@@ -795,6 +795,7 @@ There is now a forked copy on GitHub.
 - Responsive-layout issue: Navbar overflowed on screens under 480 px width. Fix: Introduced mobile media-queries and stacked links.
 - Cart issue: User was able to add in 99 of one item when there was only 50 in stock. Fix:  implement a validation check in the view that handles adding products to the cart.
 - Meta Descriptions: These were being rendered in the HTML. Fix: removed these issues by reorderig HTML.
+- If a product had a discount, the base price was still being shown in order history. Fix: Updated OrderItem.save() to snapshot the total at checkout.
 
 ## Credits
 - [Code Institute - Walkthrough Project](https://github.com/Code-Institute-Solutions/boutique_ado_v1_sourcecode)
