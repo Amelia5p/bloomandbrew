@@ -1,25 +1,87 @@
 {% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'products/css/products.css' %}">
+{% endblock extra_css %}
+
+{% block title %}My Wishlist | Bloom and Brew{% endblock %}
+{% block meta_description %}Your saved blooms, brews, and bundles in one place. Review, remove, add to bag, or continue shopping.{% endblock %}
 
 {% block content %}
-<h1>My Wishlist</h1>
+<section class="py-5">
+  <div class="container">
+    <h2 class="section-title text-center mb-4">My Wishlist</h2>
 
-{% if items %}
-  <ul>
-    {% for item in items %}
-      <li>
-        <a href="{% url 'product_detail' item.product.slug %}">
-          {{ item.product.name }}
-        </a>
-        <span> - {{ item.product.display_price }}</span>
+    {% if items %}
+      <div class="row g-4">
+        {% for item in items %}
+          {% with product=item.product %}
+          <div class="col-md-4">
+            <div class="card h-100 border-0 shadow-sm text-center">
 
-        <form action="{% url 'wishlist_toggle' item.product.id %}" method="post" style="display:inline;">
-          {% csrf_token %}
-          <button type="submit">Remove</button>
-        </form>
-      </li>
-    {% endfor %}
-  </ul>
-{% else %}
-  <p>Your wishlist is empty.</p>
-{% endif %}
+              <!-- Product Image -->
+              <a href="{% url 'product_detail' product.slug %}">
+                <img src="{{ product.image.url }}" class="card-img-top img-fluid product-image" alt="{{ product.name }}">
+              </a>
+
+              <div class="card-body d-flex flex-column">
+                <!-- Name -->
+                <h5 class="card-title mb-2">{{ product.name }}</h5>
+
+                <!-- Price -->
+                {% if product.has_discount %}
+                  <p class="card-text mb-3">
+                    <strong>€{{ product.special_offer_price }}</strong>
+                    <span class="text-muted text-decoration-line-through ms-2">€{{ product.price }}</span>
+                  </p>
+                {% else %}
+                  <p class="card-text mb-3">€{{ product.price }}</p>
+                {% endif %}
+
+                <!-- Actions (stacked buttons) -->
+                <div class="d-grid gap-2 mt-auto">
+                  <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary w-100">
+                    View Product
+                  </a>
+
+                  {% if product.stock > 0 %}
+                    <form method="POST" action="{% url 'add_to_cart' product.id %}" class="d-inline">
+                      {% csrf_token %}
+                      <input type="hidden" name="quantity" value="1">
+                      <button type="submit" class="btn btn-success w-100">
+                        Add to Cart
+                      </button>
+                    </form>
+                  {% else %}
+                    <button class="btn btn-secondary w-100" disabled>Out of Stock</button>
+                  {% endif %}
+                  <form action="{% url 'wishlist_toggle' product.id %}" method="post" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-wishlist w-100 d-flex justify-content-center">
+                      Remove from wishlist
+                    </button>
+                  </form>
+                  
+                    <a href="{% url 'product_list' %}" class="btn btn-outline-secondary w-100">
+                    Continue Shopping
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          {% endwith %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="text-center py-5">
+        <img src="{% static 'products/img/empty-heart.svg' %}" alt="Empty Wishlist" class="mb-3" style="max-width:120px;opacity:.85;">
+        <h3 class="mb-2">Your wishlist is empty</h3>
+        <p class="text-muted mb-4">Browse our collection and save your favourites for later.</p>
+        <a href="{% url 'product_list' %}" class="btn btn-primary">Shop All Products</a>
+      </div>
+    {% endif %}
+  </div>
+</section>
 {% endblock %}
