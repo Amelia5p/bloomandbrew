@@ -19,4 +19,6 @@ urlpatterns = [
          views.edit_product, name='edit_product'),
     path('admin/products/<int:product_id>/delete/',
          views.delete_product, name='delete_product'),
+    path("wishlist/", views.wishlist_page, name="wishlist_page"),
+    path("wishlist/toggle/<int:product_id>/", views.wishlist_toggle, name="wishlist_toggle"),
     ]

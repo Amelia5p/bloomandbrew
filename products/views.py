@@ -1,9 +1,11 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Product, Review
+from .models import Product, Review, Wishlist, WishlistItem
 from django.db.models import Q
 from django.contrib import messages
 from .forms import ReviewForm, ProductForm
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.views.decorators.http import require_POST
+
 
 
 def product_list(request):
@@ -259,3 +261,33 @@ def delete_product(request, product_id):
         'products/delete_product.html',
         {'product': product}
     )
+
+
+def _get_or_create_wishlist(user):
+    """ Looks up the logged-in user’s wishlist.
+    If it doesn’t exist yet, it creates one."""
+    wl, _ = Wishlist.objects.get_or_create(user=user)
+    return wl
+
+@login_required
+def wishlist_page(request):
+    """ Wishlist Page """
+    wl = _get_or_create_wishlist(request.user)
+    items = wl.items.select_related("product").all()
+    return render(request, "wishlist/wishlist.html", {"wishlist": wl, "items": items})
+
+@login_required
+@require_POST
+def wishlist_toggle(request, product_id):
+    """ Adds wishlist item if doesn't already exist """
+    wl = _get_or_create_wishlist(request.user)
+    product = get_object_or_404(Product, pk=product_id)
+
+    obj, created = WishlistItem.objects.get_or_create(wishlist=wl, product=product)
+    if created:
+        messages.success(request, "Saved to your wishlist.")
+    else:
+        obj.delete()
+        messages.info(request, "Removed from your wishlist.")
+    
+    return redirect(request.META.get("HTTP_REFERER", "wishlist_page"))
