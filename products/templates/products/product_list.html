@@ -67,7 +67,6 @@
               <img src="{{ product.image.url }}" class="card-img-top img-fluid product-image" alt="{{ product.name }}">
             </a>
 
-            <!-- Match Blooms layout -->
             <div class="card-body text-center">
               <h5 class="card-title">{{ product.name }}</h5>
 
@@ -80,7 +79,31 @@
                 <p class="card-text">€{{ product.price }}</p>
               {% endif %}
 
-              <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary mt-2">View Product</a>
+              <div class="d-flex justify-content-center gap-2 mt-2">
+
+
+                <!-- View Product & Wishlist Button -->
+                <div class="d-flex justify-content-center gap-2 mt-2">
+                  <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary">View Product</a>
+                
+                  {% if user.is_authenticated %}
+                    <form action="{% url 'wishlist_toggle' product.id %}" method="post" class="d-inline">
+                      {% csrf_token %}
+                      <button type="submit" class="btn btn-wishlist">
+                        {% if product.id in wishlisted_ids %}
+                          <i class="fas fa-heart saved"></i> Saved
+                        {% else %}
+                          <i class="far fa-heart"></i> Wishlist
+                        {% endif %}
+                      </button>
+                    </form>
+                  {% else %}
+                    <a href="{% url 'account_login' %}?next={{ request.get_full_path }}" class="btn btn-wishlist">
+                      <i class="far fa-heart"></i> Save
+                    </a>
+                  {% endif %}
+                </div>  
+              </div>
             </div>
           </div>
         </div>

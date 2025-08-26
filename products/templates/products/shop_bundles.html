@@ -1,17 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
 {% endblock extra_css %}
+
 {% block body_class %}
 bundles-page
 {% endblock body_class %}
+
 {% block title %}
 Shop Bundles | Bloom and Brew
 {% endblock title %}
+
 {% block meta_description %}
 Save with our curated gift bundles combining flowers and coffee — thoughtful, elegant, and delivered with care.
 {% endblock meta_description %}
+
 {% block content %}
 <!-- Bundles Section -->
 <section class="py-5">
@@ -24,12 +29,42 @@ Save with our curated gift bundles combining flowers and coffee — thoughtful, 
          <div class="col-md-4">
             <div class="card h-100 border-0 shadow-sm">
                <a href="{% url 'product_detail' product.slug %}">
-               <img src="{{ product.image.url }}" class="card-img-top img-fluid product-image" alt="{{ product.name }}">
+                  <img src="{{ product.image.url }}" class="card-img-top img-fluid product-image" alt="{{ product.name }}">
                </a>
                <div class="card-body text-center">
                   <h5 class="card-title">{{ product.name }}</h5>
-                  <p class="card-text">€{{ product.price }}</p>
-                  <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary mt-2">View Product</a>
+
+                  {% if product.has_discount %}
+                     <p class="card-text">
+                        <strong>€{{ product.special_offer_price }}</strong>
+                        <span class="text-muted text-decoration-line-through ms-2">€{{ product.price }}</span>
+                     </p>
+                  {% else %}
+                     <p class="card-text">€{{ product.price }}</p>
+                  {% endif %}
+
+                  <div class="d-flex justify-content-center gap-2 mt-2">
+                     <!-- View Product -->
+                     <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary">View Product</a>
+
+                     <!-- Wishlist Button -->
+                     {% if user.is_authenticated %}
+                        <form action="{% url 'wishlist_toggle' product.id %}" method="post" class="d-inline">
+                           {% csrf_token %}
+                           <button type="submit" class="btn btn-wishlist">
+                              {% if product.id in wishlisted_ids %}
+                                 <i class="fas fa-heart saved"></i> Saved
+                              {% else %}
+                                 <i class="far fa-heart"></i> Wishlist
+                              {% endif %}
+                           </button>
+                        </form>
+                     {% else %}
+                        <a href="{% url 'account_login' %}?next={{ request.get_full_path }}" class="btn btn-wishlist">
+                           <i class="far fa-heart"></i> Save
+                        </a>
+                     {% endif %}
+                  </div>
                </div>
             </div>
          </div>
@@ -41,7 +76,7 @@ Save with our curated gift bundles combining flowers and coffee — thoughtful, 
       </div>
       <div class="text-center my-4">
          <a href="#" class="btn btn-outline-dark back-to-top-footer" title="Back to Top" aria-label="Scroll to top of bundles collection">
-         <i class="fas fa-chevron-up me-1"></i> Back to Top
+            <i class="fas fa-chevron-up me-1"></i> Back to Top
          </a>
       </div>
    </div>

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>My Wishlist</h1>
+
+{% if items %}
+  <ul>
+    {% for item in items %}
+      <li>
+        <a href="{% url 'product_detail' item.product.slug %}">
+          {{ item.product.name }}
+        </a>
+        <span> - {{ item.product.display_price }}</span>
+
+        <form action="{% url 'wishlist_toggle' item.product.id %}" method="post" style="display:inline;">
+          {% csrf_token %}
+          <button type="submit">Remove</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+{% else %}
+  <p>Your wishlist is empty.</p>
+{% endif %}
+{% endblock %}

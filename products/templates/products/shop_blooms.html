@@ -1,17 +1,22 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'products/css/products.css' %}">
 {% endblock extra_css %}
+
 {% block title %}
 Shop Blooms | Bloom and Brew
 {% endblock title %}
+
 {% block meta_description %}
 Hand-tied bouquets crafted with care. Seasonal blooms and timeless arrangements of flowers perfect for gifting or brightening your home.
 {% endblock meta_description %}
+
 {% block body_class %}
 blooms-page
 {% endblock body_class %}
+
 {% block content %}
 <!-- Blooms Collection -->
 <section class="py-5">
@@ -38,13 +43,34 @@ blooms-page
                      <p class="card-text">€{{ product.price }}</p>
                   {% endif %}
 
-                  <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary mt-2">View Product</a>
+                  <div class="d-flex justify-content-center gap-2 mt-2">
+                     <!-- View Product -->
+                     <a href="{% url 'product_detail' product.slug %}" class="btn btn-primary">View Product</a>
+
+                     <!-- Wishlist Button -->
+                     {% if user.is_authenticated %}
+                        <form action="{% url 'wishlist_toggle' product.id %}" method="post" class="d-inline">
+                           {% csrf_token %}
+                           <button type="submit" class="btn btn-wishlist">
+                              {% if product.id in wishlisted_ids %}
+                                 <i class="fas fa-heart saved"></i> Saved
+                              {% else %}
+                                 <i class="far fa-heart"></i> Wishlist
+                              {% endif %}
+                           </button>
+                        </form>
+                     {% else %}
+                        <a href="{% url 'account_login' %}?next={{ request.get_full_path }}" class="btn btn-wishlist">
+                           <i class="far fa-heart"></i> Save
+                        </a>
+                     {% endif %}
+                  </div>
                </div>
             </div>
          </div>
          {% empty %}
          <div class="col-12 text-center">
-            <p>No brews available at the moment.</p>
+            <p>No blooms available at the moment.</p>
          </div>
          {% endfor %}
       </div>

@@ -34,6 +34,12 @@ def product_list(request):
         products = products.order_by('name')
     elif sort == 'name_desc':
         products = products.order_by('-name')
+    
+    wishlisted_ids = set()
+
+    if request.user.is_authenticated:
+        wl, _ = Wishlist.objects.get_or_create(user=request.user)
+        wishlisted_ids = set(wl.items.values_list("product_id", flat=True))
 
     return render(
         request,
@@ -41,6 +47,8 @@ def product_list(request):
         {
             'products': products,
             'search_query': query,
+            'wishlisted_ids': wishlisted_ids,
+
         }
     )
 
@@ -51,6 +59,7 @@ def product_detail(request, slug):
     all_reviews = product.reviews.all()
     show_all = request.GET.get('all') == '1'
     reviews = all_reviews if show_all else all_reviews[:3]
+    
 
     return render(
         request,
@@ -67,30 +76,53 @@ def product_detail(request, slug):
 def shop_brews(request):
     """Brews-only product."""
     products = Product.objects.filter(category='coffee')
+
+    wishlisted_ids = set()
+
+    if request.user.is_authenticated:
+        wl, _ = Wishlist.objects.get_or_create(user=request.user)
+        wishlisted_ids = set(wl.items.values_list("product_id", flat=True))
+
     return render(
         request,
         'products/shop_brews.html',
-        {'products': products}
+        {'products': products,
+        'wishlisted_ids': wishlisted_ids,}
     )
 
 
 def shop_blooms(request):
     """Blooms-only product."""
     products = Product.objects.filter(category='bouquet')
+
+    wishlisted_ids = set()
+
+    if request.user.is_authenticated:
+        wl, _ = Wishlist.objects.get_or_create(user=request.user)
+        wishlisted_ids = set(wl.items.values_list("product_id", flat=True))
+
     return render(
         request,
         'products/shop_blooms.html',
-        {'products': products}
+        {'products': products,
+        'wishlisted_ids': wishlisted_ids,}
     )
 
 
 def shop_bundles(request):
     """Bundles-only product."""
     products = Product.objects.filter(category='bundle')
+
+    wishlisted_ids = set()
+    if request.user.is_authenticated:
+        wl, _ = Wishlist.objects.get_or_create(user=request.user)
+        wishlisted_ids = set(wl.items.values_list("product_id", flat=True))
+
     return render(
         request,
         'products/shop_bundles.html',
-        {'products': products}
+        {'products': products,
+        'wishlisted_ids': wishlisted_ids,}
     )
 
 
@@ -274,7 +306,7 @@ def wishlist_page(request):
     """ Wishlist Page """
     wl = _get_or_create_wishlist(request.user)
     items = wl.items.select_related("product").all()
-    return render(request, "wishlist/wishlist.html", {"wishlist": wl, "items": items})
+    return render(request, "products/wishlist.html", {"wishlist": wl, "items": items})
 
 @login_required
 @require_POST
