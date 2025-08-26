@@ -90,3 +90,40 @@ class Review(models.Model):
 
     def __str__(self):
         return f"{self.product.name} - {self.user.username} ({self.rating}★)"
+
+class Wishlist(models.Model):
+    """
+    A wishlist belonging to a user. One per user.
+    """
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="wishlist"
+    )
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.user.username}'s Wishlist"
+
+
+class WishlistItem(models.Model):
+    """
+    Individual product saved to a user's wishlist.
+    """
+    wishlist = models.ForeignKey(
+        Wishlist,
+        on_delete=models.CASCADE,
+        related_name="items"
+    )
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE,
+        related_name="wishlisted_in"
+    )
+    added_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        unique_together = ("wishlist", "product")  
+
+    def __str__(self):
+        return f"{self.product.name} in {self.wishlist.user.username}'s wishlist"
