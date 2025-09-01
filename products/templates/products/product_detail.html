@@ -84,6 +84,24 @@ product-page
                </div>
             </form>
             {% endif %}
+            {% if user.is_authenticated %}
+  <form action="{% url 'wishlist_toggle' product.id %}" method="post" class="d-inline">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-wishlist d-flex justify-content-center w-100 mb-3">
+      {% if is_wishlisted %}
+        <i class="fas fa-heart saved"></i> Saved
+      {% else %}
+        <i class="far fa-heart"></i> Save
+      {% endif %}
+    </button>
+  </form>
+{% else %}
+  <a href="{% url 'account_login' %}?next={{ request.get_full_path }}"
+     class="btn btn-wishlist d-flex justify-content-center w-100 mb-3">
+    <i class="far fa-heart"></i> Save
+  </a>
+{% endif %}
+
             <!-- Customer Reviews Section -->
             <div class="customer-reviews mt-5">
                <h5 class="fw-semibold mb-3">Customer Reviews</h5>

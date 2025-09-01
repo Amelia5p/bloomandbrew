@@ -59,6 +59,11 @@ def product_detail(request, slug):
     all_reviews = product.reviews.all()
     show_all = request.GET.get('all') == '1'
     reviews = all_reviews if show_all else all_reviews[:3]
+
+    is_wishlisted = False
+    if request.user.is_authenticated:
+        wl, _ = Wishlist.objects.get_or_create(user=request.user)
+        is_wishlisted = wl.items.filter(product=product).exists()
     
 
     return render(
@@ -69,6 +74,7 @@ def product_detail(request, slug):
             'reviews': reviews,
             'show_all_reviews': show_all,
             'review_count': all_reviews.count(),
+            'is_wishlisted': is_wishlisted, 
         }
     )
 
