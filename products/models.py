@@ -124,6 +124,7 @@ class WishlistItem(models.Model):
 
     class Meta:
         unique_together = ("wishlist", "product")  
+        ordering = ["-added_on"] 
 
     def __str__(self):
         return f"{self.product.name} in {self.wishlist.user.username}'s wishlist"
