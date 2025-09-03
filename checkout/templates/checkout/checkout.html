@@ -68,9 +68,23 @@
           placeholder="Enter promo code"
           aria-label="Promo code"
         />
-        <button class="btn btn-primary" type="button" id="apply-promo-btn">Apply</button>
+        <button
+          class="btn btn-primary"
+          type="button"
+          id="apply-promo-btn"
+          data-apply-url="{% url 'apply_promo' %}"
+        >
+          Apply
+        </button>
         {% if discount_amount and discount_amount|floatformat:2 != "0.00" %}
-          <button class="btn btn-outline-secondary" type="button" id="clear-promo-btn">Remove</button>
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            id="clear-promo-btn"
+            data-clear-url="{% url 'clear_promo' %}"
+          >
+            Remove
+          </button>
         {% endif %}
       </div>
       <p class="small mt-2 text-muted" id="promo-help">
@@ -81,7 +95,7 @@
         {% endif %}
       </p>
     </div>
-    <!-- Order Summary -->
+  
 
     <!-- Card field (Stripe) -->
     <div class="mb-3">
