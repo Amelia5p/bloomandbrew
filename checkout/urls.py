@@ -8,4 +8,6 @@ urlpatterns = [
          views.checkout_success,
          name='checkout_success'),
     path('order-history/', views.order_history, name='order_history'),
+    path("apply-promo/", views.apply_promo, name="apply_promo"),
+    path("clear-promo/", views.clear_promo, name="clear_promo"),
 ]
