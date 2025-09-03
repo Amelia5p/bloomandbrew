@@ -67,3 +67,46 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 });
+
+
+
+// promocode js
+(function () {
+  const applyBtn = document.getElementById("apply-promo-btn");
+  const clearBtn = document.getElementById("clear-promo-btn");
+  const input = document.getElementById("promo-code-input");
+
+  function getCsrfToken() {
+    const el = document.querySelector(
+      '#payment-form input[name="csrfmiddlewaretoken"]'
+    );
+    return el ? el.value : "";
+  }
+
+  async function post(url, data) {
+    const resp = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
+        "X-CSRFToken": getCsrfToken(),
+      },
+      body: new URLSearchParams(data).toString(),
+    });
+    // reload page to refresh totals/messages
+    window.location.reload();
+  }
+
+  if (applyBtn) {
+    applyBtn.addEventListener("click", () => {
+      const code = (input && input.value) ? input.value.trim() : "";
+      if (!code) return;
+      post("/checkout/apply-promo/", { promo_code: code });
+    });
+  }
+
+  if (clearBtn) {
+    clearBtn.addEventListener("click", () => {
+      post("/checkout/clear-promo/", {});
+    });
+  }
+})();

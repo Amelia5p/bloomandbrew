@@ -1,54 +1,107 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'css/checkout.css' %}">
 {% endblock %}
+
 {% block title %}Checkout | Bloom and Brew{% endblock %}
 {% block meta_description %}Secure checkout for your Bloom & Brew order. Review your cart and complete your purchase with ease.{% endblock %}
+
 {% block content %}
-<!-- Checkout form -->
 <div class="container py-5">
-   <h2 class="mb-4 text-center">Checkout</h2>
-   <form method="POST" id="payment-form">
-      {% csrf_token %}
-      {{ form|crispy }}
-      <input type="hidden" name="stripe_pid" value="{{ stripe_pid }}">
-      <!-- Order Summary -->
-      <div class="mb-4">
-         <h4 class="mb-3">Order Summary</h4>
-         <ul class="list-group">
-            <li class="list-group-item d-flex justify-content-between">
-               <span>Subtotal</span>
-               <strong>€{{ cart_total|floatformat:2 }}</strong>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-               <span>Delivery</span>
-               <strong>€{{ delivery_fee|floatformat:2 }}</strong>
-            </li>
-            <li class="list-group-item d-flex justify-content-between">
-               <span>Total</span>
-               <strong>€{{ total_due|floatformat:2 }}</strong>
-            </li>
-         </ul>
+  <h2 class="mb-4 text-center">Checkout</h2>
+
+  <!-- Main checkout form -->
+  <form method="post" id="payment-form">
+    {% csrf_token %}
+    {{ form|crispy }}
+    <input type="hidden" name="stripe_pid" value="{{ stripe_pid }}">
+
+    <!-- Order Summary -->
+    <div class="mb-4 mt-3">
+      <h4 class="mb-3">Order Summary</h4>
+      <ul class="list-group">
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Subtotal</span>
+          <strong>€{{ cart_total|floatformat:2 }}</strong>
+        </li>
+        <li class="list-group-item d-flex justify-content-between">
+          <span>Delivery</span>
+          <strong>€{{ delivery_fee|floatformat:2 }}</strong>
+        </li>
+
+        {% if total_before_discount %}
+          <li class="list-group-item d-flex justify-content-between">
+            <span>Total before discount</span>
+            <strong>€{{ total_before_discount|floatformat:2 }}</strong>
+          </li>
+        {% endif %}
+
+        {% if discount_amount and discount_amount|floatformat:2 != "0.00" %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <span class="text-success">Promo discount</span>
+              {% if applied_promo %}
+                <span class="badge text-bg-success ms-2">
+                  {{ applied_promo.code|upper }} ({{ applied_promo.percent_off|floatformat:0 }}%)
+                </span>
+              {% endif %}
+            </div>
+            <strong class="text-success">-€{{ discount_amount|floatformat:2 }}</strong>
+          </li>
+        {% endif %}
+
+        <li class="list-group-item d-flex justify-content-between">
+          <span><strong>Total to pay</strong></span>
+          <strong>€{{ total_due|floatformat:2 }}</strong>
+        </li>
+      </ul>
+
+      <!-- Promo code input -->
+      <div class="mt-3 d-flex gap-2 align-items-start">
+        <input
+          type="text"
+          id="promo-code-input"
+          class="form-control"
+          placeholder="Enter promo code"
+          aria-label="Promo code"
+        />
+        <button class="btn btn-primary" type="button" id="apply-promo-btn">Apply</button>
+        {% if discount_amount and discount_amount|floatformat:2 != "0.00" %}
+          <button class="btn btn-outline-secondary" type="button" id="clear-promo-btn">Remove</button>
+        {% endif %}
       </div>
-      <!-- Payment Fields -->
-      <div class="mb-3">
-         <label class="form-label">Card Details</label>
-         <div id="card-element" class="StripeElement">
-         </div>
-         <div id="card-errors" class="text-danger mt-2" role="alert"></div>
-      </div>
-      <button type="submit" class="btn btn-primary mt-3" aria-label="Submit payment for your order">
+      <p class="small mt-2 text-muted" id="promo-help">
+        {% if discount_amount and discount_amount|floatformat:2 != "0.00" %}
+          Promo applied. You can remove it to restore the original total.
+        {% else %}
+          Have a promo code? Enter it above and click Apply.
+        {% endif %}
+      </p>
+    </div>
+    <!-- Order Summary -->
+
+    <!-- Card field (Stripe) -->
+    <div class="mb-3">
+      <label class="form-label">Card Details</label>
+      <div id="card-element" class="StripeElement"></div>
+      <div id="card-errors" class="text-danger mt-2" role="alert"></div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3" aria-label="Submit payment for your order">
       Place Order and Pay €{{ total_due|floatformat:2 }}
-      </button>
-   </form>
+    </button>
+  </form>
 </div>
 {% endblock %}
+
 {% block postloadjs %}
 {{ block.super }}
 {{ stripe_public_key|json_script:"id_stripe_public_key" }}
 {{ client_secret|json_script:"id_client_secret" }}
 <script src="https://js.stripe.com/v3/"></script>
 <script src="{% static 'js/stripe.js' %}"></script>
+<script src="{% static 'js/promo.js' %}"></script>
 {% endblock %}

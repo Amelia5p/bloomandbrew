@@ -96,6 +96,9 @@ def checkout(request):
     discount_amount = Decimal("0.00")
     if applied_promo:
         discount_amount = (cart_total * (applied_promo.percent_off / Decimal("100"))).quantize(Decimal("0.01"))
+    
+
+    total_before_discount = (cart_total + delivery_fee).quantize(Decimal("0.01")) 
 
     total_due = (cart_total + delivery_fee - discount_amount).quantize(Decimal("0.01"))
     if total_due < 0:
@@ -117,6 +120,7 @@ def checkout(request):
         'delivery_fee': delivery_fee,
         'discount_amount': discount_amount,
         'applied_promo': applied_promo,
+        'total_before_discount': total_before_discount, 
         'total_due': total_due,
     }
     return render(request, 'checkout/checkout.html', context)

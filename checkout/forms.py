@@ -14,4 +14,7 @@ class OrderForm(forms.ModelForm):
             'total_due',
             'stripe_pid',
             'cart_snapshot',
-            'created_on')
+            'created_on',
+            "discount_amount", 
+            "applied_promo",)
+
