@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from .models import Order, OrderItem, PromoCode
 from .forms import OrderForm
 from cart.cart import Cart
@@ -19,9 +20,27 @@ def _get_session_promo(request):
     try:
         return PromoCode.objects.get(code__iexact=code, is_active=True)
     except PromoCode.DoesNotExist:
-        
+    
         request.session.pop("promo_code", None)
         return None
+
+
+def _stash_checkout_form_data(request):
+    """
+    Save current checkout form fields in session so they persist across
+    promo apply/remove reloads.
+    """
+    data = request.POST.copy()
+    data.pop('csrfmiddlewaretoken', None)
+    data.pop('promo_code', None)
+    data.pop('stripe_pid', None)
+
+    allowed_keys = {
+        "full_name", "email_address", "contact_number",
+        "address_line_1", "address_line_2", "town", "county",
+        "postal_code", "country",
+    }
+    request.session['checkout_form_data'] = {k: v for k, v in data.items() if k in allowed_keys}
 
 
 def checkout(request):
@@ -44,7 +63,7 @@ def checkout(request):
             order.cart_snapshot = str(cart)
             order.stripe_pid = request.POST.get('stripe_pid')
 
-            
+            # Attach promo (if any) before totals
             promo = _get_session_promo(request)
             if promo:
                 order.applied_promo = promo
@@ -58,12 +77,13 @@ def checkout(request):
                     quantity=item['quantity'],
                 )
 
-            
+            # Compute totals with promo + items
             order.update_totals()
 
             cart.clear()
-           
+            # Clear session helpers after success
             request.session.pop("promo_code", None)
+            request.session.pop("checkout_form_data", None)
 
             messages.success(
                 request,
@@ -73,6 +93,7 @@ def checkout(request):
         else:
             messages.error(request, "There was an error with your form.")
     else:
+        
         initial_data = {}
         if request.user.is_authenticated:
             profile = request.user.userprofile
@@ -87,8 +108,14 @@ def checkout(request):
                 'postal_code': profile.postcode,
                 'country': profile.country,
             }
+
+        # preserve user input
+        stashed = request.session.get('checkout_form_data') or {}
+        initial_data.update(stashed)
+
         form = OrderForm(initial=initial_data)
 
+    
     cart_total = cart.get_total_price()
     delivery_fee = cart.get_delivery_fee()
     applied_promo = _get_session_promo(request)
@@ -96,11 +123,9 @@ def checkout(request):
     discount_amount = Decimal("0.00")
     if applied_promo:
         discount_amount = (cart_total * (applied_promo.percent_off / Decimal("100"))).quantize(Decimal("0.01"))
-    
 
-    total_before_discount = (cart_total + delivery_fee).quantize(Decimal("0.01")) 
-
-    total_due = (cart_total + delivery_fee - discount_amount).quantize(Decimal("0.01"))
+    total_before_discount = (cart_total + delivery_fee).quantize(Decimal("0.01"))
+    total_due = (total_before_discount - discount_amount).quantize(Decimal("0.01"))
     if total_due < 0:
         total_due = Decimal("0.00")
 
@@ -120,7 +145,7 @@ def checkout(request):
         'delivery_fee': delivery_fee,
         'discount_amount': discount_amount,
         'applied_promo': applied_promo,
-        'total_before_discount': total_before_discount, 
+        'total_before_discount': total_before_discount,
         'total_due': total_due,
     }
     return render(request, 'checkout/checkout.html', context)
@@ -142,10 +167,11 @@ def order_history(request):
 
 # ------- Promo apply/clear ----------
 
-from django.views.decorators.http import require_POST
-
 @require_POST
 def apply_promo(request):
+    # Stash current form values before redirecting
+    _stash_checkout_form_data(request)
+
     code = (request.POST.get("promo_code") or "").strip()
     if not code:
         messages.error(request, "Please enter a promo code.")
@@ -163,7 +189,11 @@ def apply_promo(request):
     return redirect('checkout')
 
 
+@require_POST
 def clear_promo(request):
+    # Stash current form values before redirecting
+    _stash_checkout_form_data(request)
+
     request.session.pop("promo_code", None)
     messages.info(request, "Promo code removed.")
     return redirect('checkout')
