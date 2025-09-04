@@ -7,16 +7,26 @@ from products.models import Product
 from profiles.models import UserProfile
 
 
+from django.core.validators import MinValueValidator, MaxValueValidator
+from django.core.exceptions import ValidationError
+
 class PromoCode(models.Model):
     code = models.CharField(max_length=40, unique=True)
     percent_off = models.DecimalField(
-        max_digits=5, decimal_places=2,  
+        max_digits=5,
+        decimal_places=2,
+        validators=[MinValueValidator(0), MaxValueValidator(100)],
         help_text="Enter percent discount as a number, e.g. 10 = 10%."
     )
     is_active = models.BooleanField(default=True)
 
+    def clean(self):
+        if self.percent_off is not None and self.percent_off <= 0:
+            raise ValidationError({"percent_off": "Promo code must be greater than 0%."})
+
     def __str__(self):
         return f"{self.code} ({self.percent_off}% off)"
+
 
 
 class Order(models.Model):
