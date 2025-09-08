@@ -429,6 +429,16 @@ In the future the following features would further improve the site:
 
 `item_total:` Total price for this item (product price × quantity), calculated automatically.
 
+#### PromoCode  
+
+- Description: Represents a discount code that can be applied to orders.  
+
+`code:` Unique code entered by the customer.  
+
+`percent_off:` Percentage discount applied to the subtotal.  
+
+`is_active:` Whether the promo code is currently valid and usable. 
+
 ### Products App
 #### Product
 
@@ -470,6 +480,24 @@ In the future the following features would further improve the site:
 `created_on:` Timestamp of when the review was submitted.
 
 Reviews are ordered with the newest first and a user can only leave one review per product.
+
+#### Wishlist  
+
+- Description: A collection of products saved by a user for future reference. Each user has one wishlist.  
+
+`user:` One-to-one relationship with the User who owns the wishlist.
+
+`created_on:` Timestamp of when the wishlist was created.  
+
+#### WishlistItem  
+
+- Description: Represents an individual product saved in a user's wishlist.  
+
+`wishlist:` ForeignKey to the Wishlist it belongs to.
+
+`product:` ForeignKey to the Product saved to the wishlist.  
+
+`added_on:` Timestamp when the product was added.  
 
 ### Profiles App
 #### UserProfile
@@ -796,6 +824,7 @@ There is now a forked copy on GitHub.
 - Cart issue: User was able to add in 99 of one item when there was only 50 in stock. Fix:  implement a validation check in the view that handles adding products to the cart.
 - Meta Descriptions: These were being rendered in the HTML. Fix: removed these issues by reorderig HTML.
 - If a product had a discount, the base price was still being shown in order history. Fix: Updated OrderItem.save() to snapshot the total at checkout.
+- Some orders were being saved to the database with a total of €0. Fix: add signals to compute item_total and auto-recalculate order totals and fixed old ones by making fix_orders.py file in the root and running it through the shell.
 
 ## Credits
 - [Code Institute - Walkthrough Project](https://github.com/Code-Institute-Solutions/boutique_ado_v1_sourcecode)
