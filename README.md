@@ -320,6 +320,7 @@ Wireframes were created at the start of the project to plan the layout, structur
 
 ### My Wishlist
 - Shows the users saved items in a wishlist ordered by date added.
+
 ![Wishlist](static/readme-images/wishlist.png)
 
 ![Wishlist1](static/readme-images/wishlist1.png)
@@ -329,6 +330,7 @@ Wireframes were created at the start of the project to plan the layout, structur
 
 ### PromoCode 
 - Users can add a promocde to get a discount.
+
 ![Promocode](static/readme-images/promocode.png)
 
 ### Profile
@@ -386,7 +388,7 @@ In the future the following features would further improve the site:
 ## Data Model
 - The data models for the project are shown below. 
 
-![DB Schema](static/readme-images/erd.png)
+![DB Schema](static/readme-images/erdiagram.png)
 
 ### Checkout App
 #### Order
