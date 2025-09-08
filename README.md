@@ -374,7 +374,7 @@ In the future the following features would further improve the site:
 ## Data Model
 - The data models for the project are shown below. 
 
-![Database Schema](static/readme-images/bloomandbrew-erd1.png)
+![DB Schema](static/readme-images/erd.png)
 
 ### Checkout App
 #### Order
