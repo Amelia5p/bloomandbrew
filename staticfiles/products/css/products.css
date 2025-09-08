@@ -29,6 +29,7 @@
   object-fit: contain;
   border-radius: 6px;
 }
+
 /* Product Detail Page */
 .product-detail {
   background-color: #fdfaf6;
@@ -207,6 +208,23 @@ body.shopall-page {
   background-color: #A6C7B5;
 }
 
+/* Wishlist */
+
+.btn-wishlist {
+  background-color: #ffffff; 
+  border: 1px solid #ddd;                
+  color: #333;                         
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.btn-wishlist .heart {
+  color: #EECFD1;
+  line-height: 1;
+}
+
+
 /*  Responsive */
 @media (max-width: 768px) {
   .product-detail-image {
@@ -260,3 +278,4 @@ body.shopall-page {
       text-align: left;
   }
 }
+

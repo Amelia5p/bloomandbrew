@@ -318,6 +318,18 @@ Wireframes were created at the start of the project to plan the layout, structur
 
 ![About Us](static/readme-images/about-us.png)
 
+### My Wishlist
+- Shows the users saved items in a wishlist ordered by date added.
+![Wishlist](static/readme-images/wishlist.png)
+
+![Wishlist1](static/readme-images/wishlist1.png)
+
+![Wishlist2](static/readme-images/wishlist2.png)
+
+
+### PromoCode 
+- Users can add a promocde to get a discount.
+![Promocode](static/readme-images/promocode.png)
 
 ### Profile
 - Users can view and manage their saved details here.
@@ -365,7 +377,7 @@ Wireframes were created at the start of the project to plan the layout, structur
 
 In the future the following features would further improve the site:
 - Add functionality to save the user's cart if they log out and back in, once more products are added, this was not needed so a session-based cart was used as the product range is quite small.
-- A wishlist for users.
+
 
 ## CRUD Functionality
 
