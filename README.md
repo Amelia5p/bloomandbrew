@@ -612,6 +612,15 @@ All Python code was passed through the PEP8 CI linter with no errors.
 5. Log out → Save buttons lead to Login and return you back after sign-in.  
 6. Visit **product detail**, use **Add to Wishlist** → shows **Saved** after reload.
 
+**Testing Promo Codes feature**
+
+1. Go to `/checkout/` with items in the cart → see **Subtotal**, **Delivery**, **Total to pay**.
+2. Apply a valid code (e.g., `SPECIAL10`) → summary adds a **Promo discount** row with the code and a **reduced Total to pay**.
+3. Refresh → discount row and totals persist.
+4. Click **Remove Promo** → discount row disappears, totals revert to pre-discount.
+5. Enter an invalid/inactive code → error messsage shows, totals unchanged.
+6. Place order → success page, cart cleared; promo removed from session, order saved with discount.
+
 ### Lighthouse
 
 Lighthouse validation was run on all pages (both mobile and desktop) and tested for performance, accessibility, best practices and SEO.
