@@ -79,8 +79,11 @@ class Wishlist(models.Model):
     A wishlist belonging to a user. One per user.
     """
 
-    user = 'models.OneToOneField(User,'
-    'on_delete=models.CASCADE, related_name="wishlist")'
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE,
+        related_name="wishlist",
+    )
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):

@@ -32,25 +32,24 @@
           <strong>€{{ delivery_fee|floatformat:2 }}</strong>
         </li>
 
-        {% if total_before_discount %}
+        {# Only show these when a promo is applied #}
+        {% if applied_promo %}
           <li class="list-group-item d-flex justify-content-between">
             <span>Total before discount</span>
             <strong>€{{ total_before_discount|floatformat:2 }}</strong>
           </li>
-        {% endif %}
 
-        {% if discount_amount and discount_amount|floatformat:2 != "0.00" %}
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <span class="text-success">Promo discount</span>
-              {% if applied_promo %}
+          {% if discount_amount and discount_amount|floatformat:2 != "0.00" %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+              <div>
+                <span class="text-success">Promo discount</span>
                 <span class="badge text-bg-success ms-2">
                   {{ applied_promo.code|upper }} ({{ applied_promo.percent_off|floatformat:0 }}%)
                 </span>
-              {% endif %}
-            </div>
-            <strong class="text-success">-€{{ discount_amount|floatformat:2 }}</strong>
-          </li>
+              </div>
+              <strong class="text-success">-€{{ discount_amount|floatformat:2 }}</strong>
+            </li>
+          {% endif %}
         {% endif %}
 
         <li class="list-group-item d-flex justify-content-between">
@@ -76,7 +75,7 @@
         >
           Apply
         </button>
-        {% if discount_amount and discount_amount|floatformat:2 != "0.00" %}
+        {% if applied_promo %}
           <button
             class="btn btn-outline-secondary"
             type="button"
@@ -88,14 +87,13 @@
         {% endif %}
       </div>
       <p class="small mt-2 text-muted" id="promo-help">
-        {% if discount_amount and discount_amount|floatformat:2 != "0.00" %}
+        {% if applied_promo %}
           Promo applied. You can remove it to restore the original total.
         {% else %}
           Have a promo code? Enter it above and click Apply.
         {% endif %}
       </p>
     </div>
-  
 
     <!-- Card field (Stripe) -->
     <div class="mb-3">
@@ -107,6 +105,15 @@
     <button type="submit" class="btn btn-primary mt-3" aria-label="Submit payment for your order">
       Place Order and Pay €{{ total_due|floatformat:2 }}
     </button>
+  </form>
+
+  {# Hidden POST forms must be OUTSIDE the main form (no nested forms) #}
+  <form id="apply-promo-form" method="post" action="{% url 'apply_promo' %}" class="d-none">
+    {% csrf_token %}
+    <input type="hidden" name="promo_code" id="apply-promo-code">
+  </form>
+  <form id="clear-promo-form" method="post" action="{% url 'clear_promo' %}" class="d-none">
+    {% csrf_token %}
   </form>
 </div>
 {% endblock %}

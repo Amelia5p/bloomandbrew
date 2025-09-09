@@ -603,6 +603,15 @@ All Python code was passed through the PEP8 CI linter with no errors.
 | **Form validation** | Enter data into each input field, ensuring only valid data is accepted  | Form does not submit until correct data is entered, and an error message is shown |
 | **Responsiveness**  | Resize viewport window from 320px upwards using Chrome DevTools. Test various devices  | Page layout remains intact and adapts correctly to different screen sizes |
 
+
+**Testing Wishlist Feature**
+1. Log in, visit `/products/`, click **Save** on a product → button flips to **Saved**.  
+2. Click again → flips back to **Save**.  
+3. Open `/products/wishlist/` → saved product appears with image/price and **View Product / Add to Bag / Remove / Continue Shopping**.  
+4. Click **Add to Bag** → item goes to cart (qty=1).  
+5. Log out → Save buttons lead to Login and return you back after sign-in.  
+6. Visit **product detail**, use **Add to Wishlist** → shows **Saved** after reload.
+
 ### Lighthouse
 
 Lighthouse validation was run on all pages (both mobile and desktop) and tested for performance, accessibility, best practices and SEO.

@@ -1,61 +1,66 @@
 // static/js/promo.js
+
 (function () {
-    const applyBtn = document.getElementById("apply-promo-btn");
-    const clearBtn = document.getElementById("clear-promo-btn");
-    const input = document.getElementById("promo-code-input");
-    const form = document.getElementById("payment-form");
+    const applyBtn   = document.getElementById('apply-promo-btn');
+    const clearBtn   = document.getElementById('clear-promo-btn');
+    const input      = document.getElementById('promo-code-input');
   
-    function getCsrfToken() {
-      const el = form && form.querySelector('input[name="csrfmiddlewaretoken"]');
-      return el ? el.value : "";
-    }
+    const applyForm  = document.getElementById('apply-promo-form');
+    const applyCode  = document.getElementById('apply-promo-code');
+    const clearForm  = document.getElementById('clear-promo-form');
   
-    function collectFormData(extra = {}) {
-      const data = new URLSearchParams();
-      if (form) {
-        const fields = form.querySelectorAll("input, select, textarea");
-        fields.forEach((el) => {
-          if (!el.name) return;
-   
-          if (el.type === "checkbox" || el.type === "radio") {
-            if (el.checked) data.append(el.name, el.value);
-          } else {
-            data.append(el.name, el.value);
-          }
-        });
-      }
-      Object.entries(extra).forEach(([k, v]) => data.set(k, v));
-      return data.toString();
-    }
+    const paymentForm = document.getElementById('payment-form');
   
-    async function post(url, bodyStr) {
-      await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-          "X-CSRFToken": getCsrfToken(),
-        },
-        body: bodyStr,
-      });
-      // Reload to show updated totals and keep form filled
-      window.location.reload();
-    }
+    
+    const ALLOWED_KEYS = [
+      'full_name',
+      'email_address',
+      'contact_number',
+      'address_line_1',
+      'address_line_2',
+      'town',
+      'county',
+      'postal_code',
+      'country',
+    ];
   
-    if (applyBtn) {
-      applyBtn.addEventListener("click", () => {
-        const code = input && input.value ? input.value.trim() : "";
-        if (!code) return;
-        const url = applyBtn.getAttribute("data-apply-url") || "/checkout/apply-promo/";
-        const body = collectFormData({ promo_code: code });
-        post(url, body);
+    function copyCheckoutFieldsToForm(targetForm) {
+      if (!paymentForm || !targetForm) return;
+  
+      ALLOWED_KEYS.forEach((name) => {
+        const src = paymentForm.querySelector(`[name="${name}"]`);
+        if (!src) return;
+  
+        let hidden = targetForm.querySelector(`input[name="${name}"]`);
+        if (!hidden) {
+          hidden = document.createElement('input');
+          hidden.type = 'hidden';
+          hidden.name = name;
+          targetForm.appendChild(hidden);
+        }
+        hidden.value = src.value || '';
       });
     }
   
-    if (clearBtn) {
-      clearBtn.addEventListener("click", () => {
-        const url = clearBtn.getAttribute("data-clear-url") || "/checkout/clear-promo/";
-        const body = collectFormData();
-        post(url, body);
+    if (applyBtn && applyForm && applyCode) {
+      applyBtn.addEventListener('click', function () {
+        applyCode.value = (input?.value || '').trim();
+        copyCheckoutFieldsToForm(applyForm);   
+        applyForm.submit();                   
+      });
+  
+      input?.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          applyBtn.click();
+        }
+      });
+    }
+  
+    if (clearBtn && clearForm) {
+      clearBtn.addEventListener('click', function () {
+        copyCheckoutFieldsToForm(clearForm);   
+        clearForm.submit();
       });
     }
   })();
