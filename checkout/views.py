@@ -20,7 +20,6 @@ def _get_session_promo(request):
     try:
         return PromoCode.objects.get(code__iexact=code, is_active=True)
     except PromoCode.DoesNotExist:
-    
         request.session.pop("promo_code", None)
         return None
 
@@ -31,27 +30,35 @@ def _stash_checkout_form_data(request):
     promo apply/remove reloads.
     """
     data = request.POST.copy()
-    data.pop('csrfmiddlewaretoken', None)
-    data.pop('promo_code', None)
-    data.pop('stripe_pid', None)
+    data.pop("csrfmiddlewaretoken", None)
+    data.pop("promo_code", None)
+    data.pop("stripe_pid", None)
 
     allowed_keys = {
-        "full_name", "email_address", "contact_number",
-        "address_line_1", "address_line_2", "town", "county",
-        "postal_code", "country",
+        "full_name",
+        "email_address",
+        "contact_number",
+        "address_line_1",
+        "address_line_2",
+        "town",
+        "county",
+        "postal_code",
+        "country",
     }
-    request.session['checkout_form_data'] = {k: v for k, v in data.items() if k in allowed_keys}
+    request.session["checkout_form_data"] = {
+        k: v for k, v in data.items() if k in allowed_keys
+    }
 
 
 def checkout(request):
-    """ Checkout View """
+    """Checkout View"""
     cart = Cart(request)
 
     if len(cart) == 0:
         messages.warning(request, "Your cart is empty.")
-        return redirect('view_cart')
+        return redirect("view_cart")
 
-    if request.method == 'POST':
+    if request.method == "POST":
         form = OrderForm(request.POST)
         if form.is_valid():
             order = form.save(commit=False)
@@ -61,7 +68,7 @@ def checkout(request):
                 else None
             )
             order.cart_snapshot = str(cart)
-            order.stripe_pid = request.POST.get('stripe_pid')
+            order.stripe_pid = request.POST.get("stripe_pid")
 
             # Attach promo (if any) before totals
             promo = _get_session_promo(request)
@@ -73,8 +80,8 @@ def checkout(request):
             for item in cart:
                 OrderItem.objects.create(
                     order=order,
-                    product=item['product'],
-                    quantity=item['quantity'],
+                    product=item["product"],
+                    quantity=item["quantity"],
                 )
 
             # Compute totals with promo + items
@@ -87,85 +94,101 @@ def checkout(request):
 
             messages.success(
                 request,
-                f"Order {order.order_number} placed successfully!"
+                f"Order {order.order_number} placed successfully!",
             )
-            return redirect('checkout_success', order_number=order.order_number)
+            return redirect(
+                "checkout_success",
+                order_number=order.order_number,
+            )
         else:
             messages.error(request, "There was an error with your form.")
     else:
-        
         initial_data = {}
         if request.user.is_authenticated:
             profile = request.user.userprofile
             initial_data = {
-                'full_name': request.user.get_full_name(),
-                'email_address': request.user.email,
-                'contact_number': profile.phone,
-                'address_line_1': profile.address_1,
-                'address_line_2': profile.address_2,
-                'town': profile.city,
-                'county': profile.county,
-                'postal_code': profile.postcode,
-                'country': profile.country,
+                "full_name": request.user.get_full_name(),
+                "email_address": request.user.email,
+                "contact_number": profile.phone,
+                "address_line_1": profile.address_1,
+                "address_line_2": profile.address_2,
+                "town": profile.city,
+                "county": profile.county,
+                "postal_code": profile.postcode,
+                "country": profile.country,
             }
 
         # preserve user input
-        stashed = request.session.get('checkout_form_data') or {}
+        stashed = request.session.get("checkout_form_data") or {}
         initial_data.update(stashed)
 
         form = OrderForm(initial=initial_data)
 
-    
     cart_total = cart.get_total_price()
     delivery_fee = cart.get_delivery_fee()
     applied_promo = _get_session_promo(request)
 
     discount_amount = Decimal("0.00")
     if applied_promo:
-        discount_amount = (cart_total * (applied_promo.percent_off / Decimal("100"))).quantize(Decimal("0.01"))
+        discount_amount = (
+            cart_total * (applied_promo.percent_off / Decimal("100"))
+        ).quantize(Decimal("0.01"))
 
-    total_before_discount = (cart_total + delivery_fee).quantize(Decimal("0.01"))
-    total_due = (total_before_discount - discount_amount).quantize(Decimal("0.01"))
+    total_before_discount = (cart_total + delivery_fee).quantize(
+        Decimal("0.01")
+    )
+    total_due = (total_before_discount - discount_amount).quantize(
+        Decimal("0.01")
+    )
     if total_due < 0:
         total_due = Decimal("0.00")
 
     # Create a PaymentIntent for the (possibly discounted) amount
     intent = stripe.PaymentIntent.create(
         amount=int(total_due * 100),
-        currency='eur',
+        currency="eur",
     )
 
     context = {
-        'form': form,
-        'cart': cart,
-        'stripe_public_key': settings.STRIPE_PUBLIC_KEY,
-        'client_secret': intent.client_secret,
-        'stripe_pid': intent.id,
-        'cart_total': cart_total,
-        'delivery_fee': delivery_fee,
-        'discount_amount': discount_amount,
-        'applied_promo': applied_promo,
-        'total_before_discount': total_before_discount,
-        'total_due': total_due,
+        "form": form,
+        "cart": cart,
+        "stripe_public_key": settings.STRIPE_PUBLIC_KEY,
+        "client_secret": intent.client_secret,
+        "stripe_pid": intent.id,
+        "cart_total": cart_total,
+        "delivery_fee": delivery_fee,
+        "discount_amount": discount_amount,
+        "applied_promo": applied_promo,
+        "total_before_discount": total_before_discount,
+        "total_due": total_due,
     }
-    return render(request, 'checkout/checkout.html', context)
+    return render(request, "checkout/checkout.html", context)
 
 
 def checkout_success(request, order_number):
-    """ Checkout Success View """
+    """Checkout Success View"""
     order = get_object_or_404(Order, order_number=order_number)
-    return render(request, 'checkout/checkout_success.html', {'order': order})
+    return render(
+        request,
+        "checkout/checkout_success.html",
+        {"order": order},
+    )
 
 
 @login_required
 def order_history(request):
-    """ Order history view """
+    """Order history view"""
     user_profile = request.user.userprofile
-    orders = Order.objects.filter(user=user_profile).order_by('-created_on')
-    return render(request, 'checkout/order_history.html', {'orders': orders})
+    orders = Order.objects.filter(user=user_profile).order_by("-created_on")
+    return render(
+        request,
+        "checkout/order_history.html",
+        {"orders": orders},
+    )
 
 
 # ------- Promo apply/clear ----------
+
 
 @require_POST
 def apply_promo(request):
@@ -175,18 +198,18 @@ def apply_promo(request):
     code = (request.POST.get("promo_code") or "").strip()
     if not code:
         messages.error(request, "Please enter a promo code.")
-        return redirect('checkout')
+        return redirect("checkout")
 
     try:
         PromoCode.objects.get(code__iexact=code, is_active=True)
     except PromoCode.DoesNotExist:
         messages.error(request, "Invalid or inactive promo code.")
         request.session.pop("promo_code", None)
-        return redirect('checkout')
+        return redirect("checkout")
 
     request.session["promo_code"] = code
     messages.success(request, f"Promo '{code}' applied.")
-    return redirect('checkout')
+    return redirect("checkout")
 
 
 @require_POST
@@ -196,4 +219,4 @@ def clear_promo(request):
 
     request.session.pop("promo_code", None)
     messages.info(request, "Promo code removed.")
-    return redirect('checkout')
+    return redirect("checkout")

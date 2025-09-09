@@ -13,25 +13,20 @@ class Product(models.Model):
     """
 
     CATEGORY_CHOICES = [
-        ('bouquet', 'Bouquet'),
-        ('coffee', 'Coffee'),
-        ('bundle', 'Bundle'),
+        ("bouquet", "Bouquet"),
+        ("coffee", "Coffee"),
+        ("bundle", "Bundle"),
     ]
 
     name = models.CharField(max_length=100)
     sku = models.CharField(max_length=20, unique=True)
     description = models.TextField()
-    category = models.CharField(
-        max_length=10, choices=CATEGORY_CHOICES
-    )
-    price = models.DecimalField(
-        max_digits=6, decimal_places=2
-    )
+    category = models.CharField(max_length=10, choices=CATEGORY_CHOICES)
+    price = models.DecimalField(max_digits=6, decimal_places=2)
     special_offer_price = models.DecimalField(
-        max_digits=6, decimal_places=2,
-        null=True, blank=True
+        max_digits=6, decimal_places=2, null=True, blank=True
     )
-    image = CloudinaryField('image')
+    image = CloudinaryField("image")
     stock = models.PositiveIntegerField(default=0)
     slug = models.SlugField(unique=True, blank=True)
     is_featured = models.BooleanField(default=False)
@@ -49,11 +44,7 @@ class Product(models.Model):
         )
 
     def display_price(self):
-        return (
-            self.special_offer_price
-            if self.has_discount()
-            else self.price
-        )
+        return self.special_offer_price if self.has_discount() else self.price
 
     def __str__(self):
         return self.name
@@ -66,40 +57,30 @@ class Review(models.Model):
     """
 
     product = models.ForeignKey(
-        Product,
-        on_delete=models.CASCADE,
-        related_name='reviews'
+        Product, on_delete=models.CASCADE, related_name="reviews"
     )
-    user = models.ForeignKey(
-        User,
-        on_delete=models.CASCADE
-    )
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     rating = models.IntegerField(
         choices=[(i, str(i)) for i in range(1, 6)]
     )
-    comment = models.TextField(
-        blank=True, null=True
-    )
-    created_on = models.DateTimeField(
-        auto_now_add=True
-    )
+    comment = models.TextField(blank=True, null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ['-created_on']
-        unique_together = ('product', 'user')
+        ordering = ["-created_on"]
+        unique_together = ("product", "user")
 
     def __str__(self):
         return f"{self.product.name} - {self.user.username} ({self.rating}★)"
+
 
 class Wishlist(models.Model):
     """
     A wishlist belonging to a user. One per user.
     """
-    user = models.OneToOneField(
-        User,
-        on_delete=models.CASCADE,
-        related_name="wishlist"
-    )
+
+    user = 'models.OneToOneField(User,'
+    'on_delete=models.CASCADE, related_name="wishlist")'
     created_on = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -110,21 +91,21 @@ class WishlistItem(models.Model):
     """
     Individual product saved to a user's wishlist.
     """
+
     wishlist = models.ForeignKey(
-        Wishlist,
-        on_delete=models.CASCADE,
-        related_name="items"
+        Wishlist, on_delete=models.CASCADE, related_name="items"
     )
     product = models.ForeignKey(
-        Product,
-        on_delete=models.CASCADE,
-        related_name="wishlisted_in"
+        Product, on_delete=models.CASCADE, related_name="wishlisted_in"
     )
     added_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ("wishlist", "product")  
-        ordering = ["-added_on"] 
+        unique_together = ("wishlist", "product")
+        ordering = ["-added_on"]
 
     def __str__(self):
-        return f"{self.product.name} in {self.wishlist.user.username}'s wishlist"
+        return (
+            f"{self.product.name} in "
+            f"{self.order.order_number}"
+        )
